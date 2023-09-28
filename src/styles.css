@@ -1,0 +1,149 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Cabin&family=Fira+Sans:wght@500&display=swap');
+body{
+    font-family: 'Cabin', sans-serif;
+    overflow-x: hidden;
+    
+}
+.navbar-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+}
+.navbar-container-part1{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+}
+.navbar-logo-img{
+    width: 55px;
+}
+.navbar-logo-title{
+    font-family: 'Cabin', sans-serif;
+font-size: 25px;
+padding-left: 10px;
+color: #ffffff;
+}
+.navbar-logo-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #2E3F53;
+
+}
+.navbar-routerPanel{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: 'Fira Sans', sans-serif;
+
+    font-size: 16px;
+}
+@keyframes slideIn {
+    0% {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+.footer{
+    background-image: url('/assets/footer-background.jpg');
+    background-size: 500px;
+    height: 450px;
+    display: flex;
+    align-content: space-between;
+    flex-direction: column;
+    justify-content: space-around;
+    
+}
+.footer-websiteTitle{
+    background-color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 30px 30px 30px 30px ;
+    padding: 10px 30px;
+    width: max-content;
+}
+.footer-websiteTitle-icon{
+width: 50px;
+}
+.footer-websiteTitle-text{
+    padding-left: 10px;
+color: #2E3F53;
+font-size: 19px;
+font-weight: 500;
+}
+.footer-websiteDescription{
+    
+font-size: 15px;
+font-weight: 300;
+    color: #cde9e1e0;
+}
+.footer-Icons1{
+    background-color: #1a222c;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 9px;
+    margin: 3px;
+}
+.footer-Icons1-img{
+   font-size: 25px; 
+   color: #ffffff;
+}
+.footer-Icons1-container{
+    display: flex;
+    align-items: center;
+}
+.Footer-h1{
+    color: #ffffff;
+    font-size: 25px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+.Footer-h1-banner{
+    margin-top: 27px;
+    width: 90px;
+    height: 5px;
+    background-color: #32BC94;
+}
+.Footer-service-list{
+    margin-top:16px ;
+    color: #cde9e1e0;
+    list-style-type: none;
+}
+.Footer-service-list li:before{
+    content: ">>";
+    margin-right: 10px;
+}
+.Footer-service-list li{
+ margin: 7px 0;
+}
+.contactList-text{
+    margin-top: 16px;
+    color: #cde9e1e0;
+    font-size: 20px;
+}
+.contactList-icon{
+    margin-right: 10px;
+}
+.header-navbar-a{
+    color: #1a222c;
+    text-decoration: none;
+}
+.header-navbar-a:hover{
+    color: #32BC94;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

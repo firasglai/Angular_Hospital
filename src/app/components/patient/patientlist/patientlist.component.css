@@ -1,0 +1,146 @@
+h3{
+    padding-top: 20px;
+    padding-left: 20px;
+    color: #192252;
+}
+h5{
+    padding: 0px 0 3px 0;
+    color: #192252;
+    font-weight: 500;
+    font-size: 23px;
+}
+.body{
+    margin: 0px 20px;
+    width: -webkit-fill-available !important;
+    width: fill-available !important;
+    padding-bottom: 20px;
+}
+.search-Bar{
+    width: 100%;
+    padding: 10px 10px 10px 50px;
+    border-color:#EFF3FA;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+}
+.search-svg path{
+fill: #A9B4CD;
+}
+.download-filter-container{
+    display: flex;
+    justify-content:space-around;
+}
+.download-filter-container button{
+    background: white;
+    color: #192252;
+    border: 0;
+    padding: 13px 15px;
+    border-radius: 10px;
+}
+.download-filter-container button:hover{
+   
+    background-color: #EFF3FA;
+   
+}
+.patient-profile-img{
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+  }
+.patient-container{
+    border: 1px  solid #A9B4CD;
+    border-radius: 10px;
+    margin: 10px 0px;
+    padding: 30px ;
+}
+.patient-info{
+    display: flex;
+    justify-content: space-between;
+}
+.patient-container button{
+    background-color: #192252;
+    color: white;
+    border: 0;
+    width: 100%;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+.paginat{
+    display: flex;
+    justify-content: end;
+    align-content: center;
+    flex-direction: row;
+    align-items: center;
+}
+.arrow-btn{
+    background-color: transparent;
+    border: transparent;
+    padding: 5px 15px;
+    border-radius: 3px;
+}
+.arrow-btn:hover{
+    background-color: #EFF3FA;
+    border: transparent;
+}
+.arrow-btn:disabled:hover{
+    background-color: transparent;
+    border: transparent;
+} 
+.arrow-btn:disabled path{
+ fill: #A9B4CD;
+
+}
+.threep{
+  padding: 1px 20px;
+}
+.nbtn{
+    background-color: transparent;
+    border: transparent;
+    color: #A9B4CD;
+    padding: 5px 15px;
+    border-radius: 3px;
+}
+.nbtn.active{
+    color: #192252; 
+    background-color: #EFF3FA;
+}
+.nbtn:hover{
+color: #192252;
+}
+.doc{
+    display: flex;
+    align-items: flex-start;
+    border: #a9a2ca 1px solid;
+    border-width: 0 0 1px 0;
+    padding-bottom: 15px;
+    flex-direction: column;
+  }
+.dts-title{
+    font-weight: 500;
+    font-size: 16px;
+    color: #2A3563;
+  }
+  .dts-description{
+    color: #a3a3a3;
+    font-size: 16px;
+    font-weight: 400;
+  }
+.viewProfile{
+    background-color: white;
+    border: 1px #54629b solid;
+    color: #2A3563;
+    border-radius: 4px;
+    padding: 7px;
+    margin-top: 15px;
+    font-weight: 500;
+  }
+.bookAppoitment{
+    background-color: #2A3563;
+    border: 1px #54629b solid;
+    color: white;
+    border-radius: 4px;
+    padding: 7px;
+    margin-top: 7px;
+    font-weight: 500;
+  }

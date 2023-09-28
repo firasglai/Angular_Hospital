@@ -1,0 +1,72 @@
+<div class="inbox-container body row">
+  <div class="sidebar col-5">
+    <div class="search-bar">
+      <input id="search" [(ngModel)]="searchValue" type="text" placeholder="Search" (keyup)="searchUser(searchValue)" />
+
+      <div *ngFor="let user of suggestedUsers">
+        <div class="user-info" (click)="createChat(user);suggestedUsers=[]">
+          <img src="{{user.profilePic}}" class="profile-img" alt="User Profile" />
+          <div class="details">
+            <span class="name">{{ user.name }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  
+    <div class="chat-list">
+      <div *ngFor="let chat of chatlist " class="chat-item">
+        <div class="user-info" (click)="openChat(chat.patientid)">
+          <img src="{{getchatimg(chat)}}" class="profile-img" alt="User Profile" />
+          <div class="details">
+            <span class="name">{{ getchatname(chat) }}</span>
+          
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+<div class="chat-window col-7">
+  <div class="messages" *ngIf="currentchat ;else nochat">
+    <div class="messages-header">
+      <img src="{{getchatimg(currentchat)}}" class="profile-img" alt="User Profile" />
+      <div>{{getchatname(currentchat)}}</div>
+   
+      <div class="call-btn" *ngIf="userHaveCallID.length == 0 ;else incalll" [ngClass]="{'offline': status$ === 'offline'}">
+     
+     
+
+        <button  (click)="startcall()">Call</button> 
+       
+    </div>
+      <ng-template #incalll>
+    you are in a call
+  </ng-template>
+    
+    </div>
+
+    <div class="chat-area" *ngIf=" currentchat.messages" #endOfChat  #chatArea  [scrollTop]="scrollPos" id="XX"  >
+
+      <div class="chat-bubble-container"  *ngFor="let msg of currentchat.messages" [ngClass]="{'sender': msg.senderId === cuuser.id}">
+        <div class="chat-bubble">
+          {{ msg.text }}
+        </div>
+  
+    </div>
+    </div>
+    <div>
+      <form (ngSubmit)="sendMessage()">
+        <input type="text" [(ngModel)]="newMessage" name="messageControl">
+
+        <button type="submit">send</button>
+      </form>
+    </div>
+  </div>
+
+  <ng-template #nochat>
+    XXXXXXXXXXX
+  </ng-template>
+
+</div>

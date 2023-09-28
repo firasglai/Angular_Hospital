@@ -1,0 +1,6 @@
+.vidDisplay{
+    display: none;
+}
+.vidDisplay.On{
+    display: unset;
+}

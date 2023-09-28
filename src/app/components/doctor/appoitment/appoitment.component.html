@@ -1,0 +1,460 @@
+<div class="body" [ngClass]="{'visibal':loded}">
+  <div class="app-Title">
+    <h3>Appointment</h3>
+    <div>
+      <!-- petit calendrier -->
+      <div *ngIf="DaysOnCalendar[0]" style="display: flex;margin-right: 15px;">
+        <div class="open-cal" (click)="openCalendiar()">{{ convertDateString1(DaysOnCalendar[0])}} - {{
+          convertDateString1(DaysOnCalendar[3])}}</div>
+        <div class="switch-container">
+
+          <div class="cal-label" [ngClass]="{'isOnCal': CalendarDiplay1==true}" (click)="switchDisplayto1()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M20.6665 9.9043H2.84253C2.42853 9.9043 2.09253 9.5683 2.09253 9.1543C2.09253 8.7403 2.42853 8.4043 2.84253 8.4043H20.6665C21.0805 8.4043 21.4165 8.7403 21.4165 9.1543C21.4165 9.5683 21.0805 9.9043 20.6665 9.9043Z" />
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M16.2011 13.8096C15.7871 13.8096 15.4471 13.4736 15.4471 13.0596C15.4471 12.6456 15.7781 12.3096 16.1921 12.3096H16.2011C16.6151 12.3096 16.9511 12.6456 16.9511 13.0596C16.9511 13.4736 16.6151 13.8096 16.2011 13.8096Z" />
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M11.7636 13.8096C11.3496 13.8096 11.0096 13.4736 11.0096 13.0596C11.0096 12.6456 11.3406 12.3096 11.7546 12.3096H11.7636C12.1776 12.3096 12.5136 12.6456 12.5136 13.0596C12.5136 13.4736 12.1776 13.8096 11.7636 13.8096Z" />
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M7.31689 13.8096C6.90289 13.8096 6.56189 13.4736 6.56189 13.0596C6.56189 12.6456 6.89389 12.3096 7.30789 12.3096H7.31689C7.73089 12.3096 8.06689 12.6456 8.06689 13.0596C8.06689 13.4736 7.73089 13.8096 7.31689 13.8096Z" />
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M16.2011 17.6963C15.7871 17.6963 15.4471 17.3603 15.4471 16.9463C15.4471 16.5323 15.7781 16.1963 16.1921 16.1963H16.2011C16.6151 16.1963 16.9511 16.5323 16.9511 16.9463C16.9511 17.3603 16.6151 17.6963 16.2011 17.6963Z" />
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M11.7636 17.6963C11.3496 17.6963 11.0096 17.3603 11.0096 16.9463C11.0096 16.5323 11.3406 16.1963 11.7546 16.1963H11.7636C12.1776 16.1963 12.5136 16.5323 12.5136 16.9463C12.5136 17.3603 12.1776 17.6963 11.7636 17.6963Z" />
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M7.31689 17.6963C6.90289 17.6963 6.56189 17.3603 6.56189 16.9463C6.56189 16.5323 6.89389 16.1963 7.30789 16.1963H7.31689C7.73089 16.1963 8.06689 16.5323 8.06689 16.9463C8.06689 17.3603 7.73089 17.6963 7.31689 17.6963Z" />
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M15.7935 5.791C15.3795 5.791 15.0435 5.455 15.0435 5.041V1.75C15.0435 1.336 15.3795 1 15.7935 1C16.2075 1 16.5435 1.336 16.5435 1.75V5.041C16.5435 5.455 16.2075 5.791 15.7935 5.791Z" />
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M7.71533 5.791C7.30133 5.791 6.96533 5.455 6.96533 5.041V1.75C6.96533 1.336 7.30133 1 7.71533 1C8.12933 1 8.46533 1.336 8.46533 1.75V5.041C8.46533 5.455 8.12933 5.791 7.71533 5.791Z" />
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M7.521 4.0791C4.928 4.0791 3.5 5.4621 3.5 7.9731V17.0221C3.5 19.5881 4.928 21.0001 7.521 21.0001H15.979C18.572 21.0001 20 19.6141 20 17.0981V7.9731C20.004 6.7381 19.672 5.7781 19.013 5.1181C18.335 4.4381 17.29 4.0791 15.988 4.0791H7.521ZM15.979 22.5001H7.521C4.116 22.5001 2 20.4011 2 17.0221V7.9731C2 4.6451 4.116 2.5791 7.521 2.5791H15.988C17.697 2.5791 19.11 3.0911 20.075 4.0581C21.012 4.9991 21.505 6.3521 21.5 7.9751V17.0981C21.5 20.4301 19.384 22.5001 15.979 22.5001V22.5001Z" />
+            </svg>
+
+
+          </div>
+          <div class="cal-label2" [ngClass]="{'isOnCal': CalendarDiplay1==false}" (click)="switchDisplayto2()"><svg
+              width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M7.08005 13.5928H0.779053C0.365053 13.5928 0.0290527 13.2568 0.0290527 12.8428C0.0290527 12.4288 0.365053 12.0928 0.779053 12.0928H7.08005C7.49405 12.0928 7.83005 12.4288 7.83005 12.8428C7.83005 13.2568 7.49405 13.5928 7.08005 13.5928Z"
+                fill="black" />
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M16.1909 3.9004H9.89087C9.47687 3.9004 9.14087 3.5644 9.14087 3.1504C9.14087 2.7364 9.47687 2.4004 9.89087 2.4004H16.1909C16.6049 2.4004 16.9409 2.7364 16.9409 3.1504C16.9409 3.5644 16.6049 3.9004 16.1909 3.9004Z"
+                fill="black" />
+              <mask id="mask0_368_375" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="7"
+                height="7">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M0 0.000396729H6.2258V6.192H0V0.000396729Z"
+                  fill="white" />
+              </mask>
+              <g>
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M3.11276 1.5C2.22376 1.5 1.49976 2.216 1.49976 3.097C1.49976 3.977 2.22376 4.692 3.11276 4.692C4.00276 4.692 4.72576 3.977 4.72576 3.097C4.72576 2.216 4.00276 1.5 3.11276 1.5ZM3.11276 6.192C1.39676 6.192 -0.000244141 4.804 -0.000244141 3.097C-0.000244141 1.39 1.39676 0 3.11276 0C4.82976 0 6.22576 1.39 6.22576 3.097C6.22576 4.804 4.82976 6.192 3.11276 6.192Z"
+                  fill="black" />
+              </g>
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M14.3877 11.208C13.4977 11.208 12.7737 11.924 12.7737 12.804C12.7737 13.685 13.4977 14.4 14.3877 14.4C15.2767 14.4 15.9997 13.685 15.9997 12.804C15.9997 11.924 15.2767 11.208 14.3877 11.208ZM14.3877 15.9C12.6707 15.9 11.2737 14.511 11.2737 12.804C11.2737 11.097 12.6707 9.708 14.3877 9.708C16.1037 9.708 17.4997 11.097 17.4997 12.804C17.4997 14.511 16.1037 15.9 14.3877 15.9Z"
+                fill="black" />
+            </svg>
+          </div>
+
+        </div>
+      </div>
+      <div class="calendarSelect" [ngClass]="{'displayCalON': calendarSelect==true}">
+        <div class="custom-calendar">
+          <div class="calendar-header">
+            <button class="prev-button" (click)="goToPreviousMonth()">&lt;</button>
+            <div class="month-year">{{ selectedDate1 | date: 'MMMM yyyy' }}</div>
+            <button class="next-button" (click)="goToNextMonth()">&gt;</button>
+          </div>
+          <div class="calendar-grid">
+            <div class="weekday" *ngFor="let weekday of weekdays">{{ weekday }}</div>
+            <ng-container *ngFor="let week of weeks">
+              <div class="day" *ngFor="let day of week; let i = index" [class.disabled]="!isCurrentMonth(day)"
+                [class.selected]="isDateSelected(day)" [ngClass]="{
+                'onSelectedDay': isCurrentOrNextThreeDays(day)
+              }" (click)="selectDate(day)">
+                {{ day.getDate() }}
+                <div class="nb-app" *ngIf="haveAppotmentes(day)>0; else noapp">
+                  <div class="tria"></div>
+                  {{haveAppotmentes(day)}} appointment(s)
+                </div>
+              </div>
+            </ng-container>
+            <ng-template #noapp>
+              <div class="nb-app">
+                <div class="tria"></div>
+                no appointment
+              </div>
+
+            </ng-template>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- appoitments windows -->
+
+
+  <div class="cal-container2" [ngClass]="{'CAl-on':CalendarDiplay1===false}">
+    <div *ngIf="IsanyappIn()==false" style="text-align: center;
+    padding-top: 30px;">
+      No apoitments in these day
+    </div>
+    <ng-container *ngFor="let day of DaysOnCalendar; let i = index">
+      <div class="dayTitle" *ngIf="getappByDay(day).length>0"> {{ convertDateString(day) }} </div>
+      <div *ngIf="getappByDay(day).length>0" class="row mx-3 ">
+        <div *ngFor="let app of getappByDay(day)" class="col-6 ">
+          <div class="app-container my-3">
+            <div class="patient-info" *ngFor="let p of  getpatientt(app.PatienID)">
+
+              <div class="pt-info">
+                <img src="{{p.profilePic}}" alt="" class="img-patient " style="width: 50px;height: 50px;">
+                <div>
+                  <div class="pt-name" style="font-size: 17px;font-weight: 500;">{{p.name}} {{p.lastname}}</div>
+                  <div class="pt-address"> {{gethourByString(app.id)}}</div>
+                </div>
+              </div>
+              <div class="pt-address"
+                style="    color: #5c5c5c; padding-top: 15px; font-size: 17px;font-weight: 400;padding-bottom: 15px;display: flex; align-items: center;">
+                <div style="font-weight: 500;color: #192252; font-size: 15px;padding-right: 7px;">Appoitment Statu :
+                </div>
+                <div class="StatApp {{app.statu}}">{{app.statu}}</div>
+              </div>
+              <button (click)="getInfoApp(app.id); setcuhour(day+'|08:00')" class="ViweApp">View Appointment</button>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </ng-container>
+  </div>
+
+  <ng-template #noappthisday>
+    <div class="dayTitle" style="font-weight: 400;font-size: 16px; color: grey;">
+      You have no appointments this day
+    </div>
+  </ng-template>
+
+
+
+
+
+
+
+
+
+  <!-- grand calendrier -->
+  <div class="cal-container" [ngClass]="{'CAl-on':CalendarDiplay1===true}">
+    <div class="hours" #scrollContainer>
+      <table class="table1" style="  border-width: 0   !important;">
+        <thead class="thead1" style="  border-width: 0   !important;">
+          <tr class="tr1">
+            <th class="th1">
+              <div class="bot-bord th-time">Time</div>
+            </th> <!-- First Column: numbersArray -->
+            <th class="th1" *ngFor="let date of DaysOnCalendar">
+
+              <div class="bot-bord">
+                {{ convertDateString(date) }}
+              </div>
+            </th> <!-- Other Columns: DaysOnCalendar -->
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr class="tr1" *ngFor="let number of numbersArray; let i = index">
+            <td class="td1 num">{{ number }}</td> <!-- First Column: numbersArray -->
+            <td class="td1" (click)="getInfoApp(day[DaysOnCalendar.indexOf(date)][i]); setcuhour(date+'|'+number)"
+              *ngFor="let date of DaysOnCalendar"
+              [attr.rowspan]="day[DaysOnCalendar.indexOf(date)][i].length > 0 &&day[DaysOnCalendar.indexOf(date)][i]!='x' ? getapp(day[DaysOnCalendar.indexOf(date)][i]).durationByHour : 1"
+              [ngClass]="{'displayOff': day[DaysOnCalendar.indexOf(date)][i]=='x'}">
+              <div
+                *ngIf="day[DaysOnCalendar.indexOf(date)][i].length > 0 &&day[DaysOnCalendar.indexOf(date)][i]!='x'; else empty"
+                class="{{getstatu(day[DaysOnCalendar.indexOf(date)][i]).statu}} apptab">
+                <div class="border"></div>
+                <div *ngFor=" let patient of  haveAppotmentes2(date+'|'+number) " class="Appointment">
+                  <div class="Appointment-flex">
+                    <div class=" p-name">
+                      {{patient.number}} appoitment(s)
+                    </div>
+                    <div class="date">
+                      {{gethourByString(day[DaysOnCalendar.indexOf(date)][i])}}
+                    </div>
+                  </div>
+
+
+
+                </div>
+              </div>
+
+
+            </td> <!-- Other Columns: day array -->
+          </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+  </div>
+</div>
+<ng-template #empty>
+  <div></div>
+</ng-template>
+
+
+
+
+<!-- appoitments Display -->
+<div *ngIf="appointment&&hourData" class="container1">
+
+  <div class="con-body row m-0" style="width: 100%;">
+    <div class="col-4 m-0 p-0">
+      <div class="hee">
+        <h4 class="mt-5 pt-5 mb-4 mx-3 " style="color: #192252;">Appointments for {{hourData.hour}} - {{hourData.day}}
+        </h4>
+        <div><button [ngClass]="{'only-btn':isShowOnlyApp}" (click)="isShowOnlyApp=!isShowOnlyApp">Hide Declined
+            appoitments</button></div>
+      </div>
+      <div class="tab-con">
+        <table class="table">
+          <thead class="thead-dark cuhead" style="position: sticky;top: 0;">
+            <tr>
+              <th class="cuhead" scope="col">#</th>
+              <th class="cuhead" scope="col">First Name</th>
+              <th class="cuhead" scope="col">Last Name</th>
+              <th class="cuhead" scope="col">Phone Number</th>
+              <th class="cuhead" scope="col">Statu</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="{{getappclass(hap.statu)}}" (click)="appointment=hap" style="cursor: pointer;"
+              *ngFor="let hap of hourData.apps">
+              <th scope="row">
+                {{hap.id}}
+              </th>
+              <td *ngFor="let p of  getpatientt(hap.PatienID)">
+                {{p.name}}
+              </td>
+              <td *ngFor="let p of  getpatientt(hap.PatienID)">
+                {{p.lastname}}
+              </td>
+              <td *ngFor="let p of  getpatientt(hap.PatienID)">
+                {{p.phone}}
+              </td>
+              <td *ngFor="let p of  getpatientt(hap.PatienID)">
+                {{hap.statu}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+      <div *ngFor="let hap of hourData.apps">
+
+
+      </div>
+    </div>
+    <div class="col-8 p-0" style="border-left: 1px #2e3f536e solid;">
+      <div style="display: flex; justify-content: space-between;padding-left: 15px; padding-top: 20px;    align-items: center;
+    padding-right: 15px;">
+        <h4 style="min-width: 350px;">Appointment</h4>
+        <div (click)="closeServiceTab()" class="x-shape-con">
+          <div class="x-shape"></div>
+        </div>
+      </div>
+
+
+      <div class="apploading" [ngClass]="{'displayflex':apploading}"> <img width="130px" src="assets/loading (1).gif"
+          alt=""></div>
+      <hr>
+      <div class="patient-info" *ngFor="let selectepatient of  getpatientt(appointment.PatienID)">
+
+        <div class="row">
+          <div class="col-4 win1 m-0">
+            <div class="part1">
+              <div class="d-con">
+                <img class="m-3" style="width: 80px; height: 80px; border-radius: 50%;"
+                  src="{{selectepatient.profilePic}}" alt="patientpic">
+                <div class="pat-other" style="font-size: 22px;">{{selectepatient.name}} {{selectepatient.lastname}}
+                </div>
+                <div style="display: flex;" class="mb-2">
+                  <div class="pat-info">Patient ID:</div>
+                  <div class="pat-other" style="margin-left: 2px;">#{{selectepatient.id}}</div>
+
+                </div>
+                <p class="pat-info">{{selectepatient.address}}</p>
+                <div class="app-c-a mb-2">
+                  <div class="p-3">
+                    <div class="number">15</div>
+                    <div class="pat-info">Appointment</div>
+                  </div>
+                  <div class="p-3" style="border-left: 1px #EFF3FA solid;">
+                    <div class="number">10</div>
+                    <div class="pat-info">Completed</div>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+            <div class="part2">
+
+              <div class="d-con" style="    align-items: flex-start;">
+                <h5>Patient Information</h5>
+                <div class="mt-3"
+                  style="    display: flex; width: 100%; flex-direction: row;justify-content: space-between;">
+                  <p class="pat-info">Birth date: </p>
+                  <div class="pat-other">{{selectepatient.dateOfBirth}}</div>
+                </div>
+                <div style="    display: flex; width: 100%; flex-direction: row;justify-content: space-between;">
+                  <p class="pat-info">Sexe: </p>
+                  <div class="pat-other">{{selectepatient.gender}}</div>
+                </div>
+                <div style="    display: flex; width: 100%; flex-direction: row;justify-content: space-between;">
+                  <p class="pat-info">Weight: </p>
+                  <div class="pat-other">{{selectepatient.medicalHistory.weight}}</div>
+                </div>
+                <div style="    display: flex; width: 100%; flex-direction: row;justify-content: space-between;">
+                  <p class="pat-info">Height: </p>
+                  <div class="pat-other">{{selectepatient.medicalHistory.height}}</div>
+                </div>
+                <div style="    display: flex; width: 100%; flex-direction: row;justify-content: space-between;">
+                  <p class="pat-info">Allergies: </p>
+                  <div class="pat-other">{{selectepatient.medicalHistory.allergies}}</div>
+                  <div class="pat-other" *ngIf="selectepatient.medicalHistory.allergies.length==0">No Allergies</div>
+                </div>
+                <div style="    display: flex; width: 100%; flex-direction: row;justify-content: space-between;">
+                  <p class="pat-info">Phone number: </p>
+                  <div class="pat-other">{{selectepatient.phone}}</div>
+                </div>
+                <div style="    display: flex; width: 100%; flex-direction: row;justify-content: space-between;">
+                  <p class="pat-info">Email: </p>
+                  <div class="pat-other">{{selectepatient.email}}</div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+          <div class="col-8 win2 p-0">
+            <div class="d-conn">
+              <div style="  padding: 15px;">
+                <div class="app-details">
+                  <h5>
+                    Appointment Details
+                  </h5>
+                  <div>
+                    <div class="app-label">Date</div>
+                    <div class="app-text"> {{ convertDateString(appointment.day) }} On
+                      {{gethourByString(appointment.id)}}
+                    </div>
+                  </div>
+                  <div *ngIf="appointment.PatientNotes">
+                    <div class="app-label">Patient Notes</div>
+                    <div class="app-text">{{appointment.PatientNotes}}</div>
+                  </div>
+                  <div>
+
+                  </div>
+                </div>
+                <div style="display: flex;    justify-content: space-between;">
+                  <h5 class="title-label2">Past Consultation Notes</h5>
+                </div>
+                <br>
+
+                <div class="cons-details">
+                  <div *ngIf="!anyconsolt()">You have no notes for this patient </div>
+                  <div class="cons-det2">
+                    <div class="app-con" *ngFor="let ap of selectepatient.appointments">
+                      <div *ngIf="ap.consultation">
+                        <div style="display: flex ;">
+                          <div class="circle"></div>{{ap.consultation.dateConsultation}}
+                        </div>
+                        <div class="d-border">
+                          <div class="d-details">
+                            <div style="padding:  10px;border-bottom: 2px white solid;">
+                              <h6 class="Titre">{{ap.consultation.title}}</h6>
+                              <p>{{ap.consultation.rapport}}</p>
+                            </div>
+                            <div class="row" style="width: 99%; padding: 10px;">
+                              <div class="col-4 d-title pat-info">Treatment</div>
+                              <div class="col-4 d-title middle pat-info">Duration</div>
+                              <div class="col-4 d-title pat-info">Medecins</div>
+                              <div class="col-4 d-donne">{{ap.consultation.treatment.description}}</div>
+                              <div class="col-4 d-donne middle">{{ap.consultation.treatment.duration}}</div>
+                              <div class="col-4 d-donne">{{ap.consultation.treatment.medicin}}</div>
+                            </div>
+
+
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="buutons">
+                <div [ngClass]="{'displayOn':appointment.statu=='waiting Approve'}" style="display: none; width: 100%;">
+                  <button class="b1" (click)="declineappoitment(appointment.onbaseId)">Decline</button><button
+                    class="b2" (click)="Acceptappoitment(appointment.onbaseId)">Accept Appointment</button></div>
+                <div class="buutons" [ngClass]="{'displayOn':appointment.statu=='Approved'}" style="display: none;">
+                  <button (click)="disPhinish=true" class="b3">Finish</button></div>
+                <div [ngClass]="{'displayOn':appointment.statu=='finished'}" style="display: none;">Appoitment Finished
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="fconnn" [ngClass]="{'DisplayO':disPhinish}">
+          <div style="padding: 15px 100px;">
+            <div (click)="disPhinish=false" style="padding-top: 15px" class="x-shape-con">
+              <div class="x-shape"></div>
+            </div>
+            <h3 style="padding-bottom: 30px; width: 100%; text-align: center;">Finnish Consultation</h3>
+            <div style="    font-size: 19px;
+  font-weight: 500;    color: #192252;">Consultation</div>
+            <div class="t1">Consultation Title (required)</div>
+            <input class="he1 w100" type="text" [(ngModel)]="consultationTitle">
+            <div>{{consultationTitleError}}</div>
+            <div class="t1">Consultation Report (required)</div>
+            <textarea class="w100 he1" [(ngModel)]="consultationReport"></textarea>
+            <div>{{consultationReportError}}</div>
+            <div class="t1">Description</div>
+            <textarea class="w100 he1" [(ngModel)]="treatmentDescription"></textarea>
+
+            <div class="t1">Medicin(s)</div>
+            <input class="w100 he1" type="text" [(ngModel)]="treatmentMedicin">
+
+            <div class="t1">Duration</div>
+            <input class="w100 he1" type="text" [(ngModel)]="treatmentDuration">
+
+          </div>
+          <button class="b4" (click)="finishregister(appointment.onbaseId)">Save</button>
+        </div>
+
+        <ng-template #nodocuments class="app-label">
+          No documents
+        </ng-template>
+      </div>
+
+
+
+
+
+    </div>
+  </div>
+</div>
+  <div (click)="closeCalendiar()" class="container12" [ngClass]="{'displayCalON': calendarSelect==true}"></div>

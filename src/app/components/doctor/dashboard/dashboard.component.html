@@ -1,0 +1,92 @@
+<div class="body">
+  <div>
+    <h3>Welcome back, dr. {{username}}</h3> <!-- Displays a welcome message with the username of the logged-in user -->
+  </div>
+
+  <div class="rowa">
+    <div class=" data">
+      <h5>Appoitments status</h5> <!-- Displays a heading for patient statistics -->
+      <div class="chart-container">
+        <canvas id="chart" #chart></canvas> <!-- Renders a chart with the chart id and reference #chart -->
+      </div>
+      <div class="chartLegend">
+        <div class="chartLegend-element">
+          <div class="legendCircle" style="background-color: #1D3EAF;"></div>
+          <div class="legendtext">PENDING</div>
+          <div class="legendpercent">{{ calcpercentage('PENDING') }} %</div>
+        </div>
+        <div class="chartLegend-element">
+          <div class="legendCircle" style="background-color: #FF4C5E;"></div>
+          <div class="legendtext">APPROVED</div>
+          <div class="legendpercent">{{ calcpercentage('APPROVED') }} %</div>
+        </div>
+        <div class="chartLegend-element">
+          <div class="legendCircle" style="background-color: #848FAC;"></div>
+          <div class="legendtext">DONE</div>
+          <div class="legendpercent">{{ calcpercentage('DONE') }} %</div>
+        </div>
+      </div>
+      
+
+    </div>
+    <div class=" data2">
+      <h5>Appoitments analytics</h5> <!-- Displays a heading for money earned statistics -->
+      <div class="chart-container" style="height: 300px;">
+        <canvas id="chart2" #chart2></canvas> <!-- Renders a chart with the chart id and reference #chart2 -->
+      </div>
+
+    </div>
+
+  </div>
+  <div *ngIf="!thisdayhaveApps()"  class="payments" style="height: calc(100vh - 602px);">
+    <h5>Today's Appoitments</h5>
+    <div style="text-align: center;padding:  15px;">    You have no appoitments this day</div>
+
+  </div>
+  <div  *ngIf="thisdayhaveApps()" class="payments">
+   
+    <h5>Today's Appoitments</h5>
+    <div class="table-container">
+      <table class="table table-borderless">
+        <thead>
+          <tr>
+            <th>Patient</th>
+            <th>Appointment</th>
+            <th>Date</th>
+
+            <th>Status</th>
+          
+          </tr>
+        </thead>
+        <tbody  *ngFor="let appointment of appoitmentList">
+          <tr *ngIf="isSameDay(appointment.date.toString())" >
+            <td class="patient-column">
+              {{appoitmentList[1].patient?.id}}
+              <img src='{{appointment.patient?.profilePic}}' class="Patient-profile">
+              <div style="padding-left: 15px;">
+                <div class="patient-column-name">{{appointment.patient?.name}} {{appointment.patient?.lastname}}</div>
+                <div class="patient-column-id">{{appointment.patient?.id}}</div>
+              </div>
+            </td>
+            <td class="appointment-column">
+              {{appointment.reason}}
+            </td>
+            <td class="date-column">
+              {{Dtosting(appointment.date.toString())}}
+            </td>
+
+            <td class="statu-column {{appointment.statusAPT}}">
+              <div class="statu-column {{appointment.statusAPT}}">
+                {{appointment.statusAPT}}
+              </div>
+            </td>
+            
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+
+
+</div>

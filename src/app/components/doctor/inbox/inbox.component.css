@@ -1,0 +1,331 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin&family=Fira+Sans:wght@500&display=swap');
+.body{
+    margin: 0px 20px;
+    width: -webkit-fill-available !important;
+    width: fill-available !important;
+    padding-bottom: 20px;
+    height: calc(100vh - 110px);
+    font-family: 'Cabin', sans-serif;
+}
+
+.col-7{
+      height: calc(100vh - 110px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between
+}
+ .chat-title {
+    padding-top: 20px;
+    padding-left: 13px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+.chat-head {
+    padding-top: 20px;
+    padding-left: 13px;
+    margin-bottom: 5px;
+    display: flex;
+    
+}
+
+  .chat-title .chat-name {
+    font-weight: 500;
+}
+
+.chat-title .chat-date {
+    font-size: 0.8rem;
+    color: #848FAC;
+}
+
+ .chat-list .search-input {
+    margin: 24px;
+}
+
+.messages {
+
+box-shadow: none;
+}
+
+ .messages .messages-header {
+    display: flex;
+    margin-bottom: 8px;
+}
+
+ .messages .messages-header  img {
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 16px;
+    height: 60px;
+}
+
+ .messages .messages-header  h2 {
+    margin: 0;
+}
+
+ .messages .chat-area {
+    height: calc(100vh - 270px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    overflow: auto;
+}
+
+ .messages .chat-area  :first-child {
+    margin-top: auto;
+}
+
+.messages .chat-area .chat-bubble-container {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    z-index: -10;
+}
+
+ .messages .chat-area .chat-bubble-container  .chat-bubble {
+    background: #EFF3FA;
+    padding-top: 8px;
+    padding-bottom: 18px;
+    padding-left: 8px;
+    padding-right: 100px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    width: fit-content;
+    position: relative;
+    
+}
+
+ .messages .chat-area .chat-bubble-container  .chat-bubble  .chat-time {
+    position: absolute;
+    bottom: 2px;
+    right: 8px;
+    font-size: 0.7rem;
+    color: #192252;
+    z-index: 0;
+  
+}
+
+ .messages .chat-area .chat-bubble-container.sender {
+    display: flex;
+    justify-content: flex-end;
+}
+
+ .messages .chat-area .chat-bubble-container.sender  .chat-bubble {
+    background:  #192252;
+    color: white;
+    margin-right: 5px;
+
+}
+.messages .chat-area .chat-bubble-container.sender  .chat-bubble  .chat-time {
+ 
+    color: white;
+}
+
+.messages .input-area {
+    padding-top: 16px;
+    padding-bottom: 8px;
+}
+
+mat-form-field {
+    width: 100%;
+}
+.chatLabel{
+    min-height:90px ;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.chatLabel img{
+   width: 60px;
+   height: 60px;
+   border-radius: 50%;
+
+
+}
+
+
+
+
+h3{
+    padding-top: 20px;
+    padding-left: 20px;
+    color: #192252;
+}
+h6{
+    padding: 15px 0 3px 0;
+    color: #192252;
+    font-size:  large;
+   
+}
+.body{
+    margin: 0px 20px;
+    width: -webkit-fill-available !important;
+    width: fill-available !important;
+    padding-bottom: 20px;
+    height: calc(100vh - 110px);
+}
+.search-Bar{
+    width: 100%;
+    padding: 10px 10px 10px 50px;
+    border-color:#EFF3FA;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+}
+.search-svg path{
+fill: #1851d8;
+}
+.conversations{
+    border:1px #A9B4CD solid ;
+    border-radius: 10px;
+    padding: 20px;
+
+}
+.icon-send{
+    border-radius: 50%;
+    border:3px #192252 solid ;
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.icon-send path{
+    fill: #192252;
+}
+.start-btn{
+    margin: 15px 0 3px 0;
+    color: #192252;
+    font-size:  large;
+    background-color: transparent;
+    border: 0px;
+    border-radius: 10px;
+    padding: 10px;
+}
+.start-btn:hover{
+    background-color: #EFF3FA;
+}
+.profile-img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+.input-background{
+    background: #eff3fa;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.user-sugg{
+    margin: 5px;
+    padding: 5px;
+    background-color: white;
+    border-radius: 10px;
+}
+.user-sugg.last-style{
+    
+    margin: 5px 5px 10px 5px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.user-sugg.first-style{
+    
+    margin: 10px 5px 5px 5px;
+    background-color: white;
+    border-radius: 10px;
+}
+.sugg-container{
+    display: none;
+}
+.sugg-container.active{
+    display: flex;
+    flex-direction: column;
+}
+.conversations.active{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.conversationsOn{
+    border:1px #A9B4CD solid ;
+    border-radius: 10px;
+    padding: 20px;
+    display: none
+}
+.conversationsOn.active{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.chatLabel{
+    display: block;
+    
+}
+.chatLabel-container{
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+}
+.chatLabel .ng-star-inserted{
+    display: none;
+    
+}
+.iSonline{
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: #848FAC;
+    margin-left: 5px;
+}
+.iSonline.online{
+    background-color: rgb(95, 185, 95);
+}
+.iSonline.offline{
+    background-color: rgb(194, 83, 83);
+}
+.iSonline.away{
+    background-color: rgb(236, 221, 154);
+}
+.statu{
+    
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+.chat-area{
+    overflow-y: auto;
+    scrollbar-width: thin; /* Set the width of the scrollbar */
+    scrollbar-color: #a0b6db #a0b6db;
+    overflow-y: scroll;
+
+}
+.chat-area::-webkit-scrollbar {
+    
+    width: 8px; /* Set the width of the scrollbar */
+   
+  }
+  
+  /* Handle */
+  .chat-area::-webkit-scrollbar-thumb {
+    background: #EFF3FA; /* Set the color of the scrollbar handle */
+    border-radius: 3px;
+    
+  }
+  
+  /* Handle on hover */
+  .chat-area::-webkit-scrollbar-thumb:hover {
+    background: #b9c9e6; /* Set the color of the scrollbar handle on hover */
+  }
+  .call-btn.offline{
+display: none;
+  }
+  .call-cancel{
+    display: none;
+  }
+  .call-cancel.display{
+    display: unset;
+  }

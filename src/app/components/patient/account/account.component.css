@@ -1,0 +1,348 @@
+.profile_acceuil {
+    width: 100%;
+    height: 260px;
+    border-radius: 12px;
+}
+
+.patient_picture {
+  border: 6px solid #f8f9faad;
+  transform: translate(34px, -63px);
+  width: 120px;
+  height: 120px;
+  border-radius: 60px;
+
+}
+
+.profile_patient {
+    display: contents;
+}
+
+
+.ebp {
+    margin-right: 5px;
+    height: 40px;
+    color: #606D93;
+    background-color: white;
+    border: 0;
+    border-radius: 5px;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding: 10px 7px;
+}
+.ebp svg path{
+    fill: #606D93;
+}
+.ebp:hover svg path{
+    fill: #192252;
+}
+.ebp:hover {
+    margin-right: 5px;
+    height: 40px;
+    color: #192252;
+    background-color: #EFF3FA;
+    border-radius: 5px;
+}
+
+.lo {
+    height: 40px;
+    color: white;
+    background-color: #31bc93;
+    border-radius: 5px;
+}
+
+.profile_info p {
+    color: grey;
+    font-size: 18px;
+}
+
+.profile_info h3 {
+    color: black;
+    font-weight: 900;
+    font-size: 24px;
+}
+
+.cpt {
+    transform: translate(8px, -9px);
+}
+
+.profile_icons {
+    text-decoration: none;
+}
+
+.cpt img {
+    width: 15px;
+    height: 16px;
+    text-align: start;
+
+}
+
+.main_profile_info {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    width: calc(100% - 120px);
+    justify-content: space-between;
+
+}
+
+.profile_info a {
+    color: #FF0034;
+    font-weight: 600;
+}
+
+.bh {
+    width: 250px;
+    height: 110px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 2px solid #e0e0e0;
+
+}
+
+.bh a {
+    text-decoration: none;
+    color: black;
+    font-weight: 800;
+
+}
+
+.tc {
+    width: 250px;
+    height: 110px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 2px solid #e0e0e0;
+}
+
+.tc a {
+    color: black;
+    font-weight: 800;
+
+    text-decoration: none;
+}
+
+.pp {
+    width: 250px;
+    height: 110px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 2px solid #e0e0e0;
+    }
+
+.pp a {
+    text-decoration: none;
+    color: black;
+    font-weight: 800;
+
+}
+
+.profile_buttons {
+   
+    padding-top: 15px;
+
+    right: 0;
+}
+
+.profile_info {
+    padding-left: 42px;
+
+}
+/******************************************************************/
+.custom-date::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+}
+
+.custom-date::-webkit-inner-spin-button,
+.custom-date::-webkit-clear-button {
+    -webkit-appearance: none;
+}
+.patient-outils{
+    width: 650px;
+    height: 40px;
+}
+.custom-date::-webkit-datetime-edit-text {
+    padding-right: 1rem;
+}
+
+.custom-date::-webkit-datetime-edit-year-field:focus,
+.custom-date::-webkit-datetime-edit-month-field:focus,
+.custom-date::-webkit-datetime-edit-day-field:focus {
+    background-color: #f8f9fa;
+}
+
+.custom-date::-webkit-datetime-edit-fields-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.custom-date::-webkit-datetime-edit-day-field {
+    margin-right: 2rem;
+}
+
+.custom-date::-webkit-datetime-edit-month-field {
+    margin-right: 2rem;
+}
+
+.custom-date::-webkit-datetime-edit-year-field {
+    margin-right: 2rem;
+}
+/****************************************************************/
+.search-container {
+    position: relative;
+  }
+  
+  .search-container input[type="search"] {
+    padding-right: 30px; /* adjust as needed */
+    border: none;
+  }
+  .table-pic{
+    width: 60px;
+    height: 60px;
+    border-radius: 32px;
+    padding-right: 5px;
+  }
+  .book{
+    position: absolute;
+    margin-left: 140px;
+    left: 0;
+
+  }
+  .profile{
+    border: #2e3f53 1px solid ;
+  }
+  .search-container button[type="submit"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 30px; /* adjust as needed */
+    background-color: transparent;
+    border: none;
+  }
+  
+  .fa-search:before {
+    content: "\f002";
+  }
+  .adress{
+    display: flex;
+    color: #192252;
+    font-weight: 500;
+    font-size: 18px;  
+    background-color: #EFF3FA;
+    border-radius: 27px ;
+    padding: 10px 20px;
+    width: min-content;
+} 
+  .adress svg path {
+    fill: #192252;
+  }
+  .cover-photo{
+    width: 100%;
+    height: 300px;
+    border-radius: 27px  27px 0 0 ;
+  }
+  h4{
+    color: #192252;
+  }
+  .row{
+    border: #C5D0E6 1px solid;
+    border-radius: 27px;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+  }
+  .row1{
+    border: #C5D0E6 1px solid;
+    border-radius: 27px;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+  }
+  .Description-container{
+    padding:  15px ;
+    height: calc(100% - 500px);
+    
+  }
+  .body{
+    height: calc(100vh - 110px);
+  }
+  .Edit-container{
+    display: none;
+    position: absolute;
+    width: calc(100% - 350px);
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.658);
+   
+    align-items: center;
+    justify-content: center;
+  }
+ .Edit-container.displayOn{
+    display: flex;
+ }
+
+  .edit-profile{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    min-width: 700px;
+    min-height: 450px;
+    padding: 30px;
+    border-radius: 27px;
+    border: #C5D0E6 1px solid;
+  }
+  .edit-profile input{
+    border: #C5D0E6 1px solid;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+  }
+  .edit-profile textarea{
+    border: #C5D0E6 1px solid;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+  }
+  .edit-profile button{
+    margin: 5px;
+    color: white;
+    border: none;
+    background-color: #192252;
+    padding: 7px 10px;
+    border-radius: 7px;
+  }
+  .btn-profile{
+    display: flex;
+    justify-content: flex-end;
+
+  }
+  .btn-profile .cancel{
+    border: #192252 1px solid;
+    color: #192252;
+    background-color: white;
+  }
+  .pat-inf{
+    display: flex;
+  }
+  .pat-inf-title{
+font-weight: 500;
+font-size: 17px;
+color: #303b7a;
+
+  }
+  .pat-inf-data{
+    font-weight: 500;
+    font-size: 16px;
+    padding-left: 10px;
+  }

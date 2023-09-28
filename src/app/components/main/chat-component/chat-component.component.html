@@ -1,0 +1,30 @@
+<div>
+
+
+  <div *ngFor="let message of messages">
+    <div *ngIf="message.role === 'system'">
+    </div>
+    <div *ngIf="message.role === 'user'">
+      <strong>You:</strong> {{ message.content }}
+    </div>
+    <div *ngIf="message.role === 'assistant'">
+     <div class="Ai-message">
+        <div class="containerr">
+       <strong>Assistant:</strong> {{ message.content }}
+        </div></div>
+    </div>
+  </div>
+
+  <form (ngSubmit)="sendMessage()">
+
+    <div class="searchInput-container pt-3">    <div style="width: 110px;">
+      <ng-lottie [options]="options1"
+                        (animationCreated)="animationCreated1($event)" id="loopAnimation"></ng-lottie>
+    <ng-lottie [options]="options"
+                        (animationCreated)="animationCreated($event)" id="Animation"></ng-lottie> 
+    </div><input type="text" [(ngModel)]="messageInput" name="messageInput"  autocomplete="off" placeholder="Ask me a question"
+      class="searchInput">
+  </div>
+  
+  </form>
+</div>

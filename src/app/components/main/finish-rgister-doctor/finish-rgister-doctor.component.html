@@ -1,0 +1,199 @@
+<div class="bg">
+    <div class="container ">
+        <div class="row">
+            <div class="col-6">
+                <h4>Complete Registration :</h4>
+                <form action="" method="" (submit)="check()" class="form">
+                    <div class="formInputs">
+                        <label for="" style="padding-right: 10px;">First Name :</label>
+                        <div class="inp-container">
+                            <input type="text" style="width: clac(100% - 65px);" [formControl]="nameControll"
+                                placeholder="your first name" required />
+                            <div class="error" *ngIf="nameerror.length>0">{{nameerror}}</div>
+                        </div>
+                        <label for="" style="padding-right: 10px;">Last name :</label>
+                        <div class="inp-container">
+                            <input type="text" style="width: clac(100% - 115px);" [formControl]="lastnameControll"
+                                placeholder="your last name" />
+                            <div class="error" *ngIf="lastnameerror.length>0">{{lastnameerror}}</div>
+                        </div>
+                        <label for="">Speciality :</label>
+                        <div *ngIf="selecetedspeciality;else selectspeciality ">
+                            <div class="specialty" [ngClass]="{'viw': isDescriptionOn}">
+                                <div class="viewde" [ngClass]="{'display': !isDescriptionOn}"
+                                    (click)="isDescriptionOn=true">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.5 5L15.5 12L8.5 19" stroke="white" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                                <div class="viewde" [ngClass]="{'display': isDescriptionOn}"
+                                    (click)="isDescriptionOn=false">
+                                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M19 8.5L12 15.5L5 8.5" stroke="white" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                                {{ selecetedspeciality.name }}
+                                <div class="delspec"
+                                    (click)="selecetedspeciality=undefined;searchControll.setValue('');searchResults=[]">
+                                    <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
+                                        height="20">
+                                        <title>Arrow - Up Circle-svg</title>
+                                        <style>
+                                            .s0 {
+                                                fill: none;
+                                                stroke: #130f26;
+                                                stroke-linecap: round;
+                                                stroke-linejoin: round;
+                                                stroke-width: 1.5
+                                            }
+                                        </style>
+                                        <path id="Layer" class="s0" d="m22.5 22.3l-10.3-10.3-10.2 10.3" />
+                                        <path id="Layer copy" class="s0" d="m22.5 2l-10.3 10.3-10.2-10.3" />
+                                    </svg>
+                                </div>
+
+                            </div>
+                            <div class="description" [ngClass]="{'display': isDescriptionOn}">
+                                {{ selecetedspeciality.description }}
+                            </div>
+                        </div>
+                        <ng-template #selectspeciality>
+                            <div class="inp-container">
+                                <input type="text" [formControl]="searchControll" placeholder="search for specialit">
+                                <div class="error" *ngIf="specialityerror.length>0">{{specialityerror}}</div>
+                            </div>
+                            <ul>
+                                <li *ngFor="let specialty of searchResults" (click)="selecetedspeciality=specialty">
+                                    {{ specialty.name }} - {{ specialty.description }}
+                                </li>
+                            </ul>
+
+
+                        </ng-template>
+                        <label for="">Profile description :</label>
+                        <div class="inp-container">
+                            <textarea type="text" [formControl]="descriptionControll"
+                                placeholder="your profile description"></textarea>
+                            <div class="error" *ngIf="decriptionerror.length>0">{{decriptionerror}}</div>
+                        </div>
+                        <label for="">Public Email :</label>
+
+                        <div class="inp-container">
+                            <input type="email" [formControl]="emailControll" placeholder="this email will be public" />
+                            <div class="error" *ngIf="emailerror.length>0">{{emailerror}}</div>
+                        </div>
+                        <label for="">Public phone number:</label>
+                        <div class="inp-container">
+                            <input type="text" [formControl]="phoneControll"
+                                placeholder="This phone number will be public" />
+                            <div class="error" *ngIf="phoneerror.length > 0">{{ phoneerror }}</div>
+                        </div>
+
+
+                    </div>
+
+                    <input type="submit" value="Finnish Registration" class="submit">
+                </form>
+            </div>
+
+            <div class="col-6 mx-0 px-0" style="height: 100vh;   ">
+                <div class="locationlabel">
+                    <label for="">Work Location :</label>
+                    <div class="error" *ngIf="locationerror.length > 0">{{ locationerror }}</div>
+                </div>
+                <div id="map" style="height:calc(100vh - 63px) ;  cursor: pointer !important;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="selctworkhours" [ngClass]="{'dis':continue}">
+        <div class="container work" style="width: 60%; height: 100%; padding: 30px;">
+
+            <div style="font-weight: 600;font-size: 17px;color:#2A3563;letter-spacing: 1.2px;padding-top: 15px;">Shifts
+            </div>
+            <div class="shiftcontainer ">
+                <div *ngFor="let shift of workShifts; let i = index">
+                   <div style="display: flex;"><div class="shiftname"><input type="text" [value]="shift.name" (input)="onSelectChangename($event.target,i)"><svg width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="Iconly/Light-Outline/Edit">
+                                <g id="Edit">
+                                    <path id="Fill 1" fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M20.7508 21.9397H13.4978C13.0838 21.9397 12.7478 21.6037 12.7478 21.1897C12.7478 20.7757 13.0838 20.4397 13.4978 20.4397H20.7508C21.1648 20.4397 21.5008 20.7757 21.5008 21.1897C21.5008 21.6037 21.1648 21.9397 20.7508 21.9397Z"
+                                        fill="black" />
+                                    <g id="Group 5">
+                                        <mask id="mask0_2_5827" style="mask-type:luminance" maskUnits="userSpaceOnUse"
+                                            x="2" y="3" width="18" height="19">
+                                            <path id="Clip 4" fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M2.00037 3.00016H19.181V21.9397H2.00037V3.00016Z" fill="white" />
+                                        </mask>
+                                        <g>
+                                            <path id="Fill 3" fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M13.1106 5.0168L3.69564 16.7918C3.52464 17.0058 3.46164 17.2818 3.52464 17.5468L4.20564 20.4318L7.24464 20.3938C7.53364 20.3908 7.80064 20.2618 7.97764 20.0418C11.1946 16.0168 17.3276 8.3428 17.5016 8.1178C17.6656 7.8518 17.7296 7.4758 17.6436 7.1138C17.5556 6.7428 17.3246 6.4278 16.9916 6.2268C16.9206 6.1778 15.2356 4.8698 15.1836 4.8288C14.5496 4.3208 13.6246 4.4088 13.1106 5.0168ZM3.61364 21.9398C3.26664 21.9398 2.96464 21.7018 2.88364 21.3628L2.06464 17.8918C1.89564 17.1728 2.06364 16.4308 2.52464 15.8548L11.9446 4.0728C11.9486 4.0688 11.9516 4.0638 11.9556 4.0598C12.9886 2.8248 14.8566 2.6428 16.1166 3.6538C16.1666 3.6928 17.8396 4.9928 17.8396 4.9928C18.4476 5.3548 18.9226 6.0018 19.1026 6.7678C19.2816 7.5258 19.1516 8.3078 18.7346 8.9688C18.7036 9.0178 18.6766 9.0598 9.14864 20.9798C8.68964 21.5518 8.00164 21.8848 7.26264 21.8938L3.62364 21.9398H3.61364Z"
+                                                fill="black" />
+                                        </g>
+                                    </g>
+                                    <path id="Fill 6" fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M16.2234 11.6848C16.0634 11.6848 15.9034 11.6338 15.7664 11.5298L10.3144 7.34181C9.98642 7.08981 9.92442 6.61981 10.1764 6.28981C10.4294 5.96181 10.8994 5.90081 11.2284 6.15281L16.6814 10.3398C17.0094 10.5918 17.0714 11.0628 16.8184 11.3918C16.6714 11.5838 16.4484 11.6848 16.2234 11.6848Z"
+                                        fill="black" />
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <div *ngIf="workShifts.length>1" style="display: flex; align-items: center;margin-left: 15px;" (click)="removeshift(i)" class="delete"><div style="margin-right: 15px;">Delete</div><svg width="19" height="20" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.2466 20C7.8916 20 6.5706 19.985 5.2636 19.958C3.5916 19.925 2.4346 18.841 2.2456 17.129C1.9306 14.289 1.3916 7.595 1.3866 7.528C1.3526 7.115 1.6606 6.753 2.0736 6.72C2.4806 6.709 2.8486 6.995 2.8816 7.407C2.8866 7.475 3.4246 14.146 3.7366 16.964C3.8436 17.937 4.3686 18.439 5.2946 18.458C7.7946 18.511 10.3456 18.514 13.0956 18.464C14.0796 18.445 14.6116 17.953 14.7216 16.957C15.0316 14.163 15.5716 7.475 15.5776 7.407C15.6106 6.995 15.9756 6.707 16.3846 6.72C16.7976 6.754 17.1056 7.115 17.0726 7.528C17.0666 7.596 16.5246 14.307 16.2126 17.122C16.0186 18.869 14.8646 19.932 13.1226 19.964C11.7896 19.987 10.5036 20 9.2466 20Z" fill="black"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M17.708 4.9893H0.75C0.336 4.9893 0 4.6533 0 4.2393C0 3.8253 0.336 3.4893 0.75 3.4893H17.708C18.122 3.4893 18.458 3.8253 18.458 4.2393C18.458 4.6533 18.122 4.9893 17.708 4.9893Z" fill="black"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M14.4405 4.9893C13.3025 4.9893 12.3145 4.1783 12.0905 3.0623L11.8475 1.8463C11.7965 1.6613 11.5855 1.5003 11.3455 1.5003H7.11246C6.87246 1.5003 6.66146 1.6613 6.60046 1.8923L6.36746 3.0623C6.14446 4.1783 5.15546 4.9893 4.01746 4.9893C3.60346 4.9893 3.26746 4.6533 3.26746 4.2393C3.26746 3.8253 3.60346 3.4893 4.01746 3.4893C4.44346 3.4893 4.81346 3.1853 4.89746 2.7673L5.14046 1.5513C5.38746 0.619298 6.19446 0.000297546 7.11246 0.000297546H11.3455C12.2635 0.000297546 13.0705 0.619298 13.3075 1.5063L13.5615 2.7673C13.6445 3.1853 14.0145 3.4893 14.4405 3.4893C14.8545 3.4893 15.1905 3.8253 15.1905 4.2393C15.1905 4.6533 14.8545 4.9893 14.4405 4.9893Z" fill="black"/>
+                        </svg>
+                        
+                        </div>
+                    </div> 
+                    <div style="padding: 0 15px;">
+                        <div style="display: flex; width: 300px;    align-items: center;">
+                            <div style="width: 35%;font-weight: 500;font-size: 17px;color:#2A3563">Begin Hour</div>
+                            <select class="selecthours" (input)="onSelectChangebegin($event.target,i)">
+                                <option *ngFor="let hour of hours" [value]="hour" [selected]="hour == shift.start">{{
+                                    hour }}</option>
+                            </select>
+                        </div>
+                        <div style="display: flex; width: 300px;    align-items: center;margin-top: 15px;">
+                            <div style="width: 35%;font-weight: 500;font-size: 17px;color:#2A3563">End Hour</div>
+                            <select class="selecthours" (input)="onSelectChangeend($event.target,i)">
+                                <option *ngFor="let hour of hours" [value]="hour" [selected]="hour == shift.end">{{ hour
+                                    }}</option>
+                            </select>
+                        </div>
+                        <div style="font-weight: 500;font-size: 17px;color:#2A3563;letter-spacing: 1px;">Work Days :</div>
+                        <div style="display: flex; flex-direction: row; justify-content: space-around;">
+                            <div *ngFor="let day of shift.days " style="flex: 1 0 auto; text-align: center; ">
+                                <div>
+                                    <div style="background-color: #EFF3FA; margin: 7px; border-radius: 3px;padding:  10px 0;font-size: 17px; font-weight: 500; color:#8a96c9"
+                                        class="day" [ngClass]="{'selected':day.selected}" (click)="selectday(day,i)">{{ day.name }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="shift.errors.length>0">
+                            <div class="shift error" *ngFor="let err of shift.errors">
+                                {{err}}
+                            </div>
+                        </div>
+                        <br/>
+        
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div *ngIf="workShifts.length<4">
+                <div class="sign-container">
+                    <div class="plus-sign"> </div>
+                    <div style="padding-left: 10px;" (click)="addShift()">Add new Shift</div>
+                </div>
+            </div>
+            <button (click)="checkShiftsOverlap()">Save</button>
+        </div>
+    </div>

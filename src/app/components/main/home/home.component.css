@@ -1,0 +1,214 @@
+.TheBody{
+  min-height: calc(100vh - 247.11px);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+
+}
+
+.searchContainer{
+  display: flex;
+  flex-direction: column;
+ 
+  border-radius: 30px;
+  margin: auto ;
+  padding: 30px 30px;
+  
+}
+
+.img-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.searchTitle{
+    font-size: X-large;
+    font-weight: 600;
+    margin-top: 10px;
+}
+.searchDescription{
+    font-size: large;  
+    color: #056449;
+    text-align: left;
+    font-weight: 500;
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    border-right: .15em solid orange; /* The typwriter cursor */
+    white-space: nowrap; /* Keeps the content on a single line */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    letter-spacing: .15em; /* Adjust as needed */
+    animation: 
+      typing 3.5s steps(40, end),
+      blink-caret .75s step-end infinite;
+}
+
+.row{
+  padding:  20px 0px;
+}
+
+.typewriter h1 {
+    color: #110c0c;
+    font-family: monospace;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: .15em;
+    overflow: hidden;
+  }
+  
+  .typewriter h1 span {
+    border-right: .15em solid orange;
+    animation: typing 3.5s steps(30, end), blink-caret .5s step-end infinite;
+  }
+  
+  h1 {
+    display: inline-block;
+    border-right: .15em solid orange;
+    white-space: nowrap;
+    overflow: hidden;
+    letter-spacing: .15em;
+    animation: typing 3.5s steps(30, end), blink-caret .5s step-end infinite;
+  }
+
+  .searchDescription1{
+    font-size: medium;  
+    color: #056449;
+    text-align: left;
+    font-weight: 500;
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    border-right: .15em solid #00d797; /* The typwriter cursor */
+    white-space: nowrap; /* Keeps the content on a single line */
+  /* Gives that scrolling effect as the typing happens */
+    letter-spacing: .15em; /* Adjust as needed */
+    animation: 
+      typing 2.5s steps(40, end),
+      blink-caret .75s step-end 3.5s,
+      hide-caret .5s  3.5s forwards;
+  }
+  .searchDescription2 {
+    font-size: medium;  
+    color: #056449;
+    text-align: left;
+    font-weight: 500;
+    opacity: 0; /* Add visibility property to hide the element */
+    display: inline-block;
+    border-right: .15em solid #00d797;
+    white-space: nowrap;
+    overflow: hidden;
+    letter-spacing: .15em;
+    animation: 
+    typing 2.5s steps(40, end)forwards,
+    blink-caret .75s  steps(40, end), hide-caret 0.5s forwards 2.5s;
+    animation-delay: 3s; 
+   
+  }
+  .searchDescription3 {
+    font-size: medium;  
+    color: #056449;
+    text-align: left;
+    font-weight: 500;
+    opacity: 0; /* Add visibility property to hide the element */
+    display: inline-block;
+    border-right: .15em solid #00d797;
+    white-space: nowrap;
+    overflow: hidden;
+    letter-spacing: .15em;
+    animation: typing 2.5s steps(40, end)forwards, blink-caret .5s step-end infinite;
+    animation-delay: 6s; 
+  }
+  .typedtext{
+    display: flex;
+    width: fit-content;
+  }
+  
+  /* The typing effect */
+  @keyframes typing {
+    from { width: 0; opacity: 1; }
+    to { width: 100%;opacity: 1; }
+  }
+  
+  /* The typewriter cursor effect */
+  @keyframes blink-caret {
+    from { border-color: transparent } 
+    to { border-color: transparent }
+    50% { border-color: #00d797; }
+    100%{ border-color: transparent }
+  }
+  
+@keyframes hide-caret {
+  from { border-color: #00d797 }
+  to { border-color: transparent !important}
+}
+
+.cid{
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+video {
+  border: white;
+  width: 240.0px;
+  height: auto;
+  box-sizing: unset;
+  overflow: hidden;
+}
+.coll1{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+   color: #192252;
+}
+.coll1 p{
+  font-size: 18px;
+  color: #424F7B;
+}
+.serviceTemplate{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  width: 100px;
+  text-align: center;
+  height: 100px;
+}
+.services-carrousel{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.con1{
+  background: #baf5e475;
+  border-radius: 30px;
+  margin-top: 50px;
+  display: block;
+  padding-bottom: 20px;
+}
+.services-Container{
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding-bottom: 0;
+  font-size: 12px;
+  font-weight: 600;
+  
+}
+.serviceTemplate img{
+  margin-bottom: 15px;
+}
+.seeallServices{
+  text-align: center;
+}
+.services-Expand{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+ border-top: 1px solid #2E3F53;
+ padding-top: 5px;
+ font-size: small    ;
+ font-weight: 400;
+ background: #2E3F53;
+ color: white;
+ border-radius: 0 0 30px 30px;
+}

@@ -1,0 +1,53 @@
+<main class="TheBody">
+    <div class="con1 container p-0 ">
+        <div class="searchContainer py-0">
+
+
+            <div class="row ">
+                <div class="col-6 login-vid">
+                    <ng-lottie
+                    [options]="lottieConfig"
+                    [width]="'80%'"
+                   
+                  ></ng-lottie>
+                </div>
+                <div class="col-6 login-container p-0">
+                    
+                 
+                        
+                        <form style="    height: 100%;
+                         display: flex;
+                         flex-direction: column;
+                         justify-content: space-between;" [formGroup]="loginForm" (ngSubmit)="submit()">
+                            
+                         <div> <div class="searchTitle pb-5">Login</div>  <mat-form-field class="input">
+                                <input matInput placeholder="Email address" formControlName="email" />
+                                <mat-error *ngIf="email?.errors?.['required']" class="error">
+                                    Email is required
+                                </mat-error>
+                                <mat-error *ngIf="email?.errors?.['email']">
+                                    Please enter a correct email format
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field  class="input">
+                                <input matInput placeholder="Password" formControlName="password" type="password" />
+                                <mat-error *ngIf="password?.errors?.['required']" class="error">
+                                    Password is required
+                                </mat-error>
+                            </mat-form-field>
+                            <span class="center margin-top">New to our platform? <a class="sign-up-link" routerLink="/CreateAccount">Sign Up!</a></span>
+                        </div>   <div class="center margin-top">
+                                <button mat-raised-button color="primary" type="submit" class="sub">
+                                    Login
+                                </button>
+                            </div>
+                           
+                        </form>
+            
+            </div>
+
+
+        </div>     </div>     </div>
+    
+
+</main>

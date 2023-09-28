@@ -1,0 +1,70 @@
+<div class="bg">
+    <div class="container ">
+        <div style="    text-align: center;"><h4>Complete Registration </h4></div>
+        <form action="" method="" (submit)="savePatient()" class="form">
+        <div class="row">
+            <div class="col-6">
+
+             
+                    <div class="formInputs">
+                        <label for="" style="padding-right: 10px;">First Name :</label>
+                        <div class="inp-container">
+                        <input type="text" style="width: clac(100% - 65px);"  [formControl]="nameControll" placeholder="Your first name" required/>
+                        <div  class="error" *ngIf="nameerror.length>0">{{nameerror}}</div>
+                        </div>
+                        <label for="" style="padding-right: 10px;">Last name :</label>
+                        <div class="inp-container">
+                        <input type="text" style="width: clac(100% - 115px);"[formControl]="lastnameControll" placeholder="Your last name" />
+                        <div  class="error" *ngIf="lastnameerror.length>0">{{lastnameerror}}</div>
+                        </div>
+                        <label for="" >Gender:</label>
+                        <div class="inp-container">
+                            <select [formControl]="GenderControll" >
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                            <div  class="error" *ngIf="gendererror.length>0">{{gendererror}}</div>
+                        </div>
+                      
+                        <label for="" >Date of birth:</label>
+                        <div class="inp-container">
+                            <input type="date" [formControl]="dateControll" placeholder="this email will be public" />
+                            <div  class="error" *ngIf="daterror.length>0">{{daterror}}</div></div>
+                        <label for="">Phone number:</label>
+                        <div class="inp-container">
+                        <input type="text" [formControl]="phoneControll" placeholder="Your phone number"  />
+                        <div class="error" *ngIf="phoneerror.length > 0">{{ phoneerror }}</div></div>
+                       
+                    </div>
+                   
+                    
+              
+            </div>
+
+            <div class="col-6 col-6-2" >
+                <div class="formInputs">
+                    <label for="" >Home Adress:</label>
+                    <div class="inp-container">
+                        <input type="text" [formControl]="LocationControll" placeholder="Your home Adress" />
+                        <div  class="error" *ngIf="locationerror.length>0">{{locationerror}}</div></div>
+                 
+                <label for="" >Current height - Kg :</label>
+                        <div class="inp-container">
+                        <input type="number" value="0" [formControl]="heigthControll" placeholder="0" />
+                        <div  class="error" *ngIf="heigtherror.length>0">{{heigtherror}}</div></div>
+                        <label for="">Current weight - cm :</label>
+                        <div class="inp-container">
+                        <input type="number" value="0" [formControl]="WeightControll" placeholder="0"/>
+                        <div  class="error" *ngIf="Weighterror.length>0">{{Weighterror}}</div></div>
+                        <label for="">Allergies Seperated by " - " (Leave it empty if you don't have any):</label>
+                        <div class="inp-container">
+                        <textarea  [formControl]="allergiesControll" placeholder="Your Allergies If you have"></textarea>
+                        </div>
+                    </div> 
+            </div>
+        </div>
+        <input type="submit" value="Finnish Registration" class="submit">
+        <input type="button" value="Log-out" class="Log-out" (click)="logout()">
+    </form>
+    </div>
+</div>

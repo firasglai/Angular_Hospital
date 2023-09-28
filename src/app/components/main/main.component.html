@@ -1,0 +1,14 @@
+<div class="TheBody" ><app-header></app-header>
+    <div class="container" [@slideInAnimation] [@slideInAnimation]="o.isActivated ? o.activatedRoute : ''">
+      <router-outlet #o="outlet" ></router-outlet>
+    </div>
+    </div>
+    <div class="background-container">
+    <ng-lottie
+      [options]="lottieConfig"
+      [width]="'max-content'"
+      [height]="'100vh'"
+       style="display: block;"
+      [style]="{ position: 'fixed', left: 0, zIndex: -1,display: 'block!important',backgroundImage :'linear-gradient(to top, #7b8fa6, #83a3ba, #8ab8cd, #92cede, #9de3ec, #abecf2, #b8f5f8, #c6feff, #d7fdff, #eafcff, #f8fcff, #ffffff)',opacity:'0.5'}"
+    ></ng-lottie></div>
+    

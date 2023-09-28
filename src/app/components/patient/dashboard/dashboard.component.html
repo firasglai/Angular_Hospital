@@ -1,0 +1,82 @@
+<div class="body">
+  <div>
+    <h3>Welcome back, dr. {{username}}</h3> <!-- Displays a welcome message with the username of the logged-in user -->
+  </div>
+
+  <div class="rowa">
+    <div class=" data">
+      <h5>My Appoitments</h5> <!-- Displays a heading for patient statistics -->
+      <div class="chart-container">
+        <canvas id="chart" #chart></canvas> <!-- Renders a chart with the chart id and reference #chart -->
+      </div>
+      <div class="chartLegend">
+        <div class="chartLegend-element" *ngFor="let det of patientDatas1">
+          <div class="legendCircle" [style.backgroundColor]="color(det)"> </div> <!-- Displays a colored circle legend for the chart -->
+          <div class="legendtext">{{det["name"]}}</div> <!-- Displays the name of the data in the legend -->
+          <div class="legendpercent">{{det["data"]}}</div> <!-- Displays the percentage of data in the legend -->
+
+        </div>
+      </div>
+
+    </div>
+    <div class=" data2">
+      <h5>Todays Appoitments</h5> <!-- Displays a heading for money earned statistics -->
+      
+
+    </div>
+
+  </div>
+  <div class="payments">
+    <h5>Recent Appoitments</h5> <!-- Displays a heading for recent payment information -->
+    <div class="table-container">
+      <table class="table table-borderless">
+        <thead>
+          <tr>
+            <th>Patient</th> <!-- Displays a column for patient information -->
+            <th>Appoitment</th> <!-- Displays a column for appointment information -->
+            <th>Date</th> <!-- Displays a column for payment date -->
+            <th>Total</th> <!-- Displays a column for payment total amount -->
+            <th>Status</th> <!-- Displays a column for payment status -->
+            <th>Action</th> <!-- Displays a column for actions related to payments -->
+          </tr>
+        </thead>
+        <tbody *ngFor="let P of lastPayments"> <!-- Iterates through an array of lastPayments to display payment information -->
+          <tr>
+            <td class="patient-column"><img src='assets/{{P["patient"]["profilePicture"]}}' class="Patient-profile"> <!-- Displays the profile picture of the patient -->
+              <div style="padding-left: 15px;">
+                <div class="patient-column-name">{{P["patient"]["title"]}} {{P["patient"]["name"]}} {{P["patient"]["lastname"]}}</div> <!-- Displays the name and title of the patient -->
+                <div class="patient-column-id">{{P["patient"]["id"]}}</div> <!-- Displays the ID of the patient -->
+              </div>
+            </td>
+            <td class="appointment-column">
+              {{P["appoitment"]}} <!-- Displays the appointment information -->
+            </td>
+            <td class="date-column">
+              {{P["Date"]}} <!-- Displays the payment date -->
+            </td>
+            <td class="total-column">
+              <div class="total-column-amount">{{P["payment"]["amount"]}} $</div> <!-- Displays the payment amount -->
+              <div class="total-column-method">{{P["payment"]["methode"]}}</div> <!-- Displays the payment method -->
+              
+
+            </td>
+            <td class="statu-column {{P['Statu']}}">
+              <div class="statu-column {{P['Statu']}}">
+                {{P["Statu"]}}
+              </div>
+            </td>
+            <td class="action-column  custom-action-column">
+              <div class="action-icons">
+                <i class="fas fa-eye" ></i> <!-- Displays an eye icon for viewing payment details and triggers a function on click -->
+                <i class="fas fa-print" ></i> <!-- Displays a print icon for printing payment details and triggers a function on click -->
+                <i class="fas fa-trash"></i> <!-- Displays a trash icon for deleting a payment and triggers a function on click -->
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+</div>
