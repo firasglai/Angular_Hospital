@@ -6,6 +6,9 @@
           <ng-lottie [options]="lottieConfig" [width]="'80%'"></ng-lottie>
         </div>
         <div class="col-6 login-container p-0">
+          <div class="loading" [ngClass]="{ displayon: loading }">
+            <img width="300px" src="assets/gene (2).gif" alt="" />
+          </div>
           <form
             style="
               height: 100%;

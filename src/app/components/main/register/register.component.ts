@@ -84,7 +84,7 @@ export class RegisterComponent implements OnInit {
     loop: true,
     autoplay: true,
   };
-user: User = {
+  user: User = {
     fullName: '',
     password: '',
     email: '',

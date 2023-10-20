@@ -32,6 +32,8 @@ export class LoginComponent {
     loop: true,
     autoplay: true,
   };
+  //? Loading spinner
+  loading=false
 
 
   loginForm = new FormGroup({
@@ -76,45 +78,50 @@ export class LoginComponent {
     if (!this.loginForm.valid) {
       return;
     }
-    
+  
     const { email, password } = this.loginForm.value;
     const user: Profile = { email: email!, password: password! };
-    this.auth.login(user).subscribe(
-      (response) => {
-        if (response && 'token' in response) {
-          this.toast.success('Login successful welcome!', 'Welcome!', {progressBar:true});
-          const resp = response as { token: string, userRole: string };
-          //console.log("the token here" + resp.token + "the role here" + resp.userRole);
-          this.tokenService.setToken(resp.token);
-          this.tokenService.setUserRole(resp.userRole);
-          
-          this.auth.getCurrentUser().subscribe(
-            (user) => {
-              if (user) {
-                this.cookieService.set('currentUser', JSON.stringify(user));
+  
+    this.loading = true; //? Show loading spinner
+  
+    setTimeout(() => { // Add a delay of 1 second (1000 milliseconds)
+      this.auth.login(user).subscribe(
+        (response) => {
+          if (response && 'token' in response) {
+            this.toast.success('Login successful welcome!', 'Welcome!', {progressBar:true});
+            const resp = response as { token: string, userRole: string };
+            this.tokenService.setToken(resp.token);
+            this.tokenService.setUserRole(resp.userRole);
+  
+            this.auth.getCurrentUser().subscribe(
+              (user) => {
+                if (user) {
+                  this.cookieService.set('currentUser', JSON.stringify(user));
+                }
+              },
+              (error) => {
+                console.error('Error getting current user', error);
+                this.toast.error('Error getting current user');
               }
-            },
-            (error) => {
-              console.error('Error getting current user', error);
-              this.toast.error('Error getting current user');
+            );
+  
+            if (resp.userRole === "DOCTOR") {
+              this.router.navigate(['/doctor']);
+            } else if (resp.userRole === "PATIENT") {
+              this.router.navigate(['/patient']);
+            } else if (resp.userRole === "ADMIN") {
+              this.router.navigate(['/admin']); 
             }
-          );
-         
-         
-          if (resp.userRole === "DOCTOR") {
-            this.router.navigate(['/doctor']); // Navigate to the doctor component
-          } else if (resp.userRole === "PATIENT") {
-            this.router.navigate(['/patient']);
-          } else if (resp.userRole === "ADMIN") {
-            this.router.navigate(['/admin']); 
           }
+        },
+        (error) => {
+          console.error('Error logging in', error);
+          this.toast.error('Error logging in', 'Error Logging In', {progressBar:true} );
         }
-      },
-      (error) => {
-        console.error('Error logging in', error);
-        this.toast.error('Error logging in', 'Error Logging In', {progressBar:true} );
-      }
-    );
+      );
+  
+      this.loading = false; // Hide loading spinner when the request is complete
+    }, 1000); // Add a delay of 1 second (1000 milliseconds)
   }
   
 }
