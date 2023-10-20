@@ -7,7 +7,7 @@ import { Message, Chat } from 'src/app/models/chat';
 import { ProfileUser, patientProfile } from 'src/app/models/user-profile';
 import { PresenceService } from 'src/app/services/presence.service';
 import { ChatsService } from 'src/app/services/chats.service';
-import { UsersService } from 'src/app/services/users.service';
+import { UsersService } from 'src/app/services/users/users.service';
 import { Doctor, DoctorServicesService } from 'src/app/services/doctor-services.service';
 import { DoctorChatService, chatReq } from 'src/app/services/doctor/doctor-chat.service';
 

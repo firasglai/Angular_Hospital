@@ -1,81 +1,151 @@
 <main class="TheBody">
-    <div class="con1 container p-0 ">
-        <div class="searchContainer py-0">
+  <div class="con1 container p-0">
+    <div class="searchContainer py-0">
+      <div class="row">
+        <div class="col-6 login-vid">
+          <ng-lottie [options]="lottieConfig" [width]="'80%'"></ng-lottie>
+        </div>
+        <div class="col-6 login-container p-0">
+          <div class="loading" [ngClass]="{ displayon: loading }">
+            <img width="300px" src="assets/gene (2).gif" alt="" />
+          </div>
+          <div class="searchTitle pb-3">Register</div>
 
-
-            <div class="row ">
-                <div class="col-6 login-vid">
-                    <ng-lottie
-                    [options]="lottieConfig"
-                    [width]="'80%'"
-                   
-                  ></ng-lottie>
+          <form [formGroup]="signUpForm" (ngSubmit)="submit()">
+            <div style="margin-bottom: 80px">
+              <div
+                style="
+                  display: flex;
+                  justify-content: center;
+                  margin-bottom: 50px;
+                "
+              >
+                <div class="select">
+                  <div
+                    class="sel"
+                    [ngClass]="{ display: patientSelect }"
+                    (click)="patientSelect = true"
+                  >
+                    Patient
+                  </div>
+                  <div
+                    class="sel"
+                    [ngClass]="{ display: !patientSelect }"
+                    (click)="patientSelect = false"
+                  >
+                    Doctor
+                  </div>
                 </div>
-                <div class="col-6 login-container p-0">
-                    <div class="loading"  [ngClass]="{'displayon':loading}">
-                        <img width="300px" src="assets/gene (2).gif" alt="">
-                    </div>
-                    <div class="searchTitle pb-3">Register</div>
+              </div>
+              <mat-form-field class="input">
+                <mat-label>Fullname</mat-label>
+                <input matInput formControlName="fullName" />
+                <mat-error *ngIf="fullName?.errors?.['required']" class="error">
+                  Fullname is required
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="input">
+                <mat-label>Email address</mat-label>
+                <input matInput formControlName="email" />
+                <mat-error *ngIf="email?.errors?.['required']" class="error">
+                  Email is required
+                </mat-error>
+                <mat-error *ngIf="email?.errors?.['email']" class="error">
+                  Please enter a correct email format
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field class="input">
+                <mat-label>Password</mat-label>
+                <input
+                  matInput
+                  formControlName="password"
+                  [type]="hide ? 'password' : 'text'"
+                />
+                <button
+                  mat-icon-button
+                  matSuffix
+                  (click)="hide = !hide"
+                  [attr.aria-label]="'Hide password'"
+                  class="show"
+                  [attr.aria-pressed]="hide"
+                >
+                  <mat-icon>{{
+                    hide ? "visibility_off" : "visibility"
+                  }}</mat-icon>
+                </button>
+                <mat-error *ngIf="password?.errors?.['required']" class="error">
+                  Password is required
+                </mat-error>
+              </mat-form-field>
 
-                    <form [formGroup]="signUpForm" (ngSubmit)="submit()">
-                        
-                        <div style="margin-bottom: 80px;">
-                        <div style="display: flex;    justify-content: center;margin-bottom: 50px;">
-                       <div class="select">
-                        <div class="sel" [ngClass]="{'display':patientSelect}" (click)="patientSelect=true"><div class="trinagle"></div>Patient</div>
-                        <div  class="sel" [ngClass]="{'display':!patientSelect}" (click)="patientSelect=false"><div class="trinagle"></div>Doctor</div>
-                       </div></div>
-                        <mat-form-field  class="input">
-                            <mat-label>Email address</mat-label>
-                            <input matInput formControlName="email" />
-                            <mat-error *ngIf="email?.errors?.['required']" class="error">
-                                Email is required
-                            </mat-error>
-                            <mat-error *ngIf="email?.errors?.['email']" class="error">
-                                Please enter a correct email format
-                            </mat-error>
-                        </mat-form-field>
-                        <mat-form-field  class="input">
-                            <mat-label>Password</mat-label>
-                            <input  matInput formControlName="password" [type]="hide ? 'password' : 'text'">
-                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" class="show" [attr.aria-pressed]="hide">
-                              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                            </button>
-                            <mat-error *ngIf="password?.errors?.['required']" class="error">
-                                Password is required
-                            </mat-error>
-                          </mat-form-field>
-                
-                        <mat-form-field  class="input">
-                            <mat-label>Confirm password</mat-label>
-                            <input matInput  formControlName="confirmPassword" [type]="hide1 ? 'password' : 'text'" />
-                            <button mat-icon-button matSuffix (click)="hide1 = !hide1" [attr.aria-label]="'Hide password'" class="show" [attr.aria-pressed]="hide1">
-                                <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
-                              </button>
-                            <mat-error *ngIf="confirmPassword?.errors?.['required']" class="error">
-                                Confirm Password is required
-                            </mat-error>
-                        </mat-form-field>
-                        <mat-error *ngIf="signUpForm.errors?.['passwordsDontMatch']" class="error">
-                            Passwords should match
-                        </mat-error>
-                    </div>
+              <mat-form-field class="input">
+                <mat-label>Confirm password</mat-label>
+                <input
+                  matInput
+                  formControlName="confirmPassword"
+                  [type]="hide1 ? 'password' : 'text'"
+                />
+                <button
+                  mat-icon-button
+                  matSuffix
+                  (click)="hide1 = !hide1"
+                  [attr.aria-label]="'Hide password'"
+                  class="show"
+                  [attr.aria-pressed]="hide1"
+                >
+                  <mat-icon>{{
+                    hide1 ? "visibility_off" : "visibility"
+                  }}</mat-icon>
+                </button>
+                <mat-error
+                  *ngIf="confirmPassword?.errors?.['required']"
+                  class="error"
+                >
+                  Confirm Password is required
+                </mat-error>
+              </mat-form-field>
+              <mat-error
+                *ngIf="signUpForm.errors?.['passwordsDontMatch']"
+                class="error"
+              >
+                Passwords should match
+              </mat-error>
 
-                        <div class="center margin-top">
-                            <button mat-raised-button color="primary" type="submit" class="sub">
-                                Sign Up!
-                            </button>
-                        </div>
-                    </form>
+              <mat-label>Gender : </mat-label>
+              <mat-radio-group formControlName="gender">
+                <mat-radio-button value="MALE">Male</mat-radio-button>
+                <mat-radio-button value="FEMALE">Female</mat-radio-button>
+              </mat-radio-group>
+              <mat-error *ngIf="gender?.errors?.['required']" class="error">
+                Gender is required
+              </mat-error>
 
-
-
-                </div>
-
+              <div *ngIf="!patientSelect">
+                <select class="input" aria-label=".form-select-sm example" formControlName="specialtyName">
+                  <option selected disabled>Select Specialty:</option>
+                  <option *ngFor="let specialty of specialties" [ngValue]="specialty.name">
+                    {{ specialty.name }}
+                  </option>
+                </select>
+              </div>
+              
             </div>
 
+            <!-- Conditionally show/hide additional form fields for Doctor -->
 
+            <div class="center margin-top">
+              <button
+                mat-raised-button
+                color="primary"
+                type="submit"
+                class="sub"
+              >
+                Sign Up!
+              </button>
+            </div>
+          </form>
         </div>
+      </div>
     </div>
-
+  </div>
 </main>

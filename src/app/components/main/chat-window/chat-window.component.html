@@ -1,31 +1,31 @@
 <div class="call-window">
   
-  <div *ngIf=" call2; else nocall">
-    <h2>window ref : {{ callWindowId}}</h2>
-    <h2>userHaveCallID : {{userHaveCallID}}</h2>
-    <h2 *ngIf="user.uid==call2!.starterId">callwindow : {{call2!.starteCallWindows?.currentCallwindowID}}
+  <div>
+    <h2>window ref : </h2>
+    <h2>userHaveCallID : </h2>
+    <h2 >callwindow : 
       
-      <h2 *ngIf="call2!.starteCallWindows?.currentCallwindowID==callWindowId">XXXXXXXXXXXX</h2>
+      <h2 >XXXXXXXXXXXX</h2>
     </h2>
-    <h2 *ngIf="user.uid==call2!.reciever">callwindow : {{call2!.recieverCallWindows?.currentCallwindowID}}
+    <h2 >callwindow :
 
 
 
-          <h2 *ngIf="call2!.recieverCallWindows?.currentCallwindowID==callWindowId">XXXXXXXXXXXX</h2>
+          <h2>XXXXXXXXXXXX</h2>
     </h2>
 
     <!-- Add any necessary HTML elements for the call window -->
-    <button (click)="endCall()">End Call</button>
+    <button >End Call</button>
     </div>
 
   </div>
  
   <ng-template #nocall>
     user have no call
-    <button (click)="backtoinbox()">Back to Inbox</button>
+    <button >Back to Inbox</button>
   </ng-template>
   <input type="text">
-  <div class="vidDisplay" [ngClass]="{'On': this.connected == 'On' }">
+  <div class="vidDisplay" >
     <div class="container-fluid">
       <div>
 
@@ -33,22 +33,22 @@
           <div id="remote-container" >
           </div>
          
-            <div id="local-container"  class="vidDisplay" [ngClass]="{'On': this.isCameraOn == true }">
+            <div id="local-container"  class="vidDisplay" >
    
          
          
           </div>
        
-          <div *ngIf="isCameraOn== false">
+          <div >
             no camera
             <img src="path/to/image.png">
           </div>
       </div>
       
-  <button (click)="turnOnmic()">micOn</button>
-  <button  (click)="turnOffmic()">micOff</button>
-  <button  (click)="turnOncamera()">cameraOn</button>
-  <button  (click)="turnOffcamera()">cameraOff</button>
+  <button >micOn</button>
+  <button  >micOff</button>
+  <button >cameraOn</button>
+  <button  >cameraOff</button>
   </div>
   <ng-template #waiting>
     waiting connection

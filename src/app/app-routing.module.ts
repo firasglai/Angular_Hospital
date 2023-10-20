@@ -24,107 +24,170 @@ import { ChatWindowComponent } from './components/main/chat-window/chat-window.c
 import { DashboardComponent as DashboardComponentp } from './components/patient/dashboard/dashboard.component';
 import { AccountComponent as AccountComponentp } from './components/patient/account/account.component';
 import { AnalyticsComponent as AnalyticsComponentp } from './components/patient/analytics/analytics.component';
-import { InboxComponent as InboxComponentp} from './components/patient/inbox/inbox.component';
+import { InboxComponent as InboxComponentp } from './components/patient/inbox/inbox.component';
 
-import { TransactionComponent as TransactionComponentp} from './components/patient/transaction/transaction.component';
+import { TransactionComponent as TransactionComponentp } from './components/patient/transaction/transaction.component';
 import { AppoitmentComponent as AppoitmentComponentp } from './components/patient/appoitment/appoitment.component';
-import { PatientlistComponent as  PatientlistComponentp} from './components/patient/patientlist/patientlist.component';
+import { PatientlistComponent as PatientlistComponentp } from './components/patient/patientlist/patientlist.component';
 import {
   canActivate,
   redirectUnauthorizedTo,
   redirectLoggedInTo,
 } from '@angular/fire/auth-guard';
 import { PatientComponent } from './components/patient/patient.component';
-import { AuthguardGuard } from './models/guard/authguard.guard';
+import { StepperComponent } from './components/patient/stepper/stepper.component';
+import { AuthguardGuard } from './guard/authguard.guard';
 import { FinishRgisterDoctorComponent } from './components/main/finish-rgister-doctor/finish-rgister-doctor.component';
 import { FinishRgisterPatientComponent } from './components/main/finish-rgister-patient/finish-rgister-patient.component';
-import { DocGaurdGuard } from './shared/doc-gaurd.guard';
+import { DocGuardGuard } from './shared/doc-gaurd.guard';
 import { PatGuardGuard } from './shared/pat-guard.guard';
 import { SearchDoctorComponent } from './components/patient/search-doctor/search-doctor.component';
-
+import { HasRoleGuard } from './guard/has-role.guard';
 
 const redirectToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectToHome = () => redirectLoggedInTo(['doctor']);
 const routes: Routes = [
+  //? Checking the guard routes and the token, role passed in the interceptor 
+    {
+    path: '',
+    component: MainComponent,
+    children: [
+      { path: '', component: HomeComponent, },
+      {
+        path: 'book',
+        component: BookAppoitmentComponent,
+       
+      },
+      {
+        path: 'doctors',
+        component: DoctorsComponent,
+       
+      },
+      {
+        path: 'services',
+        component: ServicesComponent,
+   
+      },
+      {
+        path: 'gallery',
+        component: GalleryComponent,
+       
+      },
+      { path: 'blog', component: BlogComponent },
+      {
+        path: 'login',
+        component: LoginComponent,
  
-  {path:"",component:MainComponent,children:[
-    {path:"",component:HomeComponent,canActivate: [AuthguardGuard]},
-    {path:"book", component:BookAppoitmentComponent,canActivate: [AuthguardGuard]},
-    {path:"doctors",component:DoctorsComponent,canActivate: [AuthguardGuard]},
-    {path:"services",component:ServicesComponent,canActivate: [AuthguardGuard]},
-    {path:"gallery",component:GalleryComponent,canActivate: [AuthguardGuard]},
-    {path:"blog",component:BlogComponent,canActivate: [AuthguardGuard]},
-    {path:"login",component:LoginComponent,canActivate: [AuthguardGuard]},
-    {path:"CreateAccount",component:RegisterComponent,canActivate: [AuthguardGuard]},
+      },
+      {
+        path: 'CreateAccount',
+        component: RegisterComponent,
+   
+      },
+    ],
+  },
+  {
+    path: 'chat',
+    component: ChatWindowComponent,
+  },
 
-  ]},
   {
-    path : "chat", component:ChatWindowComponent
-  }
-  ,
+    path: 'doctor',
+    component: DoctorComponent,
+    children: [
+      {
+        path: '',
+        component: DashboardComponent,
+    
+      },
+     
+      {
+        path: 'account',
+        component: AccountComponent,
+  
+      },
+      {
+        path: 'analytics',
+        component: AnalyticsComponent,
+      
+      },
+      {
+        path: 'inbox',
+        component: InboxComponent,
+      
+      },
+      {
+        path: 'transaction',
+        component: TransactionComponent,
+    
+      },
+      {
+        path: 'appoitment',
+        component: AppoitmentComponent,
+     
+      },
+      {
+        path: 'patientlist',
+        component: PatientlistComponent,
+   
+      },
+    ],
+  },
   {
-    path : "doctor-register", component:FinishRgisterDoctorComponent ,canActivate: [DocGaurdGuard],
-  }
-  ,
-  {
-    path : "user-register", component:FinishRgisterPatientComponent ,canDeactivate: [PatGuardGuard]
-  }
-  ,
-  {path:"doctor",component:DoctorComponent , canActivate: [DocGaurdGuard],
-   children : [{
-    path : "", component:DashboardComponent, canActivate: [DocGaurdGuard]
-   },
-   {
-    path : "account", component:AccountComponent, canActivate: [DocGaurdGuard]
-   },
-   {
-    path : "analytics", component:AnalyticsComponent, canActivate: [DocGaurdGuard]
-   },
-   {
-    path : "inbox", component:InboxComponent, canActivate: [DocGaurdGuard]
-   },
-   {
-    path : "transaction", component:TransactionComponent, canActivate: [DocGaurdGuard]
-   },
-   {
-    path : "appoitment", component:AppoitmentComponent, canActivate: [DocGaurdGuard]
-   },
-   {
-    path : "patientlist", component:PatientlistComponent, canActivate: [DocGaurdGuard]
-   }]},
-   {
-    path:"patient", component:PatientComponent,
-    children : [{
-      path : "", component:DashboardComponentp,canActivate: [PatGuardGuard]
-     },
-     {
-      path : "search", component:SearchDoctorComponent,canActivate: [PatGuardGuard]
-     },
-     {
-      path : "account", component:AccountComponentp,canActivate: [PatGuardGuard]
-     },
-     {
-      path : "analytics", component:AnalyticsComponentp,canActivate: [PatGuardGuard]
-     },
-     {
-      path : "inbox", component:InboxComponentp,canActivate: [PatGuardGuard]
-     },
-     {
-      path : "transaction", component:TransactionComponentp,canActivate: [PatGuardGuard]
-     },
-     {
-      path : "appoitment", component:AppoitmentComponentp,canActivate: [PatGuardGuard]
-     },
-     {
-      path : "patientlist", component:PatientlistComponentp,canActivate: [PatGuardGuard]
-     }]
-   }, { path: '**', redirectTo: '/' }
+    path: 'patient',
+    component: PatientComponent,
+    children: [
+      {
+        path: '',
+        component: DashboardComponentp,
+     
+      },
+      {
+        path: 'complete-register',
+        component: StepperComponent,
+      },
+      {
+        path: 'search',
+        component: SearchDoctorComponent,
+        canActivate: [PatGuardGuard],
+      },
+      {
+        path: 'account',
+        component: AccountComponentp,
+        canActivate: [PatGuardGuard],
+      },
+      {
+        path: 'analytics',
+        component: AnalyticsComponentp,
+        canActivate: [PatGuardGuard],
+      },
+      {
+        path: 'inbox',
+        component: InboxComponentp,
+        canActivate: [PatGuardGuard],
+      },
+      {
+        path: 'transaction',
+        component: TransactionComponentp,
+        canActivate: [PatGuardGuard],
+      },
+      {
+        path: 'appoitment',
+        component: AppoitmentComponentp,
+        canActivate: [PatGuardGuard],
+      },
+      {
+        path: 'patientlist',
+        component: PatientlistComponentp,
+        canActivate: [PatGuardGuard],
+      },
+    ],
+  },
+  { path: '**', redirectTo: '/' },
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes)
-  ],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

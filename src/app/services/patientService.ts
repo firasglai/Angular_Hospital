@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
-import { SpringAuthService } from './spring-auth.service';
+import { SpringAuthService } from './authentication/spring-auth.service';
 import { patientProfile } from '../models/user-profile';
 import {Doctor}from './doctor-services.service'
+import { TokenService } from './authentication/token.service';
 export interface respage{
   content:Doctor[],
   number:number,
@@ -16,10 +17,12 @@ export class patientService {
   private dataUrl = 'assets/patients.json'; // Path to the patients.json file
   private apiUrl = 'http://localhost:8080/api'; 
 
-  constructor(private http: HttpClient,private auth: SpringAuthService) {}
+  constructor(private http: HttpClient,
+    private tokenService: TokenService,
+    private auth: SpringAuthService) {}
 
   get patient():Observable<patientProfile>{
-    let uid= this.auth.getUserData()?.profileid
+    let uid= this.tokenService.getUserData()
    
     return this.http.get<patientProfile>(`${this.apiUrl}/patients/patient`) 
   }

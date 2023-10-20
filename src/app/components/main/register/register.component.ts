@@ -8,17 +8,21 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observer, map, switchMap } from 'rxjs';
-import { AuthenticationService } from 'src/app/services/authentication.service';
-import { UsersService } from 'src/app/services/users.service';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
 import { User, session } from 'src/app/models/user.model';
-import { SpringAuthService } from 'src/app/services/spring-auth.service';
+import { SpringAuthService } from 'src/app/services/authentication/spring-auth.service';
 import { AES } from 'crypto-js';
+import { specialty } from 'src/app/services/doctor-services.service';
+import { SpecialtyService } from 'src/app/services/specialty/specialty.service';
+import { SpecialtyModel } from 'src/app/models/specialty.model';
+
+
 export function passwordsMatchValidator(): ValidatorFn {
-  
   return (control: AbstractControl): ValidationErrors | null => {
     const password = control.get('password')?.value;
     const confirmPassword = control.get('confirmPassword')?.value;
@@ -32,10 +36,14 @@ export function passwordsMatchValidator(): ValidatorFn {
     return null;
   };
 }
+
+//? TO INTEGRATE 
 interface respo{
   token:string,
   user:User
 }
+
+//! DEPRECATED
 interface ProfileUser {
   uid: string;
   email?: string;
@@ -55,46 +63,63 @@ interface ProfileUser {
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+ specialties: SpecialtyModel[] = [];
+ getSpecialties() {
+  this.specialtyService.getSpecialties().subscribe(
+    data => {
+      this.specialties = data;
+    },
+    error => {
+      console.error('Error fetching specialties:', error);
+    }
+  );
+}
+  loading=false
   hide = true;
   hide1 = true;
+  patientSelect=true
+  
   public lottieConfig: AnimationOptions = {
     path: 'assets/animations/registerAnimation.json',
     loop: true,
     autoplay: true,
   };
-  user: User = {
-
-    firstname: '',
-    lastname:'',
+user: User = {
+    fullName: '',
     password: '',
     email: '',
-    userRole: 'DOCTOR',
-    user_status : "OnRegister",
-    profileid:""
+    role: '',
+    gender:   '',
+    specialtyName:'',
   };
   signUpForm = new FormGroup(
     {
-    
+      fullName: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.email, Validators.required]),
       password: new FormControl('', Validators.required),
       confirmPassword: new FormControl('', Validators.required),
+      gender: new FormControl(''), 
+      specialtyName: new FormControl('' ), 
     },
     { validators: passwordsMatchValidator() }
   );
-patientSelect=true
+  
+
   constructor(
-    private auth:SpringAuthService,
+    private authService:SpringAuthService,
+    private specialtyService: SpecialtyService,
     private toastrService: ToastrService,
     private router: Router,
-    private usersService: UsersService
   ) {
     
    
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getSpecialties();
+  }
   
-  get name() {
-    return this.signUpForm.get('name');
+  get fullName() {
+    return this.signUpForm.get('fullName');
   }
 
   get email() {
@@ -108,62 +133,63 @@ patientSelect=true
   get confirmPassword() {
     return this.signUpForm.get('confirmPassword');
   }
- loading=false
+
+
+  get gender() {
+    return this.signUpForm.get('gender');
+  }
+
+  get specialtyName() {
+    return this.signUpForm.get('specialtyName');
+  }
+
+
 submit() {
-  console.log(this.signUpForm.valid)
-  if (!this.signUpForm.valid) return;
-  if(this.patientSelect){
-    this.user.userRole="PATIENT"
-  }else{
-    this.user.userRole="DOCTOR"
+      if (!this.signUpForm.valid) return;
+  
+    const user = this.signUpForm.value as User;
+
+  
+    if (this.patientSelect) {
+      user.role = 'PATIENT';
+    } else {
+     user.role = 'DOCTOR';
+      if (!user.specialtyName) {
+        console.error('Specialty is required for doctors');
+        return;
+      }
+    }
+   
+
+    this.loading = true;
+    
+
+
+    setTimeout(() => {
+      console.log(user);
+      this.authService.register(user).subscribe(
+        (response) => {
+          console.log('Registration successful!', response);
+          this.toastrService.success('Registration successful!');
+          this.loading = false;
+          this.router.navigate(['/login'], {
+            queryParams: {
+              email: user.email,
+              password: user.password
+            }
+          });
+       },
+        (error) => {
+          console.error('Error registering user', error);
+          this.toastrService.error('Error registering user');
+          this.loading = false;
+        }
+      );
+    }, 1000); // Add a delay of 1 second (1000 milliseconds)
   }
   
-  const {  email, password } = this.signUpForm.value;
-  const defaultImgurl='male.jpg'
-  if (!email || !password) return; // Handle null or undefined email or password
- this.user.email=email
- this.user.firstname=""
- this.user.password=password
- this.loading=true
- this.auth.register(this.user).subscribe((k)=>{
-  if(k!=null){
-    let kk=k as respo
-    localStorage.setItem('token',kk.token)
-    
-    const encryptionKey = '7azd45qsd646q5ddqs64fr6gerg7';
-       
-    const dataString = JSON.stringify(kk.user);
-
-    // Encrypt the data string using AES encryption
-    const encryptedData = AES.encrypt(dataString, encryptionKey).toString();
-    
-    // Store the hashed data in localStorage
-    localStorage.setItem('udaw', encryptedData);
-    this.auth.setuser(kk.user)
-   if(kk.user.userRole=="DOCTOR"){
-     window.location.href="/doctor-register"
-   }
-   if(kk.user.userRole=="PATIENT"){
-     window.location.href="/user-register"
-   }
-   if(kk.user.userRole=="ADMIN"){
-     window.location.href="/admin"
-   }
-  }else{
-    this.signUpForm.setErrors({
-      email:"email already exists"
-    })
-  }
-  this.loading=false
-},(erroe)=>{
-  this.signUpForm.setErrors({
-    email:"email already exists"
-  })
-  this.loading=false
-})
 
 
 
-}
   
 }

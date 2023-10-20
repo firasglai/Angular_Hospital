@@ -17,9 +17,7 @@ export class AccountComponent {
      ) {// Get the current user profile once and map it to this.user1$ observable
     this.patientservice.patient.subscribe((k)=>{
         this.Patient=k
-        console.log(this.Patient.medicalHistory.weight)
-      
-        
+        console.log(this.Patient.medicalHistory.weight)   
       })}
   Onedit=false
 

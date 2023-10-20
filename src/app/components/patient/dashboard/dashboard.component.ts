@@ -3,6 +3,15 @@ import { Chart, registerables, ChartConfiguration } from 'node_modules/chart.js'
 import { Observable, of } from 'rxjs';
 import { ProfileUser, patientProfile } from 'src/app/models/user-profile';
 import { patientService } from 'src/app/services/patientService';
+import { Appointment } from 'src/app/models/appointment';
+import { AppointmentService } from 'src/app/services/appointment/appointment.service';
+import { SpringAuthService } from 'src/app/services/authentication/spring-auth.service';
+import { Profile } from 'src/app/models/profile';
+import { Store, select } from '@ngrx/store';
+import { CookieService } from 'ngx-cookie-service';
+import { selectCurrentUser } from 'src/app/store/selectors/user-selector';
+import { user } from '@angular/fire/auth';
+
 Chart.register(...registerables)
 
 // Interface for patient data
@@ -10,7 +19,6 @@ interface patientData {
   name: string,
   data: number
 }
-
 // Interface for patient details
 interface Patient {
   id: String,
@@ -112,7 +120,11 @@ const getpatientdata: Observable<patientData[]> = of([{
 export class DashboardComponent implements OnInit {
   @ViewChild('chart', { static: true }) chartRef!: ElementRef;
   @ViewChild('chart2', { static: true }) chartRef2!: ElementRef;
-  username = "Yassine Cherni";
+
+  //initilising the userProfile
+  userProfile: Profile | null = null;
+
+  username = "Patient1";
   lastPayments: paymentData[] = []
   patientDatas1: patientData[] = [];
   colors = [
@@ -120,28 +132,15 @@ export class DashboardComponent implements OnInit {
     '#FF4C5E',
     '#848FAC'
   ]
-user!:patientProfile
-  constructor(private patService:patientService) {
-    this.patService.patient.subscribe((k)=>{
-      this.user=k 
-      for (const k of   this.user.appointments) {
-        this.patientDatas1.push(
-          {
-            name: k["statusAPT"],
-            data: 1
-          }
 
-        )
+  constructor(private patService:patientService,
+    private authService: SpringAuthService,
+    private store: Store,
+    private cookieService: CookieService,
+    ) {
+    }
 
-      }
-            this.sortdetails();
-console.log(this.patientDatas1)
-    // Call RenderOChart() function
-    this.RenderOChart();
-
-
-    })
-  }
+   
 
   // Function to calculate percentage based on patient data
   calcpercentage(number: number) {
@@ -165,10 +164,16 @@ console.log(this.patientDatas1)
     }
     return this.colors[c1]
   }
-  ngOnInit(): void {
-    // Subscribe to getpatientdata Observable
-  
+      //? Get currentUser from store
+      currentUser$ = this.store.pipe(select(selectCurrentUser));
 
+  ngOnInit(): void {
+    // Subscribe to CurrentUser state
+    const currentUserData = this.cookieService.get('currentUser');
+    if (currentUserData) {
+      this.userProfile = JSON.parse(currentUserData);
+      console.log("this is the currentUSER" + this.userProfile);
+    }
     // Subscribe to last3Payments Observable
     last3Payments.subscribe(key => {
       for (const k of key) {

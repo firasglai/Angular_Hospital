@@ -1,17 +1,18 @@
 import { Token } from "@angular/compiler"
 import { patientProfile } from "./user-profile"
 import { Doctor } from "../services/doctor-services.service"
-
-export interface User{
-    id?:string,
-    firstname?:string,
-    lastname?:string,
-    email:string,
-    password:string,
-    userRole?:string,
-    user_status?:string,
-    profileid?:string
-}
+export interface User {
+    id?: string;
+    fullName?: string;
+    email: string;
+    password: string;
+    role: string;
+    user_status?: string;
+    address?: string; 
+    gender?: string; 
+    phone?: string; 
+    specialtyName?: string; 
+  }
 export interface session{
     token:string,
     user:User

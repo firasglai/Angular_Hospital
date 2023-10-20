@@ -11,10 +11,10 @@
          
           <div class="nav-bar-elements">
 
-            <div class="Incall-container" [ngClass]="{'Oncall': incall}">
-                <div class="Incall-container1"  [ngClass]="{'on': (incall != '' )}" >
-                   <button (click)="toCall()">TO call</button>
-                   <button (click)="CancelAttempt()"> Cancel</button>
+            <div class="Incall-container" >
+                <div class="Incall-container1"  >
+                   <button >TO call</button>
+                   <button> Cancel</button>
                 </div>
             </div>
             <button class="setting" style="z-index: 3;position: relative;" [class.active]="isActive1" (click)="toggleActive1()">
@@ -41,16 +41,18 @@
                     </div>
                     
             </button>
-            <div class="ava avatar-container"  [class.active]="isActive" (click)="toggleActive()" id="avatar" >
+            <div class="ava avatar-container"  id="avatar" [class.active]="isActive" (click)="toggleActive()" >
                 <img src="../../assets/icons/avatar.jpg" class="avatar" alt="">
             <div class="account-settings-container ava" id="settings">
                 <div class="trinagle ava">
+            
                 </div>
-                {{Patient.name}} {{Patient.lastname}}
+                
+                    PATIENT 1 
                 <p>Settings</p>
-              
+                
                 <button class="b1 ava"  routerLink="./account">Account</button>
-                <button class="b2 ava" (click)="SingOut()">Sing out</button>
+                <button class="b2 ava" (click)="SignOut()">Sign out</button>
             </div>
             </div>
         </div>
@@ -197,22 +199,6 @@
 </div> </div>
 <div style="width: calc(100% -  351.23px);margin-left:  351.23px !important; ">
 
-
-        <div  *ngIf="incall && Ccall && Ccall.statu=='requesting'">
-            <div class="attempting-container">
-
-                <div *ngIf="Ccall.statu=='requesting'" class="attempting-container" >
-                    recieving Call
-                    <button (click)="AccpectCall()">Accept</button> <button (click)="CancelAttempt()">Decline</button>
-            
-            </div>
-           
-            </div>
-                
-    
-        </div>
-       
-    
 <router-outlet></router-outlet>
 </div>
 </div>

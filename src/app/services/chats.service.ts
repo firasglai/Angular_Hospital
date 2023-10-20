@@ -3,7 +3,7 @@ import { getDatabase, ref, push, set, update, onValue, orderByChild, query, limi
 import { concatMap, firstValueFrom, forkJoin, from, map, Observable, of, pipe, switchMap, take, takeLast, timestamp } from 'rxjs';
 import { CALL, Callstatu, Chat, Message, statu } from '../models/chat';
 import { ProfileUser, patientProfile } from '../models/user-profile';
-import { UsersService } from './users.service';
+import { UsersService } from './users/users.service';
 import { FieldValue, Timestamp, limit } from 'firebase/firestore';
 import { UserProfile, user } from '@angular/fire/auth';
 import { Router } from '@angular/router';
@@ -16,7 +16,7 @@ import 'firebase/database';
 export class ChatsService {
   private db: any;
   private user!:ProfileUser
-
+/*
   constructor(private usersService: UsersService, private router: Router,private presence : PresenceService) {
     this.db = getDatabase();
     this.usersService.currentUserProfile$.subscribe((k)=>{
@@ -68,6 +68,7 @@ export class ChatsService {
       })
     );
   }
+  /*
   createChat(otherUserr: patientProfile): Observable<string> {
     let otherUser:ProfileUser={
       uid:otherUserr.id
@@ -469,6 +470,6 @@ setSenderOFFWindow(callID:string){
  let x= dbd.subscribe()
  x.unsubscribe()
 }
-
+*/
 
 }

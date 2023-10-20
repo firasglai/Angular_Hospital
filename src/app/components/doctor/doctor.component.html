@@ -10,13 +10,13 @@
          
           <div class="nav-bar-elements">
 
-            <div class="Incall-container" [ngClass]="{'Oncall': userHaveCallID.length >0}">
-                <div class="Incall-container1"  [ngClass]="{'on': (userHaveCallID != '' )}" >
-                   <button (click)="toCall()">TO call</button>
-                   <button (click)="CancelAttempt()"> Cancel</button>
+            <div class="Incall-container" >
+                <div class="Incall-container1" >
+                   <button >TO call</button>
+                   <button > Cancel</button>
                 </div>
             </div>
-            <button class="setting" style="z-index: 3;position: relative;" [class.active]="isActive1" (click)="toggleActive1()">
+            <button class="setting" style="z-index: 3;position: relative;">
                 <svg width="30" style="z-index: -3;position: relative;" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="Iconly/Light-Outline/Notification">
                     <g id="Notification">
@@ -40,23 +40,23 @@
                     </div>
                     
             </button>
-            <div class="ava avatar-container"  [class.active]="isActive" (click)="toggleActive()" id="avatar" >
+            <div class="ava avatar-container"  id="avatar" >
                 <img src="../../assets/icons/avatar.jpg" class="avatar" alt="">
             <div class="account-settings-container ava" id="settings">
                 <div class="trinagle ava">
                 </div>
-                {{username$}}
+                    Hello
                 <p>Settings</p>
               
                 <button class="b1 ava"  routerLink="./account">Account</button>
-                <button class="b2 ava" (click)="SingOut()">Sing out</button>
+                <button class="b2 ava" >Sing out</button>
             </div>
             </div>
         </div>
         </div>
       </header></div>
-<div class="body"><div style="position: fixed; height: 120%; top: 0;"> 
-    <div class="navbar-container-part1" >
+            <div class="body"><div style="position: fixed; height: 120%; top: 0;"> 
+            <div class="navbar-container-part1" >
             <div class=" navbar-logo-container py-3 px-5" >
               <img src="../../assets/logo.png" class="navbar-logo-img">
               <div class="navbar-logo-title">Appointmentease</div>
@@ -116,7 +116,7 @@
             </svg>
             
             
-             Message</button>
+             Consultations</button>
 
     <button class="sidebar-button" routerLink="appoitment" routerLinkActive="active">
         <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -166,27 +166,12 @@
                 </g>
                 </g>
                 </svg>
-                  Notification</button>
+                  Transactions</button>
 </div> </div>
 <div style="width: calc(100% -  351.23px);margin-left:  351.23px !important; ">
 
 
-        <div  *ngIf="call && CallObservableSUB">
-            <div *ngIf="call.statu=='requesting Call'" class="attempting-container">
-
-                <div class="attempting-container" *ngIf="call.reciever === user.uid">
-                    recieving Call
-                    <button (click)="AccpectCall()">Accept</button> <button (click)="CancelAttempt()">Decline</button>
-            
-            </div>
-           <div class="attempting-container" *ngIf="call.starterId  === user.uid">
-                attemptingCall
-                <button (click)="CancelAttempt()" >Cancel</button>
-            </div>
-            </div>
-                
-    
-        </div>
+       
        
     
 <router-outlet></router-outlet>

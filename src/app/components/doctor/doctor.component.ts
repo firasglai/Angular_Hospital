@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { Observable, Subject, Unsubscribable, map, take, takeUntil } from 'rxjs';
 import { CALL } from 'src/app/models/chat';
 import { ProfileUser } from 'src/app/models/user-profile';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { ChatsService } from 'src/app/services/chats.service';
 import { PresenceService } from 'src/app/services/presence.service';
-import { SpringAuthService } from 'src/app/services/spring-auth.service';
-import { UsersService } from 'src/app/services/users.service';
+import { SpringAuthService } from 'src/app/services/authentication/spring-auth.service';
+import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
   selector: 'app-doctor',
@@ -15,7 +15,10 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./doctor.component.css']
 })
 export class DoctorComponent implements OnInit {
-  
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
+  /*
   isActive = false;
   isActive1 = false;
   user$
@@ -38,8 +41,9 @@ export class DoctorComponent implements OnInit {
     private usersService: UsersService,
     private presence : PresenceService,
     private chatservice: ChatsService
-     ) {// Get the current user profile once and map it to this.user1$ observable
-      
+     ) {
+     // Get the current user profile once and map it to this.user1$ observable
+      /*
       // Subscribe to the current user profile and update the corresponding variables
       this.user$ = this.usersService.currentUserProfile$;
       this.user$.subscribe(user => {
@@ -153,6 +157,7 @@ export class DoctorComponent implements OnInit {
   toCall(){
     this.router.navigate(['./chat'])
   }
+  
   CancelCall(){
     this.chatservice.destroyCall(this.userHaveCallID!)
   }
@@ -165,4 +170,5 @@ export class DoctorComponent implements OnInit {
   destroyCallWindow(){
 
   }
+  */
 }

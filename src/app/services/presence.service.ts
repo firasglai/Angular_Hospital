@@ -5,16 +5,17 @@ import { Observable, from, of } from 'rxjs';
 import firebase from 'firebase/compat/app';
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
-import { AuthenticationService } from './authentication.service';
+import { AuthenticationService } from './authentication/authentication.service';
 import { getDatabase, ref, onDisconnect, onValue, Database, get, DatabaseReference, set } from 'firebase/database';
 import { User } from '../models/user.model';
 import { DocumentReference, DocumentSnapshot, getDoc } from 'firebase/firestore';
 import { ProfileUser } from '../models/user-profile';
 import { Router } from '@angular/router';
 import { list } from 'firebase/storage';
-import { SpringAuthService } from './spring-auth.service';
+import { SpringAuthService } from './authentication/spring-auth.service';
 import { DoctorServicesService } from './doctor-services.service';
 import { patientService } from './patientService';
+import { Profile } from '../models/profile';
 
 
 interface statu{
@@ -44,8 +45,8 @@ export class PresenceService {
    
     this.updateOnAway()
     this.auth.currentUser$.subscribe((k)=>{
-      if(k?.profileid){
-        this.userID=k?.profileid
+      if(k?.id){
+        this.userID=k?.id
       }else{
         this.userID=""
       }
@@ -110,7 +111,7 @@ export class PresenceService {
           return;
       };
       
-      const userStatusDatabaseRef =ref(this.db,'/status/' +  user!.profileid); 
+      const userStatusDatabaseRef =ref(this.db,'/status/' +  user!.id); 
         onDisconnect(userStatusDatabaseRef).set(isOfflineForDatabase).finally(() => {
           // The promise returned from .onDisconnect().set() will
           // resolve as soon as the server acknowledges the onDisconnect() 
@@ -133,7 +134,7 @@ export class PresenceService {
         if (status === 'online') {
 
           this.auth.currentUser$.subscribe((user)=>{
-          this.setPresenceOn(user.id!)
+          this.setPresenceOn(user?.id!)
           })
           return this.auth.currentUser$;
 
@@ -175,17 +176,17 @@ return new Observable<string>((observer) => {
   };
     document.onvisibilitychange = () => {
       if (document.visibilityState !== 'visible') {
-        this.auth.currentUser$.subscribe((user: User | null) => {
+        this.auth.currentUser$.subscribe((user: Profile | null) => {
           this.auth.currentUser$
           if (user) {
-            const userStatusDatabaseRef =ref(this.db,'/status/' +  user!.profileid); 
+            const userStatusDatabaseRef =ref(this.db,'/status/' +  user!.id); 
             set(userStatusDatabaseRef,isOfflineForDatabase)
           }
         });
       } else {
-        this.auth.currentUser$.subscribe((user: User | null) => {
+        this.auth.currentUser$.subscribe((user: Profile | null) => {
           if (user) {
-            const userStatusDatabaseRef =ref(this.db,'/status/' +  user!.profileid); 
+            const userStatusDatabaseRef =ref(this.db,'/status/' +  user!.id); 
             set(userStatusDatabaseRef,isOnlineForDatabase)
           }
         });

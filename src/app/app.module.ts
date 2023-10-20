@@ -1,10 +1,13 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/main/home/home.component';
 import { FormsModule } from '@angular/forms';
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import {
+  FontAwesomeModule,
+  FaIconLibrary,
+} from '@fortawesome/angular-fontawesome';
 
 import { BlogComponent } from './components/main/blog/blog.component';
 import { GalleryComponent } from './components/main/gallery/gallery.component';
@@ -20,15 +23,14 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ChatComponentComponent } from './components/main/chat-component/chat-component.component';
 import { CursorEffectDirective } from './cursor-effect.directive';
 import { DashboardComponent } from './components/doctor/dashboard/dashboard.component';
-import { DashboardComponent as DashboardComponentp} from './components/patient/dashboard/dashboard.component';
+import { DashboardComponent as DashboardComponentp } from './components/patient/dashboard/dashboard.component';
 import { AccountComponent } from './components/doctor/account/account.component';
 import { InboxComponent } from './components/doctor/inbox/inbox.component';
 
 import { AccountComponent as AccountComponentp } from './components/patient/account/account.component';
 import { InboxComponent as InboxComponentp } from './components/patient/inbox/inbox.component';
-import { TransactionComponent as TransactionComponentp} from './components/patient/transaction/transaction.component';
+import { TransactionComponent as TransactionComponentp } from './components/patient/transaction/transaction.component';
 import { PatientlistComponent as PatientlistComponentp } from './components/patient/patientlist/patientlist.component';
-
 
 import { MainComponent } from './components/main/main.component';
 import { DoctorComponent } from './components/doctor/doctor.component';
@@ -41,8 +43,8 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFunctions, getFunctions } from '@angular/fire/functions';
-import { ChatsService } from './services/chats.service'; 
-import {  ReactiveFormsModule } from '@angular/forms';
+import { ChatsService } from './services/chats.service';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { DatePipe } from '@angular/common';
@@ -56,18 +58,25 @@ import { MatIconModule } from '@angular/material/icon';
 import { PresenceService } from './services/presence.service';
 import { ChatWindowComponent } from './components/main/chat-window/chat-window.component';
 import { AppoitmentComponent } from './components/doctor/appoitment/appoitment.component';
-
-import { AppoitmentComponent  as AppoitmentComponentp } from './components/patient/appoitment/appoitment.component';
+import { MatSelectModule } from '@angular/material/select';
+import { AppoitmentComponent as AppoitmentComponentp } from './components/patient/appoitment/appoitment.component';
 import { PatientComponent } from './components/patient/patient.component';
-
-import { TokenInterceptorService } from './services/token-interceptor.service';
+import { MatRadioModule } from '@angular/material/radio';
+import { TokenInterceptorService } from './services/authentication/token-interceptor.service';
 import { FinishRgisterDoctorComponent } from './components/main/finish-rgister-doctor/finish-rgister-doctor.component';
 import { FinishRgisterPatientComponent } from './components/main/finish-rgister-patient/finish-rgister-patient.component';
 import { PatGuardGuard } from './shared/pat-guard.guard';
-import { DocGaurdGuard } from './shared/doc-gaurd.guard';
+import { DocGuardGuard } from './shared/doc-gaurd.guard';
 import { DoctorServicesService } from './services/doctor-services.service';
 import { SearchDoctorComponent } from './components/patient/search-doctor/search-doctor.component';
 import { FilterAppointmentsPipe } from './models/pipes/filter-appointments.pipe';
+import {MatStepperModule} from '@angular/material/stepper';
+import { StepperComponent } from './components/patient/stepper/stepper.component';
+import { StoreModule } from '@ngrx/store';
+import { userReducer } from './store/reducers/user-reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+//import { EffectsModule } from '@ngrx/effects';
+//import { UserEffects } from './store/effects/user-effects';
 export function playerFactory() {
   return import('lottie-web');
 }
@@ -82,12 +91,10 @@ export function playerFactory() {
     RegisterComponent,
     LoginComponent,
     HeaderComponent,
-
     BookAppoitmentComponent,
     ChatComponentComponent,
     CursorEffectDirective,
     DashboardComponent,
-
     AccountComponent,
     InboxComponent,
     MainComponent,
@@ -107,35 +114,58 @@ export function playerFactory() {
     FinishRgisterDoctorComponent,
     FinishRgisterPatientComponent,
     SearchDoctorComponent,
-    FilterAppointmentsPipe
+    FilterAppointmentsPipe,
+    StepperComponent,
   ],
   imports: [
+    StoreModule.forRoot({currentUser : userReducer}, {}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+    }),
     MatMenuModule,
     BrowserModule,
-    FormsModule, ReactiveFormsModule,
-    BrowserAnimationsModule, MatFormFieldModule, MatInputModule,
-    HttpClientModule,BrowserModule, FormsModule,AppRoutingModule, FontAwesomeModule,  FontAwesomeModule,BrowserAnimationsModule,LottieModule.forRoot({ player: playerFactory }), NgChartsModule,
-    MatAutocompleteModule, MatInputModule,MatDividerModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    HttpClientModule,
+    BrowserModule,
+    FormsModule,
+    MatRadioModule,
+    AppRoutingModule,
+    FontAwesomeModule,
+    FontAwesomeModule,
+    BrowserAnimationsModule,
+    LottieModule.forRoot({ player: playerFactory }),
+    NgChartsModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatDividerModule,
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
     AppRoutingModule,
     MatListModule,
+    MatSelectModule,
     MatIconModule,
     ToastrModule.forRoot(),
-    
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideStorage(() => getStorage()),
     provideFirestore(() => getFirestore()),
-    
+    MatStepperModule,
 
-  
   ],
-  providers: [FaIconLibrary,DatePipe,PatGuardGuard,DocGaurdGuard,{provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorService,multi:true},DoctorServicesService],
-  bootstrap: [AppComponent]
+  providers: [
+    FaIconLibrary,
+    DatePipe,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-
-export class AppModule {
-
-}
+export class AppModule {}

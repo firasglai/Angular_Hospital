@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { take } from 'rxjs';
 import { patientProfile } from 'src/app/models/user-profile';
-import { SpringAuthService } from 'src/app/services/spring-auth.service';
+import { SpringAuthService } from 'src/app/services/authentication/spring-auth.service';
 
 @Component({
   selector: 'app-finish-rgister-patient',
@@ -135,11 +135,8 @@ constructor(private auth:SpringAuthService){
   });
 }
   ngOnInit(): void {
-    if(this.auth.getUserData()?.user_status=="done"){
-    
-      window.location.href="doctor"
-    }
-    console.log(this.auth.user)}
+   
+    console.log("this is the user somehow"+this.auth.user)}
 
 checkinputs():boolean{
 let result=true

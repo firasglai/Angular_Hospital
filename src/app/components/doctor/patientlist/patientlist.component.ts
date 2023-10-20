@@ -4,7 +4,7 @@ import { Observable, of, take } from 'rxjs';
 import { patientProfile } from 'src/app/models/user-profile';
 import { Appoitment, Consultation } from 'src/app/models/user.model';
 import { Doctor, DoctorServicesService } from 'src/app/services/doctor-services.service';
-import { SpringAuthService } from 'src/app/services/spring-auth.service';
+import { SpringAuthService } from 'src/app/services/authentication/spring-auth.service';
 interface appointmentHistory {
   history: AppointmentRecord[]
 }

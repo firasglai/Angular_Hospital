@@ -5,7 +5,7 @@ import { control, DomUtil } from 'leaflet';
 import { geocode } from 'opencage-api-client';
 import { User } from 'src/app/models/user.model';
 import { Doctor, DoctorServicesService, specialty } from 'src/app/services/doctor-services.service';
-import { SpringAuthService } from 'src/app/services/spring-auth.service';
+import { SpringAuthService } from 'src/app/services/authentication/spring-auth.service';
 interface Day {
   name: string,
   selected: boolean

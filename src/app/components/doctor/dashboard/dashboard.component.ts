@@ -7,7 +7,7 @@ import { Appoitment } from 'src/app/models/user.model';
 import { DoctorServicesService } from 'src/app/services/doctor-services.service';
 Chart.register(...registerables)
 
-// Interface for patient data
+// Interface for patient data 
 interface patientData {
   name: String,
   data: number
@@ -115,7 +115,7 @@ const getpatientdata: Observable<patientData[]> = of([{
 export class DashboardComponent implements OnInit {
   @ViewChild('chart', { static: true }) chartRef!: ElementRef;
   @ViewChild('chart2', { static: true }) chartRef2!: ElementRef;
-  username = "Yassine Cherni";
+  username = "Firas";
   lastPayments: paymentData[] = []
   patientDatas1: patientData[] = [];
   colors = [
@@ -167,14 +167,11 @@ appoitmentList:Appoitment[]=[]
     // Compare year, month, and day components
     return year1 === year2 && month1 === month2 && day1 === day2;
   }
-  
-  
   Dtosting(d:string){
     console.log(d)
     const date = new Date(d);
     const formattedDate = this.datePipe.transform(date, 'd MMM yyyy HH:mm');
     return formattedDate
-  
   }
   extractStatusAPT(data: any[]): string[] {
     const statusAPTArray: string[] = [];
@@ -182,14 +179,12 @@ appoitmentList:Appoitment[]=[]
     data.forEach((item) => {
       statusAPTArray.push(item.statusAPT);
     });
-
     return statusAPTArray;
   }
   // Function to calculate percentage based on patient data
   calcpercentage(status: string) {
     let totalCount = 0;
     let statusCount = 0;
-  
     for (const appointment of this.appoitmentList) {
       if (appointment.statusAPT !== 'CANCELED') {
         totalCount++;

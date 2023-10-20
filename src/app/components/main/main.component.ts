@@ -8,20 +8,21 @@ import { Router, RouterOutlet } from '@angular/router';
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css'],
-  animations: [slideInAnimation]
+  animations: [slideInAnimation],
 })
 export class MainComponent implements AfterViewInit {
-  inn=false
+  inn = false;
   public lottieConfig: AnimationOptions = {
     path: 'assets/animations/background.json',
     loop: true,
     autoplay: true,
   };
-  constructor(private changeDetectorRef: ChangeDetectorRef,private router:Router) {}
+  constructor(
+    private changeDetectorRef: ChangeDetectorRef,
+    private router: Router
+  ) {}
   ngAfterViewInit(): void {
-this.inn=true
-this.router.getCurrentNavigation()
+    this.inn = true;
+    this.router.getCurrentNavigation();
   }
-  
-  
 }

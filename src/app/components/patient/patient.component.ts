@@ -4,15 +4,15 @@ import { Router } from '@angular/router';
 import { Observable, Subject, Unsubscribable, map, take, takeUntil } from 'rxjs';
 import { CALL } from 'src/app/models/chat';
 import { ProfileUser, patientProfile } from 'src/app/models/user-profile';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { ChatsService } from 'src/app/services/chats.service';
 import { call } from 'src/app/services/doctor/doctor-chat.service';
 import { PatientChatService } from 'src/app/services/patient/patient-chat.service';
 import { patientService } from 'src/app/services/patientService';
 import { PresenceService } from 'src/app/services/presence.service';
-import { SpringAuthService } from 'src/app/services/spring-auth.service';
-import { UsersService } from 'src/app/services/users.service';
-
+import { SpringAuthService } from 'src/app/services/authentication/spring-auth.service';
+import { UsersService } from 'src/app/services/users/users.service';
+import { TokenService } from 'src/app/services/authentication/token.service';
 @Component({
   selector: 'app-patient',
   templateUrl: './patient.component.html',
@@ -20,8 +20,35 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class PatientComponent {
 
+  constructor (
+    private authService: SpringAuthService,
+    private UserService: UsersService,
+    private router: Router,
+    private tokenService: TokenService,
+
+  ){
+    
+    
+  }
   isActive = false;
   isActive1 = false;
+
+  toggleActive() {
+    this.isActive = !this.isActive;
+  }
+
+  toggleActive1() {
+    this.isActive1 = !this.isActive1;
+  }
+  SignOut(){
+    this.tokenService.removeToken();
+    this.tokenService.removeUserRole();
+    this.authService.updateCurrentUser(null);
+    this.router.navigate(['']);
+
+  }
+/*
+  
   user$
 
 
@@ -84,6 +111,7 @@ export class PatientComponent {
           })
         
       })
+
       // Subscribe to the current user profile and update the corresponding variables
       this.user$ = this.usersService.currentUserProfile$;
       this.user$.subscribe(user => {
@@ -143,17 +171,10 @@ export class PatientComponent {
    
   }
 
-  toggleActive() {
-    this.isActive = !this.isActive;
-  }
   
-  toggleActive1() {
-    this.isActive1 = !this.isActive1;
-  }
-  SingOut(){
-    this.authService.logout()
-    this.router.navigate(['']);
-  }
+  
+  
+
 
   toCall(){
     this.router.navigate(['./chat'])
@@ -170,4 +191,5 @@ export class PatientComponent {
   destroyCallWindow(){
 
   }
+*/
 }

@@ -6,7 +6,9 @@ import { ChatWindowComponent } from '../../components/main/chat-window/chat-wind
 @Injectable({
   providedIn: 'root'
 })
-export class MyCanDeactivateGuard implements CanDeactivate<ChatWindowComponent> {
+export class MyCanDeactivateGuard {
+
+  /*
   canDeactivate(component: ChatWindowComponent): boolean {
     // Add your custom logic here to decide whether the user can navigate away from the current route or not.
     // For example, you can prompt the user for confirmation before allowing them to leave the page:
@@ -26,4 +28,5 @@ export class MyCanDeactivateGuard implements CanDeactivate<ChatWindowComponent> 
    
   }
 else return true}
+*/
 }

@@ -5,11 +5,11 @@ import { Database, getDatabase, onDisconnect, onValue, push, ref, set, update } 
 import { Observable, Subject, Subscription, filter, from, interval, map, of, pipe, pluck, switchMap, take, takeUntil, tap } from 'rxjs';
 import { CALL, Call, Callstatu, Chat } from 'src/app/models/chat';
 import { ProfileUser } from 'src/app/models/user-profile';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 
 import { ChatsService } from 'src/app/services/chats.service';
 import { PresenceService } from 'src/app/services/presence.service';
-import { UsersService } from 'src/app/services/users.service';
+import { UsersService } from 'src/app/services/users/users.service';
 import { MyCanDeactivateGuard } from '../../../models/pipes/BeforeCloseGuard';
 import { environment } from 'src/environments/environment';
 import { initializeApp } from 'firebase/app';
@@ -23,7 +23,15 @@ declare var apiRTC: any;
   styleUrls: ['./chat-window.component.css']
 })
 export class ChatWindowComponent implements OnInit ,OnDestroy  {
+  ngOnDestroy(): void {
+    throw new Error('Method not implemented.');
+  }
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
 
+
+  /*
   title = 'ApiRTC-angular';
   conversationFormGroup = this.fb.group({
     name: this.fb.control('', [Validators.required])
@@ -529,4 +537,5 @@ turnOncamera(){
 turnOffcamera(){
   console.log('off camera');
 }
+*/
 }

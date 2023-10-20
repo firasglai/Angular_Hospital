@@ -60,7 +60,7 @@ export class SearchDoctorComponent implements OnInit {
   location!:any
   isDescriptionOn=false
   private map!: L.Map;
-   map2!: L.Map|undefined;
+  map2!: L.Map|undefined;
   private searchControl!: L.Control;
   private marker!: L.Marker;
   private marker2!: L.Marker;

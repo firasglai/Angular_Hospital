@@ -1,78 +1,21 @@
 <div class="container">
   <div class="search-container">
     <h3>All Services</h3>
-    <p style="text-align: center;">
-      Discover trusted doctors online and book appointments effortlessly. Prioritize your health with personalized care
-      from reliable professionals you can trust. Experience seamless booking and expert medical services on our
-      healthcare website.
+    <p style="text-align: center">
+      Discover trusted doctors online and book appointments effortlessly.
+      Prioritize your health with personalized care from reliable professionals
+      you can trust. Experience seamless booking and expert medical services on
+      our healthcare website.
     </p>
     <div class="row speciality-container">
-      <div class="col-3 speciality">
+      <div *ngFor="let specialty of specialties" class="col-3 speciality col">
         <div class="searcj-card">
-          <img src="assets/icons/medical-history.png" alt="">
-          <h5>Primary Care</h5>
-          <p>Routine check-ups, preventive care, and treatment for common illnesses from experienced primary care
-            physicians.</p>
-          <button class="preview-btn" (click)="previewDoctors()">See Doctors</button>
-        </div>
-      </div>
-      <div class="col-3 speciality">
-        <div class="searcj-card">
-          <img src="assets/icons/syringe.png" alt="">
-          <h5>Specialty Care</h5>
-          <p>Access specialized medical care in various fields delivered by expert specialists.</p>
-          <button class="preview-btn" (click)="previewDoctors()">See Doctors</button>
-        </div>
-      </div>
-      <div class="col-3 speciality">
-        <div class="searcj-card">
-          <img src="assets/icons/mental-health.png" alt="">
-          <h5>Mental Health Services</h5>
-          <p>Compassionate mental health support through counseling, therapy, and psychiatric consultations.</p>
-          <button class="preview-btn" (click)="previewDoctors()">See Doctors</button>
-        </div>
-      </div>
-      <div class="col-3 speciality">
-        <div class="searcj-card">
-          <img src="assets/icons/pediatrics.png" alt="">
-          <h5>Pediatric Care</h5>
-          <p>Dedicated pediatric services including routine check-ups, vaccinations, and specialized consultations.</p>
-          <button class="preview-btn" (click)="previewDoctors()">See Doctors</button>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-3 speciality">
-        <div class="searcj-card">
-          <img src="assets/icons/heart.png" alt="">
-          <h5>Chronic Disease Management</h5>
-          <p>Personalized care plans and ongoing support for managing chronic conditions.</p>
-          <button class="preview-btn" (click)="previewDoctors()">See Doctors</button>
-        </div>
-      </div>
-      <div class="col-3 speciality">
-        <div class="searcj-card">
-          <img src="assets/icons/wheelchair.png" alt="">
-          <h5>Geriatric Health Services</h5>
-          <p>Comprehensive healthcare services designed for the unique needs of elderly individuals.</p>
-          <button class="preview-btn" (click)="previewDoctors()">See Doctors</button>
-        </div>
-      </div>
-      <div class="col-3 speciality">
-        <div class="searcj-card">
-          <img src="assets/icons/male.png" alt="">
-          <h5>Male Health Services</h5>
-          <p>Tailored healthcare services addressing specific health concerns and needs of men.</p>
-          <button class="preview-btn" (click)="previewDoctors()">See Doctors</button>
-        </div>
-      </div>
-      <div class="col-3 speciality">
-        <div class="searcj-card">
-          <img src="assets/icons/female.png" alt="">
-          <h5>Female Health Services</h5>
-          <p> Comprehensive women's healthcare services: gynecological care, family planning, prenatal/postnatal care,
-            and wellness programs.</p>
-          <button class="preview-btn" (click)="previewDoctors()">See Doctors</button>
+          <!-- Display specialty information -->
+          <img [src]="specialty.image" alt="{{ specialty.name }}" />
+          <h5>{{ specialty.name }}</h5>
+          <p>{{ specialty.description }}</p>
+          <!-- When button is clicked, pass specialty to previewDoctors -->
+          <button class="preview-btn" (click)="previewDoctors(specialty)">See Doctors</button>
         </div>
       </div>
     </div>
@@ -80,82 +23,42 @@
 </div>
 
 
-
-<div class="preview-contaienr"  [ngClass]="{'displayOn': isOn==true}">
+<div class="preview-contaienr" [ngClass]="{ displayOn: isOn == true }">
   <div class="preview-card row">
-    <div >
-      <div (click)="closeServiceTab()" class="x-shape-con">
-      <div class="x-shape"></div>
-     </div>
-      <h5>Suggested</h5>
-      <div class="doc-tab">
-        <div class="row row1">
-          <div class="col-4 docctor-card "> <div class="doc">
-            <div style="width: 100%;"> <img class="doc-img" src="assets/male.jpg" alt=""></div>
-            <div class="doc-info">
-              <div class="name">Dr foulen</div>
-              <div class="with-hr">Tunis</div>
-              
-              <div class="row"><div class="col-5 spec">Speciality </div><div class="col-7 spec-text">: Dentist</div></div>
-              <div class="row"><div class="col-5 spec">Review </div><div class="col-7 spec-text">: stars****</div></div>
-              <div class="row"><div class="col-5 spec">Availability </div><div class="col-7 spec-text">: Now</div></div>
-            </div>
-            <button>See profile</button>
-          </div></div>
-          <div class="col-4 docctor-card "><div class="doc">
-            <div style="width: 100%;"> <img class="doc-img" src="assets/male.jpg" alt=""></div>
-            <div class="doc-info">
-              <div class="name">Dr foulen</div>
-              <div class="with-hr">Tunis</div>
-              
-              <div class="row"><div class="col-5 spec">Speciality </div><div class="col-7 spec-text">: Dentist</div></div>
-              <div class="row"><div class="col-5 spec">Review </div><div class="col-7 spec-text">: stars****</div></div>
-              <div class="row"><div class="col-5 spec">Availability </div><div class="col-7 spec-text">: Now</div></div>
-            </div>
-            <button>See profile</button>
-          </div></div>
-          <div class="col-4 docctor-card "><div class="doc">d3</div></div>
-        </div>
-        <div class="see-all-btn"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="Iconly/Light-Outline/Arrow - Right 2">
-<g id="Arrow - Right 2">
-<path id="Stroke 1" d="M7.96967 19.5303C7.7034 19.2641 7.6792 18.8474 7.89705 18.5538L7.96967 18.4697L14.439 12L7.96967 5.53033C7.7034 5.26406 7.6792 4.8474 7.89705 4.55379L7.96967 4.46967C8.23594 4.2034 8.6526 4.1792 8.94621 4.39705L9.03033 4.46967L16.0303 11.4697C16.2966 11.7359 16.3208 12.1526 16.1029 12.4462L16.0303 12.5303L9.03033 19.5303C8.73744 19.8232 8.26256 19.8232 7.96967 19.5303Z" fill="black"/>
-</g>
-</g>
-</svg>
-</div>
-      </div>
-    </div>
-   
     <div>
-      <h5>Most Reviewed</h5>
+      <!-- Add a button to close the preview -->
+      <div (click)="closeServiceTab()" class="x-shape-con">
+        <div class="x-shape"></div>
+      </div>
+      <h5>Featured</h5>
       <div class="doc-tab">
-        <div class="row row1">
-          <div class="col-4 docctor-card "><div class="doc">
-            <div style="width: 100%;"> <img class="doc-img" src="assets/male.jpg" alt=""></div>
-            <div class="doc-info">
-              <div class="name">Dr foulen</div>
-              <div class="with-hr">Tunis</div>
+        <div class="row row1" *ngIf="doctors.length > 0" >
+          <!-- Loop through the doctors and display their information -->
+          <div *ngFor="let doctor of doctors" class="col-4 docctor-card">
+            <div class="doc">
+              <div style="width: 100%">
+                <img class="doc-img" [src]="'assets/male.jpg'" alt="" />
+              </div>
+              <div class="doc-info">
+                <div class="name">{{ doctor.fullName }}</div>
+                <div class="with-hr"> Email : {{ doctor.email }}</div>
+                <div class="with-hr"> Phone : {{ doctor.phone }}</div>
+
               
-              <div class="row"><div class="col-5 spec">Speciality </div><div class="col-7 spec-text">: Dentist</div></div>
-              <div class="row"><div class="col-5 spec">Review </div><div class="col-7 spec-text">: stars****</div></div>
-              <div class="row"><div class="col-5 spec">Availability </div><div class="col-7 spec-text">: Now</div></div>
+                <!-- Add more details as needed -->
+                <!-- For example, add review and availability -->
+                <!-- You can use doctor.email, doctor.phone, etc. -->
+              </div>
+              <button>See profile</button>
             </div>
-            <button>See profile</button>
-          </div></div>
-          <div class="col-4 docctor-card "><div class="doc">d2</div></div>
-          <div class="col-4 docctor-card "><div class="doc">d3</div></div>
+          </div>
         </div>
-        <div class="see-all-btn"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="Iconly/Light-Outline/Arrow - Right 2">
-<g id="Arrow - Right 2">
-<path id="Stroke 1" d="M7.96967 19.5303C7.7034 19.2641 7.6792 18.8474 7.89705 18.5538L7.96967 18.4697L14.439 12L7.96967 5.53033C7.7034 5.26406 7.6792 4.8474 7.89705 4.55379L7.96967 4.46967C8.23594 4.2034 8.6526 4.1792 8.94621 4.39705L9.03033 4.46967L16.0303 11.4697C16.2966 11.7359 16.3208 12.1526 16.1029 12.4462L16.0303 12.5303L9.03033 19.5303C8.73744 19.8232 8.26256 19.8232 7.96967 19.5303Z" fill="black"/>
-</g>
-</g>
-</svg>
-</div>
+        <div class="no-doctors-message" *ngIf="doctors.length === 0">No Doctors yet in this speciality</div>
+        <div class="see-all-btn">
+          <!-- Add your SVG or button for pagination if needed -->
+        </div>
       </div>
     </div>
   </div>
-
 </div>
+
