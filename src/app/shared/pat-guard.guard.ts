@@ -19,7 +19,7 @@ export class PatGuardGuard implements CanActivate {
         this.router.navigate(['/']);
         return false;
       } else {
-        const userRole = this.tokenService.getUserData();
+        const userRole = this.tokenService.getUserRole();
         console.log(userRole)
         let path = "";
         if (userRole === "DOCTOR") {

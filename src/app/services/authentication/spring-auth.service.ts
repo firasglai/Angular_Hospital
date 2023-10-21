@@ -6,6 +6,7 @@ import { patientProfile } from '../../models/user-profile';
 import { TokenService } from './token.service';
 import { UsersService } from '../users/users.service';
 import { Profile } from 'src/app/models/profile';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,11 +19,12 @@ export class SpringAuthService {
   currentUser$ = this._currentUser$.asObservable();
   user!: User;
 
+  currentUser : Profile | null = null;
+
   constructor(private http: HttpClient,
     private tokenService: TokenService,
-    private userService: UsersService
-    
-   
+    private userService: UsersService,
+    private cookieService: CookieService,
   ) {
     this._isLoggedIn$.next(!!tokenService.getToken());
   }
@@ -36,14 +38,19 @@ export class SpringAuthService {
     return this.http.post(`${this.apiUrl}/auth/login`, user)
   }
 
-  getCurrentUser(): Observable<Profile> {
-    return this.http.get<Profile>(`${this.apiUrl}/users/me`);
-  }
 
-  //! DEPRECATED the cuurentUser$ is not updated after login [object,object]
-  updateCurrentUser(user: Profile | null) {
-    this._currentUser$.next(user);
-    console.log("currentUser object "+JSON.stringify(this._currentUser$.value));
+ 
+
+  getActiveUser(): Observable<Profile | null> {
+    const currentUserData = this.cookieService.get('currentUser');
+    if (currentUserData) {
+      const user = JSON.parse(currentUserData);
+      this._currentUser$.next(user);
+      return this._currentUser$.asObservable();
+    } else {
+      this._currentUser$.next(null);
+      return this._currentUser$.asObservable();
+    }
   }
   
   
@@ -51,7 +58,6 @@ export class SpringAuthService {
   isAuthenticated() {
     if (this.tokenService.getToken() == '') {
       this.tokenService.removeToken();
-      this.tokenService.removeUserData();
     }
     return this.tokenService.getToken() !== null;
   }
@@ -77,8 +83,8 @@ export class SpringAuthService {
 
   logout() {
     this.tokenService.removeToken();
-    this.tokenService.removeUserData();
    this.tokenService.removeUserRole();
+   this.cookieService.delete('currentUser');
   }
 
   updateuser(uid: string) {

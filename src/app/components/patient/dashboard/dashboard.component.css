@@ -173,19 +173,24 @@ thead th:first-child {
     padding: 10px;
     text-align: center;
 }
-.statu-column .Success{
+.statu-column .APPROVED{
     color: #0F595A;
     background-color: #CFFCD4;
 
 }
-.statu-column .Pending{
+.statu-column .PENDING{
     color: #7A4B04;
     background-color: #FFF7D0;
 }
-.statu-column .Failed{
+.statu-column .CANCELED{
     color: #7A0E40;
     background-color: #FFE4DB;
 }
+.statu-column .DONE{
+    color: #0b31ef;
+    background-color: #FFE4DB;
+}
+.act
 .action-column{
 
 }

@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class TokenService {
 
   private readonly TOKEN_KEY = 'token';
-  private readonly USER_DATA_KEY = 'userdata';
+ 
   private readonly USER_ROLE= "role" // New key for user data
 
   constructor() {}
@@ -14,23 +14,12 @@ export class TokenService {
   getToken(): string | null {
     return localStorage.getItem(this.TOKEN_KEY);
   }
-
   setToken(token: string): void {
     localStorage.setItem(this.TOKEN_KEY, token);
   }
-
   removeToken(): void {
     localStorage.removeItem(this.TOKEN_KEY);
   }
-
-  getUserData(): string | null {
-    return localStorage.getItem(this.USER_DATA_KEY);
-  }
-
-  setUserData(userData: string): void {
-    localStorage.setItem(this.USER_DATA_KEY, userData);
-  }
-
   getUserRole(): string | null{
   return localStorage.getItem(this.USER_ROLE);
   }
@@ -40,11 +29,6 @@ export class TokenService {
     removeUserRole(): void {
     localStorage.removeItem(this.USER_ROLE);
     }
-  
 
-  
-  removeUserData(): void {
-    localStorage.removeItem(this.USER_DATA_KEY);
-  }
 
 }

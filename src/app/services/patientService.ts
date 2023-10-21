@@ -22,7 +22,7 @@ export class patientService {
     private auth: SpringAuthService) {}
 
   get patient():Observable<patientProfile>{
-    let uid= this.tokenService.getUserData()
+    let uid= this.tokenService.getUserRole()
    
     return this.http.get<patientProfile>(`${this.apiUrl}/patients/patient`) 
   }

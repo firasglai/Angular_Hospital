@@ -18,10 +18,8 @@
       </div>
 
     </div>
-    <div class=" data2">
+    <div class="data2">
       <h5>Todays Appoitments</h5> <!-- Displays a heading for money earned statistics -->
-      
-
     </div>
 
   </div>
@@ -32,36 +30,34 @@
         <thead>
           <tr>
             <th>Doctor</th> <!-- Displays a column for patient information -->
-            <th>Appoitment</th> <!-- Displays a column for appointment information -->
+            <th>Speciality</th> <!-- Displays a column for appointment information -->
             <th>Date</th> <!-- Displays a column for payment date -->
-            <th>Total</th> <!-- Displays a column for payment total amount -->
+            <th>Reason</th> <!-- Displays a column for payment total amount -->
             <th>Status</th> <!-- Displays a column for payment status -->
             <th>Action</th> <!-- Displays a column for actions related to payments -->
           </tr>
         </thead>
-        <tbody *ngFor="let P of lastPayments"> <!-- Iterates through an array of lastPayments to display payment information -->
+        <tbody *ngFor="let P of userAppointments"> <!-- Iterates through an array of lastPayments to display payment information -->
           <tr>
-            <td class="patient-column"><img src='assets/{{P["patient"]["profilePicture"]}}' class="Patient-profile"> <!-- Displays the profile picture of the patient -->
+            <td class="patient-column"><img src='assets/image/d1.png' class="Patient-profile"> <!-- Displays the profile picture of the patient -->
               <div style="padding-left: 15px;">
-                <div class="patient-column-name">{{P["patient"]["title"]}} {{P["patient"]["name"]}} {{P["patient"]["lastname"]}}</div> <!-- Displays the name and title of the patient -->
-                <div class="patient-column-id">{{P["patient"]["id"]}}</div> <!-- Displays the ID of the patient -->
+                <div class="patient-column-name">{{P["doctor"]["fullName"]}}</div> <!-- Displays the name and title of the patient -->
+                <div class="patient-column-id">{{P["doctor"]["id"]}}</div> <!-- Displays the ID of the patient -->
               </div>
             </td>
             <td class="appointment-column">
-              {{P["appoitment"]}} <!-- Displays the appointment information -->
+              {{P["doctor"]["specialty"]["name"]}} 
             </td>
             <td class="date-column">
-              {{P["Date"]}} <!-- Displays the payment date -->
+              {{P["date"]}} <!-- Displays the payment date -->
             </td>
             <td class="total-column">
-              <div class="total-column-amount">{{P["payment"]["amount"]}} $</div> <!-- Displays the payment amount -->
-              <div class="total-column-method">{{P["payment"]["methode"]}}</div> <!-- Displays the payment method -->
-              
+              <div class="total-column-amount">{{P["reason"]}}</div> <!-- Displays the payment amount -->
 
             </td>
-            <td class="statu-column {{P['Statu']}}">
-              <div class="statu-column {{P['Statu']}}">
-                {{P["Statu"]}}
+            <td class="statu-column {{P['statusAPT']}}">
+              <div class="statu-column  {{P['statusAPT']}}">
+                {{P["statusAPT"]}}
               </div>
             </td>
             <td class="action-column  custom-action-column">

@@ -18,7 +18,7 @@ import { patientService } from './patientService';
 import { Profile } from '../models/profile';
 
 
-interface statu{
+interface status{
   
     state: string,
     last_changed: Database & Timestamp,
@@ -28,7 +28,7 @@ interface statu{
   providedIn: 'root'
 })
 export class PresenceService {
-  userID?:string | undefined
+  userID?:number | undefined
   userpresence$!:Observable<any>
   constructor(
     private auth: SpringAuthService,
@@ -48,7 +48,7 @@ export class PresenceService {
       if(k?.id){
         this.userID=k?.id
       }else{
-        this.userID=""
+        this.userID=0
       }
      
    
@@ -222,7 +222,7 @@ return  new Observable<string>(() => { set(userStatusDatabaseRef,isOfflineForDat
 
 }
 
-setPresenceOn(uid:string):Observable<string>{
+setPresenceOn(uid:number):Observable<string>{
   
   var isOfflineForDatabase = {
     state: 'online',

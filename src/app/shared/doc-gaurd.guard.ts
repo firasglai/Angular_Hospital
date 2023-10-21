@@ -15,7 +15,7 @@ export class DocGuardGuard implements CanActivate {
 
   canActivate() {
     if (this.auth.isAuthenticated()) {
-      const userRole = this.tokenService.getUserData();
+      const userRole = this.tokenService.getUserRole();
       if (!userRole) {
         this.router.navigate(['/login']); // Redirect to login if userRole is not found
         return false;

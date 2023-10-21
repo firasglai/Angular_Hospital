@@ -153,7 +153,7 @@ const routes: Routes = [
       },
       {
         path: 'account',
-        component: AccountComponentp,
+        component: AccountComponent,
         canActivate: [PatGuardGuard],
       },
       {

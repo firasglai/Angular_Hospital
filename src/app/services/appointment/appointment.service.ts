@@ -44,7 +44,7 @@ export class AppointmentService {
   }
 
   getUpcomingPatientAppointments(patientId: number): Observable<Appointment[]> {
-    return this.http.get<Appointment[]>(`${this.apiUrl}/approved-appointments/${patientId}`);
+    return this.http.get<Appointment[]>(`${this.apiUrl}/approved-appointments/patient/${patientId}`);
   }
 
   searchAppointments(patientName?: string, doctorName?: string): Observable<Appointment[]> {
@@ -62,4 +62,14 @@ export class AppointmentService {
   deleteAppointment(appointmentId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${appointmentId}`);
   }
+
+  getUserAppointments(userId: number, status?: StatusAPT): Observable<Appointment[]> {
+    if (status) {
+      const params = { status: status };
+      return this.http.get<Appointment[]>(`${this.apiUrl}/user-appointments/${userId}`, { params });
+    } else {
+      return this.http.get<Appointment[]>(`${this.apiUrl}/user-appointments/${userId}`);
+    }
+  }
+  
 }

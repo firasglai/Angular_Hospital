@@ -40,12 +40,10 @@ export class PatientComponent {
   toggleActive1() {
     this.isActive1 = !this.isActive1;
   }
+  
   SignOut(){
-    this.tokenService.removeToken();
-    this.tokenService.removeUserRole();
-    this.authService.updateCurrentUser(null);
+    this.authService.logout();
     this.router.navigate(['']);
-
   }
 /*
   

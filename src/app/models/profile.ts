@@ -1,10 +1,10 @@
 export interface Profile {
-  id?: string;
+  id?: number;
   fullName?: string;
-  email: string;
+  email?: string;
   //to check images outputs
   profileImage?: Blob;
-  password: string;
+  password?: string;
   userRole?: string;
   enabled?: boolean;
   username?: string;

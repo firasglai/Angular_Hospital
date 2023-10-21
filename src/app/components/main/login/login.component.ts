@@ -93,7 +93,7 @@ export class LoginComponent {
             this.tokenService.setToken(resp.token);
             this.tokenService.setUserRole(resp.userRole);
   
-            this.auth.getCurrentUser().subscribe(
+            this.userService.getCurrentUser().subscribe(
               (user) => {
                 if (user) {
                   this.cookieService.set('currentUser', JSON.stringify(user));
@@ -104,7 +104,6 @@ export class LoginComponent {
                 this.toast.error('Error getting current user');
               }
             );
-  
             if (resp.userRole === "DOCTOR") {
               this.router.navigate(['/doctor']);
             } else if (resp.userRole === "PATIENT") {
