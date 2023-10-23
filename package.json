@@ -44,6 +44,7 @@
     "leaflet-control-geocoder": "^2.4.0",
     "leaflet-geosearch": "^3.8.0",
     "lottie-web": "^5.10.2",
+    "mdb-angular-ui-kit": "^4.1.0",
     "ng2-charts": "^4.1.1",
     "ngx-cookie-service": "^15.0.0",
     "ngx-lottie": "^10.0.0",

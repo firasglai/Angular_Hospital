@@ -1,395 +1,612 @@
 <div class="row">
-    <form class="col-3">
-        <div class="filterInputs">
-
-
-            <div>
-                <div class="title"> Speciatlity</div>
-                <div *ngIf="selecetedspeciality;else selectspeciality ">
-                    <div class="specialty" [ngClass]="{'viw': isDescriptionOn}">
-                        <div class="viewde" [ngClass]="{'display': !isDescriptionOn}" (click)="isDescriptionOn=true">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8.5 5L15.5 12L8.5 19" stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                        </div>
-                        <div class="viewde" [ngClass]="{'display': isDescriptionOn}" (click)="isDescriptionOn=false">
-                            <svg width="30" height="30" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path d="M19 8.5L12 15.5L5 8.5" stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                        </div>
-                        {{ selecetedspeciality.name }}
-                        <div class="delspec"
-                            (click)="selecetedspeciality=undefined;searchControll.setValue('');searchResults=[]">
-                            <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
-                                height="20">
-                                <style>
-                                    .s0 {
-                                        fill: none;
-                                        stroke: #130f26;
-                                        stroke-linecap: round;
-                                        stroke-linejoin: round;
-                                        stroke-width: 1.5;
-                                    }
-                                </style>
-                                <path id="Layer" class="s0" d="M22.5,22.3L12.2,12L1.9,22.3" />
-                                <path id="Layer copy" class="s0" d="M22.5,2L12.2,12L1.9,2" />
-                            </svg>
-
-                        </div>
-
-                    </div>
-                    <div class="description" [ngClass]="{'display': isDescriptionOn}">
-                        {{ selecetedspeciality.description }}
-                    </div>
-                </div>
-                <ng-template #selectspeciality>
-                    <div class="inp-container">
-                        <input type="text" class="input-location" [formControl]="searchControll"
-                            placeholder="search for specialit">
-
-                    </div>
-                    <ul>
-                        <li *ngFor="let specialty of searchResults" (click)="selecetedspeciality=specialty">
-                            {{ specialty.name }} - {{ specialty.description }}
-                        </li>
-                    </ul>
-
-
-                </ng-template>
+  <form class="col-3">
+    <div class="filterInputs">
+      <div>
+        <div class="title">Speciatlity</div>
+        <div *ngIf="selecetedspeciality; else selectspeciality">
+          <div class="specialty" [ngClass]="{ viw: isDescriptionOn }">
+            <div
+              class="viewde"
+              [ngClass]="{ display: !isDescriptionOn }"
+              (click)="isDescriptionOn = true"
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8.5 5L15.5 12L8.5 19"
+                  stroke="white"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
             </div>
-            <div class="title">Availabiltiy</div>
-
-            <div class="input-with-label row">
-                <div class="col-4 title">From :</div>
-                <div class="col-8"><input style="width: 100%;" type="date" [formControl]="currentDateControl"
-                        [min]="currentDate" /></div>
+            <div
+              class="viewde"
+              [ngClass]="{ display: isDescriptionOn }"
+              (click)="isDescriptionOn = false"
+            >
+              <svg
+                width="30"
+                height="30"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M19 8.5L12 15.5L5 8.5"
+                  stroke="white"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
             </div>
-            <div class="input-with-label row">
-                <div class="col-4 title">To :</div>
-                <div class="col-8"> <input style="width: 100%;" type="date" [formControl]="currentDateControl2"
-                        [min]="currentDateControl.value"> </div>
+            {{ selecetedspeciality.name }}
+            <div
+              class="delspec"
+              (click)="
+                selecetedspeciality = undefined;
+                searchControll.setValue('');
+                searchResults = []
+              "
+            >
+              <svg
+                version="1.2"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="20"
+                height="20"
+              >
+                <style>
+                  .s0 {
+                    fill: none;
+                    stroke: #130f26;
+                    stroke-linecap: round;
+                    stroke-linejoin: round;
+                    stroke-width: 1.5;
+                  }
+                </style>
+                <path id="Layer" class="s0" d="M22.5,22.3L12.2,12L1.9,22.3" />
+                <path id="Layer copy" class="s0" d="M22.5,2L12.2,12L1.9,2" />
+              </svg>
             </div>
-
-
-
-
-            <div>
-                <div class="title">Review</div>
-                <div class="reviews"> <span *ngFor="let star of stars" class="star" (click)="rate(star)">
-                        <i class="fas fa-star" [ngClass]="{'filled ':star.filled}"></i>
-                    </span></div>
-
-
-
-            </div>
-            <div>
-                <div class="title">Location</div>
-                <div>
-                    <div class="loc" style="display: flex ; align-items: center;">
-                        <input class="input-location" type="text" [formControl]="searchTerm" (input)="search()"
-                            placeholder="Search cities">
-                        <svg (click)="showmap=!showmap" width="21" height="21" viewBox="0 0 21 21" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                d="M9.21145 9.2119L8.16445 12.5589L11.5105 11.5109L12.5585 8.1639L9.21145 9.2119ZM7.02045 14.4519C6.82445 14.4519 6.63245 14.3749 6.48945 14.2329C6.29245 14.0349 6.22045 13.7439 6.30445 13.4789L7.89745 8.3899C7.97045 8.1539 8.15445 7.9709 8.38845 7.8979L13.4775 6.3049C13.7445 6.2199 14.0345 6.2929 14.2325 6.4899C14.4295 6.6879 14.5015 6.9789 14.4175 7.2439L12.8255 12.3329C12.7525 12.5679 12.5675 12.7519 12.3335 12.8249L7.24445 14.4179C7.17045 14.4409 7.09445 14.4519 7.02045 14.4519Z"
-                                fill="black" />
-                            <mask id="mask0_397_1096" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0"
-                                width="21" height="21">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M0 0H20.7218V20.7217H0V0Z"
-                                    fill="white" />
-                            </mask>
-                            <g>
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                    d="M10.3608 1.5C5.47476 1.5 1.49976 5.476 1.49976 10.361C1.49976 15.247 5.47476 19.222 10.3608 19.222C15.2468 19.222 19.2218 15.247 19.2218 10.361C19.2218 5.476 15.2468 1.5 10.3608 1.5ZM10.3608 20.722C4.64776 20.722 -0.000244141 16.074 -0.000244141 10.361C-0.000244141 4.648 4.64776 0 10.3608 0C16.0738 0 20.7218 4.648 20.7218 10.361C20.7218 16.074 16.0738 20.722 10.3608 20.722Z"
-                                    fill="black" />
-                            </g>
-                        </svg>
-
-                    </div>
-                    <ul>
-                        <li (click)="setmarker(city)" *ngFor="let city of filteredCities">{{ city.gov }}, {{ city.deleg
-                            }}, {{ city.cite }}</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="range-container" *ngIf="location">
-                <input type="range" id="range-input" min="10" max="100" step="1" value="20" (input)="setsize($event)">
-
-                {{circleSize}}
-            </div>
-            <div class="mapcontainer" [ngClass]="{'dismap':!showmap}">
-
-                <div id="map" style="height: 400px; width: 100%; cursor: pointer !important;">
-                    <div class="maploding" [ngClass]="{'displayon':maploading}">
-
-                        <img width="130px" src="assets/loading (1).gif" alt="">
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="row buttons"><input type="submit" value="Search" (click)="searchbyd()" class="sub"></div>
+          </div>
+          <div class="description" [ngClass]="{ display: isDescriptionOn }">
+            {{ selecetedspeciality.description }}
+          </div>
         </div>
-    </form>
-    <div class="col-9">
-        <div class="doc-search" style="padding: 20px;">
-            <div class="row">
-                <div class="col-4" style="    padding-top: 10px;" *ngFor="let d of doctorArray">
-                    <div style="border: #a9a2ca 1px solid; border-radius: 15px; padding: 10px;">
-                        <div class="doc">
-                            <div style="    display: flex;
-                            align-items: center;
-                        "><img src="{{d.profilepic}}"
-                                style="width: 60px;height: 60px; border-radius: 50%; margin-right: 15px;" alt="">
-                            <div class="dts-title">Dr. {{d.name}} {{d.lastname}}</div></div>
-                            <div class="dts-description">{{d.description}}</div>
-                        </div>
-                        <div>
-                            <div class="dts-title">Speciality</div>{{d.specialty.name}}
-                        </div>
-                        <div style="display: flex;    flex-direction: column;">
-                            <button class="viewProfile" (click)="doctorToshow=d;showdoc=true; initmap2()">View
-                                profile</button>
-                            <button class="bookAppoitment" (click)="doctorToshow=d;showbook=true; checktheday()">Book
-                                Appointment</button>
-                        </div>
-                    </div>
+        <ng-template #selectspeciality>
+          <div class="inp-container">
+            <input
+              type="text"
+              class="input-location"
+              [formControl]="searchControll"
+              placeholder="search for specialit"
+            />
+          </div>
+          <ul>
+            <li
+              *ngFor="let specialty of searchResults"
+              (click)="selecetedspeciality = specialty"
+            >
+              {{ specialty.name }} - {{ specialty.description }}
+            </li>
+          </ul>
+        </ng-template>
+      </div>
+      <div class="title">Availabiltiy</div>
 
-                </div>
-            </div>
+      <div class="input-with-label row">
+        <div class="col-4 title">From :</div>
+        <div class="col-8">
+          <input
+            style="width: 100%"
+            type="date"
+            [formControl]="currentDateControl"
+            [min]="currentDate"
+          />
         </div>
+      </div>
+      <div class="input-with-label row">
+        <div class="col-4 title">To :</div>
+        <div class="col-8">
+          <input
+            style="width: 100%"
+            type="date"
+            [formControl]="currentDateControl2"
+            [min]="currentDateControl.value"
+          />
+        </div>
+      </div>
+
+      <div>
+        <div class="title">Review</div>
+        <div class="reviews">
+          <span *ngFor="let star of stars" class="star" (click)="rate(star)">
+            <i class="fas fa-star" [ngClass]="{ 'filled ': star.filled }"></i>
+          </span>
+        </div>
+      </div>
+      <div>
+        <div class="title">Location</div>
+        <div>
+          <div class="loc" style="display: flex; align-items: center">
+            <input
+              class="input-location"
+              type="text"
+              [formControl]="searchTerm"
+              (input)="search()"
+              placeholder="Search cities"
+            />
+            <svg
+              (click)="showmap = !showmap"
+              width="21"
+              height="21"
+              viewBox="0 0 21 21"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M9.21145 9.2119L8.16445 12.5589L11.5105 11.5109L12.5585 8.1639L9.21145 9.2119ZM7.02045 14.4519C6.82445 14.4519 6.63245 14.3749 6.48945 14.2329C6.29245 14.0349 6.22045 13.7439 6.30445 13.4789L7.89745 8.3899C7.97045 8.1539 8.15445 7.9709 8.38845 7.8979L13.4775 6.3049C13.7445 6.2199 14.0345 6.2929 14.2325 6.4899C14.4295 6.6879 14.5015 6.9789 14.4175 7.2439L12.8255 12.3329C12.7525 12.5679 12.5675 12.7519 12.3335 12.8249L7.24445 14.4179C7.17045 14.4409 7.09445 14.4519 7.02045 14.4519Z"
+                fill="black"
+              />
+              <mask
+                id="mask0_397_1096"
+                style="mask-type: luminance"
+                maskUnits="userSpaceOnUse"
+                x="0"
+                y="0"
+                width="21"
+                height="21"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M0 0H20.7218V20.7217H0V0Z"
+                  fill="white"
+                />
+              </mask>
+              <g>
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M10.3608 1.5C5.47476 1.5 1.49976 5.476 1.49976 10.361C1.49976 15.247 5.47476 19.222 10.3608 19.222C15.2468 19.222 19.2218 15.247 19.2218 10.361C19.2218 5.476 15.2468 1.5 10.3608 1.5ZM10.3608 20.722C4.64776 20.722 -0.000244141 16.074 -0.000244141 10.361C-0.000244141 4.648 4.64776 0 10.3608 0C16.0738 0 20.7218 4.648 20.7218 10.361C20.7218 16.074 16.0738 20.722 10.3608 20.722Z"
+                  fill="black"
+                />
+              </g>
+            </svg>
+          </div>
+          <ul>
+            <li (click)="setmarker(city)" *ngFor="let city of filteredCities">
+              {{ city.gov }}, {{ city.deleg }}, {{ city.cite }}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="range-container" *ngIf="location">
+        <input
+          type="range"
+          id="range-input"
+          min="10"
+          max="100"
+          step="1"
+          value="20"
+          (input)="setsize($event)"
+        />
+
+        {{ circleSize }}
+      </div>
+      <div class="mapcontainer" [ngClass]="{ dismap: !showmap }">
+        <div
+          id="map"
+          style="height: 400px; width: 100%; cursor: pointer !important"
+        >
+          <div class="maploding" [ngClass]="{ displayon: maploading }">
+            <img width="130px" src="assets/loading (1).gif" alt="" />
+          </div>
+        </div>
+      </div>
+      <div class="row buttons">
+        <input type="submit" value="Search" (click)="searchbyd()" class="sub" />
+      </div>
     </div>
-    <div class="profile" [ngClass]="{'displayOn':showdoc}">
-        <div class="profile-container">
+  </form>
+  <div class="col-9">
+    <div class="doc-search" style="padding: 20px">
+      <div class="row">
+        <div
+          class="col-4"
+          style="padding-top: 10px"
+          *ngFor="let d of doctorArray"
+        >
+          <div
+            style="
+              border: #a9a2ca 1px solid;
+              border-radius: 15px;
+              padding: 10px;
+            "
+          >
+            <div class="doc">
+              <div style="display: flex; align-items: center">
+                <img
+                  src="{{ d.profilepic }}"
+                  style="
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 50%;
+                    margin-right: 15px;
+                  "
+                  alt=""
+                />
+                <div class="dts-title">Dr. {{ d.name }} {{ d.lastname }}</div>
+              </div>
+              <div class="dts-description">{{ d.description }}</div>
+            </div>
             <div>
-
-
-                <div *ngIf="doctorToshow" style=" padding: 10px;">
-
-                    <div class="doc">
-                        <div style="    display: flex;
-                    justify-content: space-between;
-                    width: 100%;
-                    align-items: center;
-                    align-content: center;
-                ">
-                            <div style="display: flex;align-items: center;"><img src="{{doctorToshow.profilepic}}"
-                                    style="width: 60px;height: 60px; border-radius: 50%; margin-right: 15px;" alt="">
-                                    <div style="cursor: pointer;" >  <div (click)="subscribetodoctor()" class="substar" [ngClass]="{'disabled':isubbed()==true}"><svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.74992 1.5C9.65892 1.5 9.43492 1.525 9.31592 1.763L7.48992 5.414C7.20092 5.991 6.64392 6.392 5.99992 6.484L1.91192 7.073C1.64192 7.112 1.54992 7.312 1.52192 7.396C1.49692 7.477 1.45692 7.683 1.64292 7.861L4.59892 10.701C5.06992 11.154 5.28392 11.807 5.17192 12.446L4.47592 16.456C4.43292 16.707 4.58992 16.853 4.65992 16.903C4.73392 16.959 4.93192 17.07 5.17692 16.942L8.83192 15.047C9.40792 14.75 10.0939 14.75 10.6679 15.047L14.3219 16.941C14.5679 17.068 14.7659 16.957 14.8409 16.903C14.9109 16.853 15.0679 16.707 15.0249 16.456L14.3269 12.446C14.2149 11.807 14.4289 11.154 14.8999 10.701L17.8559 7.861C18.0429 7.683 18.0029 7.476 17.9769 7.396C17.9499 7.312 17.8579 7.112 17.5879 7.073L13.4999 6.484C12.8569 6.392 12.2999 5.991 12.0109 5.413L10.1829 1.763C10.0649 1.525 9.84092 1.5 9.74992 1.5M4.94692 18.5C4.53392 18.5 4.12392 18.37 3.77292 18.114C3.16692 17.67 2.86992 16.937 2.99892 16.199L3.69492 12.189C3.72092 12.04 3.66992 11.889 3.55992 11.783L0.603916 8.943C0.0599161 8.422 -0.135084 7.652 0.0949161 6.937C0.326916 6.214 0.940916 5.697 1.69792 5.589L5.78592 5C5.94392 4.978 6.07992 4.881 6.14792 4.743L7.97492 1.091C8.31192 0.418 8.99192 0 9.74992 0V0C10.5079 0 11.1879 0.418 11.5249 1.091L13.3529 4.742C13.4219 4.881 13.5569 4.978 13.7139 5L17.8019 5.589C18.5589 5.697 19.1729 6.214 19.4049 6.937C19.6349 7.652 19.4389 8.422 18.8949 8.943L15.9389 11.783C15.8289 11.889 15.7789 12.04 15.8049 12.188L16.5019 16.199C16.6299 16.938 16.3329 17.671 15.7259 18.114C15.1109 18.565 14.3099 18.626 13.6309 18.272L9.97792 16.379C9.83492 16.305 9.66392 16.305 9.52092 16.379L5.86792 18.273C5.57592 18.425 5.26092 18.5 4.94692 18.5" fill="#192252"/>
-                                        </svg>
-                                        </div>
-                                        <div (click)=" unsubscribetodoctor()" class="substar" [ngClass]="{'disabled':isubbed()==false}"><svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M15.9185 12.3201C15.6595 12.5711 15.5405 12.9341 15.5995 13.2901L16.4885 18.2101C16.5635 18.6271 16.3875 19.0491 16.0385 19.2901C15.6965 19.5401 15.2415 19.5701 14.8685 19.3701L10.4395 17.0601C10.2855 16.9781 10.1145 16.9341 9.93951 16.9291H9.66851C9.57451 16.9431 9.48251 16.9731 9.39851 17.0191L4.96851 19.3401C4.74951 19.4501 4.50151 19.4891 4.25851 19.4501C3.66651 19.3381 3.27151 18.7741 3.36851 18.1791L4.25851 13.2591C4.31751 12.9001 4.19851 12.5351 3.93951 12.2801L0.32851 8.78012C0.0265096 8.48712 -0.0784904 8.04712 0.0595096 7.65012C0.19351 7.25412 0.53551 6.96512 0.94851 6.90012L5.91851 6.17912C6.29651 6.14012 6.62851 5.91012 6.79851 5.57012L8.98851 1.08012C9.04051 0.980122 9.10751 0.888122 9.18851 0.810122L9.27851 0.740122C9.32551 0.688122 9.37951 0.645122 9.43951 0.610122L9.54851 0.570122L9.71851 0.500122H10.1395C10.5155 0.539122 10.8465 0.764122 11.0195 1.10012L13.2385 5.57012C13.3985 5.89712 13.7095 6.12412 14.0685 6.17912L19.0385 6.90012C19.4585 6.96012 19.8095 7.25012 19.9485 7.65012C20.0795 8.05112 19.9665 8.49112 19.6585 8.78012L15.9185 12.3201Z" fill="#192252"/>
-                                            </svg>
-                                        </div></div>
-                            </div>
-                          
-                            <div class="x-shape" (click)="doctorToshow=undefined;showdoc=false">
-                                <div class="line"></div>
-                                <div class="line"></div>
-                            </div>
-                        </div>
-                        <div class="dts-title">Dr. {{doctorToshow.name}} {{doctorToshow.lastname}}</div>
-                        <div class="dts-description">{{doctorToshow.description}}</div>
-
-
-                    </div>
-                    <div class="dts-title">Speciality :</div>
-                    <div style="font-weight: 500; font-size: 15px;">
-                        {{doctorToshow.specialty.name}}
-                    </div>
-                    <div class="dts-description"> {{doctorToshow.specialty.description}}</div>
-                    <div class="dts-title">Working Days :</div>
-                    <div class="days">
-                        <div style=" flex-basis: 0;
-            flex-grow: 1;
-            flex-shrink: 1;padding: 7px;" *ngFor="let day of getworkingDay(doctorToshow)">
-                            <div>
-                                <div class="day-title" [ngClass]="{'empty': day.shifts.length=== 0 }">{{ day.name }}
-                                </div>
-                                <div>
-                                    <div class="day-data" *ngFor="let shift of day.shifts">
-                                        {{ shift }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div>
-                    <div class="dts-title" style="padding-left: 15px;padding-bottom: 15px;">Location :</div>
-                    <div>
-                        <div id="map2" style="width: 100%;
-                height: 300px;"></div>
-                    </div>
-                </div>
+              <div class="dts-title">Speciality</div>
+              {{ d.specialty.name }}
             </div>
-            <div><button class="dts-bA" (click)="showbook=true;showdoc=false; checktheday()">Book Appointment</button>
+            <div style="display: flex; flex-direction: column">
+              <button
+                class="viewProfile"
+                (click)="doctorToshow = d; showdoc = true; initmap2()"
+              >
+                View profile
+              </button>
+              <button
+                class="bookAppoitment"
+                (click)="doctorToshow = d; showbook = true; checktheday()"
+              >
+                Book Appointment
+              </button>
             </div>
+          </div>
         </div>
-
+      </div>
     </div>
-    <div class="profile2" [ngClass]="{'displayOn2':showbook}">
-        <div class="book-container">
-            <div class="maploding" [ngClass]="{'displayon':issendig}">
-
-                <img width="130px" src="assets/loading (1).gif" alt="">
-
-            </div>
-            <div *ngIf="doctorToshow" style=" padding: 10px;">
-
-                <div class="doc">
-                    <div style="    display: flex;
-            justify-content: space-between;
-            width: 100%;
-            align-items: center;
-            align-content: center;
-        ">
-                        <div><img src="{{doctorToshow.profilepic}}"
-                                style="width: 60px;height: 60px; border-radius: 50%; margin-right: 15px;" alt=""> </div>
-                        <div class="x-shape" (click)="doctorToshow=undefined;showbook=false">
-                            <div class="line"></div>
-                            <div class="line"></div>
-                        </div>
-                    </div>
-                    <div class="dts-title">Dr. {{doctorToshow.name}} {{doctorToshow.lastname}}</div>
-                    <div class="dts-description">{{doctorToshow.description}}</div>
-
-
-                </div>
-                <div class="dts-title">Speciality :</div>
-                <div style="font-weight: 500; font-size: 15px;">
-                    {{doctorToshow.specialty.name}}
-                </div>
-
-
-
-
-
-
-
-
-
-                <div class="dts-description"> {{doctorToshow.specialty.description}}</div>
-
-                <div class="days">
-                    <div style=" flex-basis: 0;
-        flex-grow: 1;
-        flex-shrink: 1;padding: 7px;" *ngFor="let day of getworkingDay(doctorToshow)">
-                        <div>
-                            <div class="day-title" [ngClass]="{'empty': day.shifts.length=== 0 }">{{ day.name }}
-                            </div>
-                            <div>
-                                <div class="day-data" *ngFor="let shift of day.shifts">
-                                    {{ shift }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div>
-
-                    <div style="display: flex;align-items: center; margin-top: 15px;">
-                        <div class="dts-title" style="margin-right: 10px;">Appointment day :</div>
-                        <div class="open-cal" (click)="openCalendiar()">{{ selectedDate1}}</div>
-                        <div style="margin-left: 0px; color: red;font-size: 15px;" *ngIf="isselecteddayvalid==false">
-                            Please Select Valid Day</div>
-                        
-                    </div>
-                </div>
-
-
-
-
-
-
-
-
-
-
-
-
-                <div class="cal-listener" [ngClass]="{'displayCalON': calendarSelect==true}"
-                    (click)="calendarSelect=false"></div>
-
-                <div class="calendarSelect" [ngClass]="{'displayCalON': calendarSelect==true}">
-                    <div class="custom-calendar">
-                        <div class="calendar-header">
-                            <button class="prev-button" (click)="goToPreviousMonth()">&lt;</button>
-                            <div class="month-year">{{ selectedDate1 | date: 'MMMM yyyy' }}</div>
-                            <button class="next-button" (click)="goToNextMonth()">&gt;</button>
-                        </div>
-                        <div class="calendar-grid">
-                            <div class="weekday" *ngFor="let weekday of weekdays">{{ weekday }}</div>
-                            <ng-container *ngFor="let week of weeks">
-                                <div class="day" *ngFor="let day of week; let i = index"
-                                    [class.disabled]="!isvalidDay(day)" [class.selected]="isDateSelected(day)"
-                                    [ngClass]="{'notvalid':isDateSelected(day)&&isselecteddayvalid==false}"
-                                    (click)="selectDate(day)">
-                                    {{ day.getDate() }}
-
-                                </div>
-                            </ng-container>
-
-
-                        </div>
-                    </div>
-
-                </div>
-
-
-
-                <div style="display: flex; align-items: center; margin-top: 15px;" *ngIf="isselecteddayvalid==true">
-                    <div class="dts-title" style="margin-right: 10px;">Select hour :</div>
-                    <div>
-                      <select  class="open-cal2" #mySelect
-                              [class.open]="isSelectOpen"
-
-                              (change)="onSelectChange()" name="" id="" [formControl]="hourcontroller">
-                        <option *ngFor="let hour of gethoures()" [value]="hour">{{hour}}</option>
-                      </select>
-                    </div>
+  </div>
+  <div class="profile" [ngClass]="{ displayOn: showdoc }">
+    <div class="profile-container">
+      <div>
+        <div *ngIf="doctorToshow" style="padding: 10px">
+          <div class="doc">
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                align-items: center;
+                align-content: center;
+              "
+            >
+              <div style="display: flex; align-items: center">
+                <img
+                  src="{{ doctorToshow.profilepic }}"
+                  style="
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 50%;
+                    margin-right: 15px;
+                  "
+                  alt=""
+                />
+                <div style="cursor: pointer">
+                  <div
+                    (click)="subscribetodoctor()"
+                    class="substar"
+                    [ngClass]="{ disabled: isubbed() == true }"
+                  >
+                    <svg
+                      width="20"
+                      height="19"
+                      viewBox="0 0 20 19"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M9.74992 1.5C9.65892 1.5 9.43492 1.525 9.31592 1.763L7.48992 5.414C7.20092 5.991 6.64392 6.392 5.99992 6.484L1.91192 7.073C1.64192 7.112 1.54992 7.312 1.52192 7.396C1.49692 7.477 1.45692 7.683 1.64292 7.861L4.59892 10.701C5.06992 11.154 5.28392 11.807 5.17192 12.446L4.47592 16.456C4.43292 16.707 4.58992 16.853 4.65992 16.903C4.73392 16.959 4.93192 17.07 5.17692 16.942L8.83192 15.047C9.40792 14.75 10.0939 14.75 10.6679 15.047L14.3219 16.941C14.5679 17.068 14.7659 16.957 14.8409 16.903C14.9109 16.853 15.0679 16.707 15.0249 16.456L14.3269 12.446C14.2149 11.807 14.4289 11.154 14.8999 10.701L17.8559 7.861C18.0429 7.683 18.0029 7.476 17.9769 7.396C17.9499 7.312 17.8579 7.112 17.5879 7.073L13.4999 6.484C12.8569 6.392 12.2999 5.991 12.0109 5.413L10.1829 1.763C10.0649 1.525 9.84092 1.5 9.74992 1.5M4.94692 18.5C4.53392 18.5 4.12392 18.37 3.77292 18.114C3.16692 17.67 2.86992 16.937 2.99892 16.199L3.69492 12.189C3.72092 12.04 3.66992 11.889 3.55992 11.783L0.603916 8.943C0.0599161 8.422 -0.135084 7.652 0.0949161 6.937C0.326916 6.214 0.940916 5.697 1.69792 5.589L5.78592 5C5.94392 4.978 6.07992 4.881 6.14792 4.743L7.97492 1.091C8.31192 0.418 8.99192 0 9.74992 0V0C10.5079 0 11.1879 0.418 11.5249 1.091L13.3529 4.742C13.4219 4.881 13.5569 4.978 13.7139 5L17.8019 5.589C18.5589 5.697 19.1729 6.214 19.4049 6.937C19.6349 7.652 19.4389 8.422 18.8949 8.943L15.9389 11.783C15.8289 11.889 15.7789 12.04 15.8049 12.188L16.5019 16.199C16.6299 16.938 16.3329 17.671 15.7259 18.114C15.1109 18.565 14.3099 18.626 13.6309 18.272L9.97792 16.379C9.83492 16.305 9.66392 16.305 9.52092 16.379L5.86792 18.273C5.57592 18.425 5.26092 18.5 4.94692 18.5"
+                        fill="#192252"
+                      />
+                    </svg>
                   </div>
-                  <div style="margin-left: 0px; color: red;font-size: 15px;" >
-                    {{errorofhour}}</div>
-                <div style="display: flex;  margin-top: 15px;" *ngIf="isselecteddayvalid==true">
-                    <div class="dts-title" style="margin-right: 10px;display: block;min-width: 126px;">Notes to Doctor :</div>
-                    <div style="width: 100%;">
-                       <textarea name="" id="" maxlength="255" [formControl]="noteController" class="textarea-tds"></textarea>
-                    </div>
+                  <div
+                    (click)="unsubscribetodoctor()"
+                    class="substar"
+                    [ngClass]="{ disabled: isubbed() == false }"
+                  >
+                    <svg
+                      width="21"
+                      height="20"
+                      viewBox="0 0 21 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M15.9185 12.3201C15.6595 12.5711 15.5405 12.9341 15.5995 13.2901L16.4885 18.2101C16.5635 18.6271 16.3875 19.0491 16.0385 19.2901C15.6965 19.5401 15.2415 19.5701 14.8685 19.3701L10.4395 17.0601C10.2855 16.9781 10.1145 16.9341 9.93951 16.9291H9.66851C9.57451 16.9431 9.48251 16.9731 9.39851 17.0191L4.96851 19.3401C4.74951 19.4501 4.50151 19.4891 4.25851 19.4501C3.66651 19.3381 3.27151 18.7741 3.36851 18.1791L4.25851 13.2591C4.31751 12.9001 4.19851 12.5351 3.93951 12.2801L0.32851 8.78012C0.0265096 8.48712 -0.0784904 8.04712 0.0595096 7.65012C0.19351 7.25412 0.53551 6.96512 0.94851 6.90012L5.91851 6.17912C6.29651 6.14012 6.62851 5.91012 6.79851 5.57012L8.98851 1.08012C9.04051 0.980122 9.10751 0.888122 9.18851 0.810122L9.27851 0.740122C9.32551 0.688122 9.37951 0.645122 9.43951 0.610122L9.54851 0.570122L9.71851 0.500122H10.1395C10.5155 0.539122 10.8465 0.764122 11.0195 1.10012L13.2385 5.57012C13.3985 5.89712 13.7095 6.12412 14.0685 6.17912L19.0385 6.90012C19.4585 6.96012 19.8095 7.25012 19.9485 7.65012C20.0795 8.05112 19.9665 8.49112 19.6585 8.78012L15.9185 12.3201Z"
+                        fill="#192252"
+                      />
+                    </svg>
                   </div>
+                </div>
+              </div>
 
-              
-
-
-
-
-
-
-
-
+              <div
+                class="x-shape"
+                (click)="doctorToshow = undefined; showdoc = false"
+              >
+                <div class="line"></div>
+                <div class="line"></div>
+              </div>
             </div>
-            <div><button class="dts-bA" (click)="send()">Submit</button></div>
+            <div class="dts-title">
+              Dr. {{ doctorToshow.name }} {{ doctorToshow.lastname }}
+            </div>
+            <div class="dts-description">{{ doctorToshow.description }}</div>
+          </div>
+          <div class="dts-title">Speciality :</div>
+          <div style="font-weight: 500; font-size: 15px">
+            {{ doctorToshow.specialty.name }}
+          </div>
+          <div class="dts-description">
+            {{ doctorToshow.specialty.description }}
+          </div>
+          <div class="dts-title">Working Days :</div>
+          <div class="days">
+            <div
+              style="flex-basis: 0; flex-grow: 1; flex-shrink: 1; padding: 7px"
+              *ngFor="let day of getworkingDay(doctorToshow)"
+            >
+              <div>
+                <div
+                  class="day-title"
+                  [ngClass]="{ empty: day.shifts.length === 0 }"
+                >
+                  {{ day.name }}
+                </div>
+                <div>
+                  <div class="day-data" *ngFor="let shift of day.shifts">
+                    {{ shift }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-       
-    </div>
-    <div class="profile" [ngClass]="{'displayOn':showdone}">
-        <div *ngIf="resposne!=undefined" class="profile-container">
-            <div>Done</div>
-            <div><div>Appoitment ID :</div>5</div>
-            <div><div>User :</div>SQHDQ DHQBDQ</div>
-            <div><div>Doctor :</div>sqddq</div>
-            <div><div>Date :</div>DATE</div>
-            <div><div>Statu</div>Waiting Doctor Approve</div>
-           <button>Done</button>
+        <div>
+          <div
+            class="dts-title"
+            style="padding-left: 15px; padding-bottom: 15px"
+          >
+            Location :
+          </div>
+          <div>
+            <div id="map2" style="width: 100%; height: 300px"></div>
+          </div>
         </div>
-    
+      </div>
+      <div>
+        <button
+          class="dts-bA"
+          (click)="showbook = true; showdoc = false; checktheday()"
+        >
+          Book Appointment
+        </button>
+      </div>
     </div>
+  </div>
+  <div class="profile2" [ngClass]="{ displayOn2: showbook }">
+    <div class="book-container">
+      <div class="maploding" [ngClass]="{ displayon: issendig }">
+        <img width="130px" src="assets/loading (1).gif" alt="" />
+      </div>
+      <div *ngIf="doctorToshow" style="padding: 10px">
+        <div class="doc">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              width: 100%;
+              align-items: center;
+              align-content: center;
+            "
+          >
+            <div>
+              <img
+                src="{{ doctorToshow.profilepic }}"ff
+                style="
+                  width: 60px;
+                  height: 60px;
+                  border-radius: 50%;
+                  margin-right: 15px;
+                "
+                alt=""
+              />
+            </div>
+            <div
+              class="x-shape"
+              (click)="doctorToshow = undefined; showbook = false"
+            >
+              <div class="line"></div>
+              <div class="line"></div>
+            </div>
+          </div>
+          <div class="dts-title">
+            Dr. {{ doctorToshow.name }} {{ doctorToshow.lastname }}
+          </div>
+          <div class="dts-description">{{ doctorToshow.description }}</div>
+        </div>
+        <div class="dts-title">Speciality :</div>
+        <div style="font-weight: 500; font-size: 15px">
+          {{ doctorToshow.specialty.name }}
+        </div>
+
+        <div class="dts-description">
+          {{ doctorToshow.specialty.description }}
+        </div>
+
+        <div class="days">
+          <div
+            style="flex-basis: 0; flex-grow: 1; flex-shrink: 1; padding: 7px"
+            *ngFor="let day of getworkingDay(doctorToshow)"
+          >
+            <div>
+              <div
+                class="day-title"
+                [ngClass]="{ empty: day.shifts.length === 0 }"
+              >
+                {{ day.name }}
+              </div>
+              <div>
+                <div class="day-data" *ngFor="let shift of day.shifts">
+                  {{ shift }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="display: flex; align-items: center; margin-top: 15px">
+            <div class="dts-title" style="margin-right: 10px">
+              Appointment day :
+            </div>
+            <div class="open-cal" (click)="openCalendiar()">
+              {{ selectedDate1 }}
+            </div>
+            <div
+              style="margin-left: 0px; color: red; font-size: 15px"
+              *ngIf="isselecteddayvalid == false"
+            >
+              Please Select Valid Day
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="cal-listener"
+          [ngClass]="{ displayCalON: calendarSelect == true }"
+          (click)="calendarSelect = false"
+        ></div>
+
+        <div
+          class="calendarSelect"
+          [ngClass]="{ displayCalON: calendarSelect == true }"
+        >
+          <div class="custom-calendar">
+            <div class="calendar-header">
+              <button class="prev-button" (click)="goToPreviousMonth()">
+                &lt;
+              </button>
+              <div class="month-year">
+                {{ selectedDate1 | date : "MMMM yyyy" }}
+              </div>
+              <button class="next-button" (click)="goToNextMonth()">
+                &gt;
+              </button>
+            </div>
+            <div class="calendar-grid">
+              <div class="weekday" *ngFor="let weekday of weekdays">
+                {{ weekday }}
+              </div>
+              <ng-container *ngFor="let week of weeks">
+                <div
+                  class="day"
+                  *ngFor="let day of week; let i = index"
+                  [class.disabled]="!isvalidDay(day)"
+                  [class.selected]="isDateSelected(day)"
+                  [ngClass]="{
+                    notvalid: isDateSelected(day) && isselecteddayvalid == false
+                  }"
+                  (click)="selectDate(day)"
+                >
+                  {{ day.getDate() }}
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+
+        <div
+          style="display: flex; align-items: center; margin-top: 15px"
+          *ngIf="isselecteddayvalid == true"
+        >
+          <div class="dts-title" style="margin-right: 10px">Select hour :</div>
+          <div>
+            <select
+              class="open-cal2"
+              #mySelect
+              [class.open]="isSelectOpen"
+              (change)="onSelectChange()"
+              name=""
+              id=""
+              [formControl]="hourcontroller"
+            >
+              <option *ngFor="let hour of gethoures()" [value]="hour">
+                {{ hour }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div style="margin-left: 0px; color: red; font-size: 15px">
+          {{ errorofhour }}
+        </div>
+        <div
+          style="display: flex; margin-top: 15px"
+          *ngIf="isselecteddayvalid == true"
+        >
+          <div
+            class="dts-title"
+            style="margin-right: 10px; display: block; min-width: 126px"
+          >
+            Notes to Doctor :
+          </div>
+          <div style="width: 100%">
+            <textarea
+              name=""
+              id=""
+              maxlength="255"
+              [formControl]="noteController"
+              class="textarea-tds"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      <div><button class="dts-bA" (click)="send()">Submit</button></div>
+    </div>
+  </div>
+  <div class="profile" [ngClass]="{ displayOn: showdone }">
+    <div *ngIf="resposne != undefined" class="profile-container">
+      <div>Done</div>
+      <div>
+        <div>Appoitment ID :</div>
+        5
+      </div>
+      <div>
+        <div>User :</div>
+        SQHDQ DHQBDQ
+      </div>
+      <div>
+        <div>Doctor :</div>
+        sqddq
+      </div>
+      <div>
+        <div>Date :</div>
+        DATE
+      </div>
+      <div>
+        <div>Statu</div>
+        Waiting Doctor Approve
+      </div>
+      <button>Done</button>
+    </div>
+  </div>
 </div>

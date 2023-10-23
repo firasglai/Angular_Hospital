@@ -2,14 +2,16 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import axios from 'axios';
 import { AutocompleteService } from 'src/app/services/autocomplete.service';
-import { Doctor, DoctorServicesService, specialty } from 'src/app/services/doctor-services.service';
+import { Doctor, DoctorServicesService } from 'src/app/services/doctor-services.service';
 import { patientService, respage } from 'src/app/services/patientService';
 import * as L from 'leaflet';
 import { patientProfile } from 'src/app/models/user-profile';
 import { DatePipe } from '@angular/common';
 import { Subscription, take } from 'rxjs';
 import { Appoitment } from 'src/app/models/user.model';
-
+import { SpecialtyModel } from 'src/app/models/specialty.model';
+import { SpecialtyService } from 'src/app/services/specialty/specialty.service';
+import { Doctor as doc } from 'src/app/models/doctor';
 interface citie {
   id: String,
   gov: string,
@@ -55,8 +57,8 @@ export class SearchDoctorComponent implements OnInit {
   'Saturday'
   ];
   
-  selecetedspeciality:specialty|undefined
-  private specialitise:specialty[]=[]
+  selecetedspeciality:SpecialtyModel|undefined
+  private specialitise:SpecialtyModel[]=[]
   location!:any
   isDescriptionOn=false
   private map!: L.Map;
@@ -73,6 +75,7 @@ issendig=false
   totalpages=0
   pagecounte=0
   doctorArray:Doctor[]=[]
+  doctor:doc [] = [];
   circleSize:number=20000
   @Input() selectedDate!: Date;
   selectedDate1: string;
@@ -88,7 +91,14 @@ issendig=false
   resposne:done | undefined
   usersub:Subscription
   errorofhour=""
-  constructor(private datePipe: DatePipe,private autocompleteService: AutocompleteService,private docservices:DoctorServicesService,private patser:patientService,private elementRef: ElementRef) {
+  constructor(
+    private datePipe: DatePipe,
+    private autocompleteService: AutocompleteService,
+    private docservices:DoctorServicesService,
+    private patser:patientService,
+    private elementRef: ElementRef,
+    private specialtyservice:SpecialtyService
+    ) {
     this.currentMonth = new Date();
     this. selectedDate1=new Date().toDateString()
     this.searchControll.valueChanges.subscribe((value: string) => {
@@ -548,6 +558,16 @@ this.circle.setRadius(this.circleSize)
                //search by date location and speciality
               }
             }
+            if (this.selecetedspeciality) {
+              const specialityName = this.selecetedspeciality.name; // Assuming name property contains the speciality name
+              this.specialtyservice.getDoctorsBySpeciality(specialityName).subscribe(
+                (doctors) => {
+                // Process the list of doctors received from the API
+                console.log(doctors);
+                // Update your component's state with the list of doctors
+                this.doctor = doctors;
+              });
+            }
      
  
       //this.patser.searchbydate(array).subscribe((k)=>{})
@@ -557,10 +577,9 @@ this.circle.setRadius(this.circleSize)
     
   }
   loadspecialties(){
-    this.docservices.getallspecialities().forEach((k)=>{
-      let arr= k as specialty[]
+    this.specialtyservice.getSpecialties().forEach((k)=>{
+      let arr= k as SpecialtyModel[]
       this.specialitise=arr
-    
     })
       }
   searchSpecialties(): void {

@@ -4,8 +4,9 @@ import * as L from 'leaflet';
 import { control, DomUtil } from 'leaflet';
 import { geocode } from 'opencage-api-client';
 import { User } from 'src/app/models/user.model';
-import { Doctor, DoctorServicesService, specialty } from 'src/app/services/doctor-services.service';
+import { Doctor, DoctorServicesService} from 'src/app/services/doctor-services.service';
 import { SpringAuthService } from 'src/app/services/authentication/spring-auth.service';
+import { SpecialtyModel } from 'src/app/models/specialty.model';
 interface Day {
   name: string,
   selected: boolean
@@ -28,13 +29,13 @@ export class FinishRgisterDoctorComponent implements OnInit {
   private searchControl!: L.Control;
   private marker!: L.Marker;
   private resultsContainer!: HTMLDivElement;
-  private specialitise: specialty[] = []
+  private specialitise: SpecialtyModel[] = []
   counter=1
   searchControll: FormControl = new FormControl();
   searchKeyword: string = '';
   searchResults: any[] = [];
   isDescriptionOn = false
-  selecetedspeciality: specialty | undefined
+  selecetedspeciality: SpecialtyModel | undefined
   nameControll: FormControl = new FormControl();
   lastnameControll: FormControl = new FormControl();
   descriptionControll: FormControl = new FormControl();
@@ -318,7 +319,7 @@ export class FinishRgisterDoctorComponent implements OnInit {
   }
   loadspecialties() {
     this.docservices.getallspecialities().forEach((k) => {
-      let arr = k as specialty[]
+      let arr = k as SpecialtyModel[]
       this.specialitise = arr
 
     })
@@ -473,7 +474,9 @@ export class FinishRgisterDoctorComponent implements OnInit {
       {
         id: this.selecetedspeciality?.id!,
         name: this.selecetedspeciality?.name!,
-        description: this.selecetedspeciality?.description!
+        description: this.selecetedspeciality?.description!,
+        image: this.selecetedspeciality?.image!,
+        
       }
       ,
       phone: this.phoneControll.value,

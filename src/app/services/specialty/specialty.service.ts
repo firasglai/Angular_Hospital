@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SpecialtyModel } from '../../models/specialty.model';
 import { User } from '../../models/user.model';
+import { Doctor } from 'src/app/models/doctor';
 @Injectable({
   providedIn: 'root'
 })
@@ -31,8 +32,8 @@ export class SpecialtyService {
     return this.http.get<SpecialtyModel>(`${this.apiUrl}/${id}`);
   }
   
-  getDoctorsBySpeciality(specialityName: string): Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiUrl}/${specialityName}/doctors`);
+  getDoctorsBySpeciality(specialityName: string): Observable<Doctor[]> {
+    return this.http.get<Doctor[]>(`${this.apiUrl}/${specialityName}/doctors`);
   }
   
   

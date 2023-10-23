@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SpecialtyService } from 'src/app/services/specialty/specialty.service';
 import { SpecialtyModel } from 'src/app/models/specialty.model';
 import { User } from 'src/app/models/user.model';
-import { specialty } from './../../../services/doctor-services.service';
+import { Doctor } from 'src/app/models/doctor';
+
 @Component({
   selector: 'app-services',
   templateUrl: './services.component.html',
@@ -11,7 +12,7 @@ import { specialty } from './../../../services/doctor-services.service';
 export class ServicesComponent implements OnInit {
   isOn=false
   specialties: SpecialtyModel[] = []; // Define an array to hold specialties
-  doctors: User[] = []; // Define an array to hold doctors
+  doctors: Doctor[] = []; // Define an array to hold doctors
 
   constructor(private specialtyService: SpecialtyService) { }
   ngOnInit(): void {

@@ -17,7 +17,7 @@ import { MatFormFieldAppearance } from '@angular/material/form-field';
 import { User, session } from 'src/app/models/user.model';
 import { SpringAuthService } from 'src/app/services/authentication/spring-auth.service';
 import { AES } from 'crypto-js';
-import { specialty } from 'src/app/services/doctor-services.service';
+
 import { SpecialtyService } from 'src/app/services/specialty/specialty.service';
 import { SpecialtyModel } from 'src/app/models/specialty.model';
 

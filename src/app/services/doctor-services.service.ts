@@ -4,11 +4,8 @@ import { SpringAuthService } from './authentication/spring-auth.service';
 import { patientProfile } from '../models/user-profile';
 import { Observable, take } from 'rxjs';
 import { User } from '../models/user.model';
-export interface specialty {
-  id: string;
-  name: string;
-  description: string;
-}
+import { SpecialtyModel } from '../models/specialty.model';
+
 export interface Day {
   name: string;
   selected: boolean;
@@ -29,7 +26,7 @@ export interface Doctor {
   profilepic: string;
   lat: number;
   lon: number;
-  specialty: specialty;
+  specialty: SpecialtyModel;
   patients: patientProfile[];
   phone: string;
   shiftHours: ShiftHours[];

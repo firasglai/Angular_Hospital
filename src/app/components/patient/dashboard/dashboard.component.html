@@ -41,30 +41,30 @@
           <tr>
             <td class="patient-column"><img src='assets/image/d1.png' class="Patient-profile"> <!-- Displays the profile picture of the patient -->
               <div style="padding-left: 15px;">
-                <div class="patient-column-name">{{P["doctor"]["fullName"]}}</div> <!-- Displays the name and title of the patient -->
-                <div class="patient-column-id">{{P["doctor"]["id"]}}</div> <!-- Displays the ID of the patient -->
+                <div class="patient-column-name">{{P?.doctor?.fullName || 'Name not available'}}</div> <!-- Displays the name and title of the patient -->
+                <div class="patient-column-id">{{P?.doctor?.id || 'ID not available'}}</div> <!-- Displays the ID of the patient -->
               </div>
             </td>
             <td class="appointment-column">
-              {{P["doctor"]["specialty"]["name"]}} 
+              {{P?.doctor?.specialty?.name || 'Specialty not available'}}<!-- Displays the speciality of the patient -->
             </td>
             <td class="date-column">
-              {{P["date"]}} <!-- Displays the payment date -->
+              {{P?.date || 'Date not available'}} <!-- Displays the payment date -->
             </td>
             <td class="total-column">
-              <div class="total-column-amount">{{P["reason"]}}</div> <!-- Displays the payment amount -->
+              <div class="total-column-amount">{{P?.reason || 'Reason not available'}}</div> <!-- Displays the payment amount -->
 
             </td>
             <td class="statu-column {{P['statusAPT']}}">
               <div class="statu-column  {{P['statusAPT']}}">
-                {{P["statusAPT"]}}
+                {{P?.statusAPT || 'Status not available'}}
               </div>
             </td>
             <td class="action-column  custom-action-column">
               <div class="action-icons">
-                <i class="fas fa-eye" ></i> <!-- Displays an eye icon for viewing payment details and triggers a function on click -->
-                <i class="fas fa-print" ></i> <!-- Displays a print icon for printing payment details and triggers a function on click -->
-                <i class="fas fa-trash"></i> <!-- Displays a trash icon for deleting a payment and triggers a function on click -->
+                <i class="fas fa-eye" ></i> <!--TO ADD APPOINTMENT DETAILS PAGE-->
+                <i class="fas fa-print" ></i> <!-- PRINT DETAILS OF APPOINTMENT -->
+                <i class="fas fa-trash"></i> <!-- DELETE APPOINTMENT -->
               </div>
             </td>
           </tr>
