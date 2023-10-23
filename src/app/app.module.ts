@@ -17,7 +17,6 @@ import { RegisterComponent } from './components/main/register/register.component
 import { LoginComponent } from './components/main/login/login.component';
 import { HeaderComponent } from './components/main/header/header.component';
 import { BookAppoitmentComponent } from './components/main/book-appoitment/book-appoitment.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LottieModule } from 'ngx-lottie';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ChatComponentComponent } from './components/main/chat-component/chat-component.component';
@@ -75,6 +74,12 @@ import { StepperComponent } from './components/patient/stepper/stepper.component
 import { StoreModule } from '@ngrx/store';
 import { userReducer } from './store/reducers/user-reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+
+//? MDB IMPORTS
+
 //import { EffectsModule } from '@ngrx/effects';
 //import { UserEffects } from './store/effects/user-effects';
 export function playerFactory() {
@@ -136,7 +141,6 @@ export function playerFactory() {
     AppRoutingModule,
     FontAwesomeModule,
     FontAwesomeModule,
-    BrowserAnimationsModule,
     LottieModule.forRoot({ player: playerFactory }),
     NgChartsModule,
     MatAutocompleteModule,
@@ -155,6 +159,8 @@ export function playerFactory() {
     provideStorage(() => getStorage()),
     provideFirestore(() => getFirestore()),
     MatStepperModule,
+    //? MDB IMPORTS
+
 
   ],
   providers: [
