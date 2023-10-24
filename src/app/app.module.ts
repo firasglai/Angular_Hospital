@@ -75,7 +75,8 @@ import { StoreModule } from '@ngrx/store';
 import { userReducer } from './store/reducers/user-reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 
 //? MDB IMPORTS
@@ -127,38 +128,36 @@ export function playerFactory() {
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
     }),
-    MatMenuModule,
     BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatInputModule,
     HttpClientModule,
-    BrowserModule,
     FormsModule,
-    MatRadioModule,
     AppRoutingModule,
     FontAwesomeModule,
-    FontAwesomeModule,
     LottieModule.forRoot({ player: playerFactory }),
-    NgChartsModule,
-    MatAutocompleteModule,
-    MatInputModule,
-    MatDividerModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatMenuModule,
     MatFormFieldModule,
     MatInputModule,
+    MatRadioModule,
+    NgChartsModule,
+    MatAutocompleteModule,
+    MatDividerModule,
+    MatFormFieldModule,
     ReactiveFormsModule,
     AppRoutingModule,
     MatListModule,
     MatSelectModule,
+    MatStepperModule,
     MatIconModule,
+    MatCardModule,
+    MatButtonModule,
     ToastrModule.forRoot(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideStorage(() => getStorage()),
     provideFirestore(() => getFirestore()),
-    MatStepperModule,
+    
     //? MDB IMPORTS
 
 
