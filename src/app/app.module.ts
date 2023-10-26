@@ -25,12 +25,10 @@ import { DashboardComponent } from './components/doctor/dashboard/dashboard.comp
 import { DashboardComponent as DashboardComponentp } from './components/patient/dashboard/dashboard.component';
 import { AccountComponent } from './components/doctor/account/account.component';
 import { InboxComponent } from './components/doctor/inbox/inbox.component';
-
 import { AccountComponent as AccountComponentp } from './components/patient/account/account.component';
 import { InboxComponent as InboxComponentp } from './components/patient/inbox/inbox.component';
 import { TransactionComponent as TransactionComponentp } from './components/patient/transaction/transaction.component';
 import { PatientlistComponent as PatientlistComponentp } from './components/patient/patientlist/patientlist.component';
-
 import { MainComponent } from './components/main/main.component';
 import { DoctorComponent } from './components/doctor/doctor.component';
 import { TransactionComponent } from './components/doctor/transaction/transaction.component';
@@ -82,7 +80,9 @@ import { NavbarComponent } from './components/global/navbar/navbar.component';
 import { ProfilePageComponent } from './components/global/profile-page/profile-page.component';
 import { PatientSidebarComponent } from './components/global/patient-sidebar/patient-sidebar.component';
 import { DoctorSidebarComponent } from './components/global/doctor-sidebar/doctor-sidebar.component'; 
-
+import {MatDialogModule} from '@angular/material/dialog';
+import { DoctorProfileComponent } from './components/patient/modals/doctor-profile/doctor-profile.component';
+import { AppointmentDetailsComponent } from './components/patient/modals/appointment-details/appointment-details.component';
 //? MDB IMPORTS
 
 //import { EffectsModule } from '@ngrx/effects';
@@ -130,6 +130,8 @@ export function playerFactory() {
     ProfilePageComponent,
     PatientSidebarComponent,
     DoctorSidebarComponent,
+    DoctorProfileComponent,
+    AppointmentDetailsComponent,
   ],
   imports: [
     StoreModule.forRoot({currentUser : userReducer}, {}),
@@ -160,6 +162,7 @@ export function playerFactory() {
     MatIconModule,
     MatCardModule,
     MatButtonModule,
+    MatDialogModule,
     ToastrModule.forRoot(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),

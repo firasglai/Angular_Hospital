@@ -224,7 +224,7 @@
         <input
           type="submit"
           value="Search"
-          (click)="searchDoctors()"
+          (click)="searchDoctorsBySpeciality()"
           class="sub"
         />
         <mat-icon>search</mat-icon>
@@ -238,7 +238,7 @@
         <div
           class="col-4"
           style="padding-top: 10px"
-          *ngFor="let d of doctorArray"
+          *ngFor="let d of doctors"
         >
           <div
             style="
@@ -250,33 +250,32 @@
             <div class="doc">
               <div style="display: flex; align-items: center">
                 <img
-                  src="{{ d.profilepic }}"
+                  src="assets/images/male.jpg"
                   style="
                     width: 60px;
                     height: 60px;
                     border-radius: 50%;
                     margin-right: 15px;
                   "
-                  alt=""
+                  alt="Doctor Profile Image"
                 />
-                <div class="dts-title">Dr. {{ d.name }} {{ d.lastname }}</div>
+                <div class="dts-title">Dr. {{d.fullName}}</div>
               </div>
-              <div class="dts-description">{{ d.description }}</div>
+              <div class="dts-description"> address: {{ d.address }}</div>
             </div>
             <div>
               <div class="dts-title">Speciality</div>
-              {{ d.specialty.name }}
+              {{d?.specialty?.name || 'Specialty not available'}}
             </div>
             <div style="display: flex; flex-direction: column">
               <button
                 class="viewProfile"
-                (click)="doctorToshow = d; showdoc = true; initmap2()"
+                (click)="openDialog(d ,'700ms', '700ms')"
               >
                 View profile
               </button>
               <button
                 class="bookAppoitment"
-                (click)="doctorToshow = d; showbook = true; checktheday()"
               >
                 Book Appointment
               </button>
@@ -287,137 +286,7 @@
     </div>
   </div>
   <!--PROFILE-->
-  <div class="profile" [ngClass]="{ displayOn: showdoc }">
-    <div class="profile-container">
-      <div>
-        <div *ngIf="doctorToshow" style="padding: 10px">
-          <div class="doc">
-            <div
-              style="
-                display: flex;
-                justify-content: space-between;
-                width: 100%;
-                align-items: center;
-                align-content: center;
-              "
-            >
-              <div style="display: flex; align-items: center">
-                <img
-                  src="{{ doctorToshow.profilepic }}"
-                  style="
-                    width: 60px;
-                    height: 60px;
-                    border-radius: 50%;
-                    margin-right: 15px;
-                  "
-                  alt=""
-                />
-                <div style="cursor: pointer">
-                  <div
-                    (click)="subscribetodoctor()"
-                    class="substar"
-                    [ngClass]="{ disabled: isubbed() == true }"
-                  >
-                    <svg
-                      width="20"
-                      height="19"
-                      viewBox="0 0 20 19"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        d="M9.74992 1.5C9.65892 1.5 9.43492 1.525 9.31592 1.763L7.48992 5.414C7.20092 5.991 6.64392 6.392 5.99992 6.484L1.91192 7.073C1.64192 7.112 1.54992 7.312 1.52192 7.396C1.49692 7.477 1.45692 7.683 1.64292 7.861L4.59892 10.701C5.06992 11.154 5.28392 11.807 5.17192 12.446L4.47592 16.456C4.43292 16.707 4.58992 16.853 4.65992 16.903C4.73392 16.959 4.93192 17.07 5.17692 16.942L8.83192 15.047C9.40792 14.75 10.0939 14.75 10.6679 15.047L14.3219 16.941C14.5679 17.068 14.7659 16.957 14.8409 16.903C14.9109 16.853 15.0679 16.707 15.0249 16.456L14.3269 12.446C14.2149 11.807 14.4289 11.154 14.8999 10.701L17.8559 7.861C18.0429 7.683 18.0029 7.476 17.9769 7.396C17.9499 7.312 17.8579 7.112 17.5879 7.073L13.4999 6.484C12.8569 6.392 12.2999 5.991 12.0109 5.413L10.1829 1.763C10.0649 1.525 9.84092 1.5 9.74992 1.5M4.94692 18.5C4.53392 18.5 4.12392 18.37 3.77292 18.114C3.16692 17.67 2.86992 16.937 2.99892 16.199L3.69492 12.189C3.72092 12.04 3.66992 11.889 3.55992 11.783L0.603916 8.943C0.0599161 8.422 -0.135084 7.652 0.0949161 6.937C0.326916 6.214 0.940916 5.697 1.69792 5.589L5.78592 5C5.94392 4.978 6.07992 4.881 6.14792 4.743L7.97492 1.091C8.31192 0.418 8.99192 0 9.74992 0V0C10.5079 0 11.1879 0.418 11.5249 1.091L13.3529 4.742C13.4219 4.881 13.5569 4.978 13.7139 5L17.8019 5.589C18.5589 5.697 19.1729 6.214 19.4049 6.937C19.6349 7.652 19.4389 8.422 18.8949 8.943L15.9389 11.783C15.8289 11.889 15.7789 12.04 15.8049 12.188L16.5019 16.199C16.6299 16.938 16.3329 17.671 15.7259 18.114C15.1109 18.565 14.3099 18.626 13.6309 18.272L9.97792 16.379C9.83492 16.305 9.66392 16.305 9.52092 16.379L5.86792 18.273C5.57592 18.425 5.26092 18.5 4.94692 18.5"
-                        fill="#192252"
-                      />
-                    </svg>
-                  </div>
-                  <div
-                    (click)="unsubscribetodoctor()"
-                    class="substar"
-                    [ngClass]="{ disabled: isubbed() == false }"
-                  >
-                    <svg
-                      width="21"
-                      height="20"
-                      viewBox="0 0 21 20"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M15.9185 12.3201C15.6595 12.5711 15.5405 12.9341 15.5995 13.2901L16.4885 18.2101C16.5635 18.6271 16.3875 19.0491 16.0385 19.2901C15.6965 19.5401 15.2415 19.5701 14.8685 19.3701L10.4395 17.0601C10.2855 16.9781 10.1145 16.9341 9.93951 16.9291H9.66851C9.57451 16.9431 9.48251 16.9731 9.39851 17.0191L4.96851 19.3401C4.74951 19.4501 4.50151 19.4891 4.25851 19.4501C3.66651 19.3381 3.27151 18.7741 3.36851 18.1791L4.25851 13.2591C4.31751 12.9001 4.19851 12.5351 3.93951 12.2801L0.32851 8.78012C0.0265096 8.48712 -0.0784904 8.04712 0.0595096 7.65012C0.19351 7.25412 0.53551 6.96512 0.94851 6.90012L5.91851 6.17912C6.29651 6.14012 6.62851 5.91012 6.79851 5.57012L8.98851 1.08012C9.04051 0.980122 9.10751 0.888122 9.18851 0.810122L9.27851 0.740122C9.32551 0.688122 9.37951 0.645122 9.43951 0.610122L9.54851 0.570122L9.71851 0.500122H10.1395C10.5155 0.539122 10.8465 0.764122 11.0195 1.10012L13.2385 5.57012C13.3985 5.89712 13.7095 6.12412 14.0685 6.17912L19.0385 6.90012C19.4585 6.96012 19.8095 7.25012 19.9485 7.65012C20.0795 8.05112 19.9665 8.49112 19.6585 8.78012L15.9185 12.3201Z"
-                        fill="#192252"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-
-              <div
-                class="x-shape"
-                (click)="doctorToshow = undefined; showdoc = false"
-              >
-                <div class="line"></div>
-                <div class="line"></div>
-              </div>
-            </div>
-            <div class="dts-title">
-              Dr. {{ doctorToshow.name }} {{ doctorToshow.lastname }}
-            </div>
-            <div class="dts-description">{{ doctorToshow.description }}</div>
-          </div>
-          <div class="dts-title">Speciality :</div>
-          <div style="font-weight: 500; font-size: 15px">
-            {{ doctorToshow.specialty.name }}
-          </div>
-          <div class="dts-description">
-            {{ doctorToshow.specialty.description }}
-          </div>
-          <div class="dts-title">Working Days :</div>
-          <div class="days">
-            <div
-              style="flex-basis: 0; flex-grow: 1; flex-shrink: 1; padding: 7px"
-              *ngFor="let day of getworkingDay(doctorToshow)"
-            >
-              <div>
-                <div
-                  class="day-title"
-                  [ngClass]="{ empty: day.shifts.length === 0 }"
-                >
-                  {{ day.name }}
-                </div>
-                <div>
-                  <div class="day-data" *ngFor="let shift of day.shifts">
-                    {{ shift }}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div
-            class="dts-title"
-            style="padding-left: 15px; padding-bottom: 15px"
-          >
-            Location :
-          </div>
-          <div>
-            <div id="map2" style="width: 100%; height: 300px"></div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <button
-          class="dts-bA"
-          (click)="showbook = true; showdoc = false; checktheday()"
-        >
-          Book Appointment
-        </button>
-      </div>
-    </div>
-  </div>
+  
   <!-- Book Appointment -->
   <div class="profile2" [ngClass]="{ displayOn2: showbook }">
     <div class="book-container">

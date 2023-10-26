@@ -15,6 +15,9 @@ import { Appoitment } from 'src/app/models/user.model';
 import { SpecialtyModel } from 'src/app/models/specialty.model';
 import { SpecialtyService } from 'src/app/services/specialty/specialty.service';
 import { Doctor as doc } from 'src/app/models/doctor';
+import { DoctorService } from 'src/app/services/doctor/doctor.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DoctorProfileComponent } from '../modals/doctor-profile/doctor-profile.component';
 interface citie {
   id: String;
   gov: string;
@@ -78,7 +81,7 @@ export class SearchDoctorComponent implements OnInit {
   totalpages = 0;
   pagecounte = 0;
   doctorArray: Doctor[] = [];
-  doctor: doc[] = [];
+  doctors: doc[] = [];
   circleSize: number = 20000;
   @Input() selectedDate!: Date;
   selectedDate1: string;
@@ -94,13 +97,16 @@ export class SearchDoctorComponent implements OnInit {
   resposne: done | undefined;
   usersub: Subscription;
   errorofhour = '';
+
   constructor(
     private datePipe: DatePipe,
     private autocompleteService: AutocompleteService,
     private docservices: DoctorServicesService,
     private patient: patientService,
     private elementRef: ElementRef,
-    private specialtyservice: SpecialtyService
+    private specialtyservice: SpecialtyService,
+    private doctorService: DoctorService,
+    public dialog: MatDialog
   ) {
     this.currentMonth = new Date();
     this.selectedDate1 = new Date().toDateString();
@@ -141,6 +147,85 @@ export class SearchDoctorComponent implements OnInit {
     });
     this.selectedDate = new Date();
   }
+  //? LOAD SPECIALITY API CALL
+   loadspecialties() {
+    this.specialtyservice.getSpecialties().forEach((k) => {
+      let arr = k as SpecialtyModel[];
+      this.specialties = arr;
+    });
+  }
+  //? SEARCH SPEC BY KEYWORD CALL
+  calculateMatchPercentage(source: string, keyword: string): number {
+    const sourceWords = source.toLowerCase().split(' ');
+    const keywordWords = keyword.toLowerCase().split(' ');
+
+    let matchCount = 0;
+    for (const word of sourceWords) {
+      for (const keyword of keywordWords) {
+        if (word.includes(keyword)) {
+          matchCount++;
+          break;
+        }
+      }
+    }
+
+    const totalWords = sourceWords.length;
+    return (matchCount / totalWords) * 100;
+  }
+  searchSpecialties(): void {
+    this.searchResults = this.specialties.filter((specialty) => {
+      const specialtyName = specialty.name.toLowerCase();
+      const specialtyDescription = specialty.description.toLowerCase();
+      const keyword = this.searchKeyword.toLowerCase();
+
+      const nameMatchPercentage = this.calculateMatchPercentage(
+        specialtyName,
+        keyword
+      );
+      if (nameMatchPercentage >= 40) {
+        return true;
+      }
+      return specialtyDescription.includes(keyword);
+    });
+  }
+
+
+  //? SEARCH DOCTORS BY SPECIALTY
+  searchDoctorsBySpeciality(){
+    if (this.selectedspeciality) {
+      const specialityName = this.selectedspeciality.name; 
+      console.log("SpecialtyName : "+ specialityName)
+      this.specialtyservice
+        .getDoctorsBySpeciality(specialityName)
+        .subscribe((doctors) => {
+          console.log("THE DOCTORS HERE :"+ doctors);
+          this.doctors = doctors;
+        });
+    }
+  }
+
+  //? VIEW DOCTOR PROFILE DIALOG
+
+  openDialog(doctor:doc,enterAnimationDuration: string, exitAnimationDuration: string): void {
+    const dialogRef = this.dialog.open(DoctorProfileComponent, {
+      data: {
+        doctorName: doctor.fullName,
+        doctorAddress: doctor.address,
+        doctorEmail: doctor.email,
+        doctorPhone: doctor.phone,
+        doctorBirthDate: doctor.dateOfBirth
+      },
+      height:'500px',
+      width:'500px',
+      enterAnimationDuration,
+      exitAnimationDuration
+
+    });
+  }
+
+  
+
+  //!DEPRECATED
   unsubscribetodoctor() {
     this.patient
       .unsubscribetodoctor(this.user.id, this.doctorToshow!.id)
@@ -157,6 +242,7 @@ export class SearchDoctorComponent implements OnInit {
         }
       });
   }
+  //!DEPRECATED
   subscribetodoctor() {
     this.patient
       .subscribetodoctor(this.user.id, this.doctorToshow!.id)
@@ -174,6 +260,7 @@ export class SearchDoctorComponent implements OnInit {
         }
       });
   }
+  //!DEPRECATED
   isubbed() {
     let resulta = false;
     for (let p of this.doctorToshow?.patients!) {
@@ -183,6 +270,7 @@ export class SearchDoctorComponent implements OnInit {
     }
     return resulta;
   }
+  //!DEPRECATED
   send() {
     if (this.isselecteddayvalid) {
       console.log(!this.patientHaveAppointmentByDate());
@@ -241,6 +329,7 @@ export class SearchDoctorComponent implements OnInit {
       }
     }
   }
+   //!DEPRECATED
   patientHaveAppointmentByDate() {
     const selectedDate = this.selectedDate;
     selectedDate.setHours(parseInt(this.hourcontroller.value!), 0, 0);
@@ -263,7 +352,7 @@ export class SearchDoctorComponent implements OnInit {
 
     return res;
   }
-
+ //!DEPRECATED
   gethoures() {
     let shift: string[] = [];
     for (let X of this.doctorToshow?.shiftHours!) {
@@ -287,6 +376,7 @@ export class SearchDoctorComponent implements OnInit {
     }
     return hours;
   }
+   //!DEPRECATED
   isvalidDay(day: Date) {
     let result = false;
     let dayy = this.dayss[day.getDay()];
@@ -300,24 +390,27 @@ export class SearchDoctorComponent implements OnInit {
 
     return result;
   }
-
+ //!DEPRECATED
   openCalendiar() {
     this.calendarSelect = true;
     this.generateCalendar();
   }
+   //!DEPRECATED
   closeCalendiar() {
     this.calendarSelect = false;
   }
+   //!DEPRECATED
   goToPreviousMonth() {
     this.currentMonth.setMonth(this.currentMonth.getMonth() - 1);
     this.generateCalendar();
   }
-
+ //!DEPRECATED
   goToNextMonth() {
     this.currentMonth.setMonth(this.currentMonth.getMonth() + 1);
 
     this.generateCalendar();
   }
+   //!DEPRECATED
   checktheday() {
     this.errorofhour = '';
 
@@ -327,6 +420,7 @@ export class SearchDoctorComponent implements OnInit {
       this.isselecteddayvalid = false;
     }
   }
+   //!DEPRECATED
   generateCalendar() {
     const firstDayOfMonth = new Date(
       this.currentMonth.getFullYear(),
@@ -355,7 +449,6 @@ export class SearchDoctorComponent implements OnInit {
     this.weeks = [];
 
     let currentDay = 1;
-
     for (let i = 0; i < totalWeeks; i++) {
       const week: Date[] = [];
       for (let j = 0; j < 7; j++) {
@@ -391,18 +484,18 @@ export class SearchDoctorComponent implements OnInit {
       this.isselecteddayvalid = false;
     }
   }
-
+ //!DEPRECATED
   isCurrentMonth(date: Date): boolean {
     return date.getMonth() === this.currentMonth.getMonth();
   }
-
+ //!DEPRECATED
   isDateSelected(date: Date): boolean {
     if (!this.selectedDate) {
       return false;
     }
     return date.toDateString() === this.selectedDate.toDateString();
   }
-
+ //!DEPRECATED
   selectDate(date: Date) {
     this.selectedDate1 = date.toDateString();
     if (this.isvalidDay(date)) {
@@ -417,6 +510,7 @@ export class SearchDoctorComponent implements OnInit {
       this.generateCalendar();
     }
   }
+   //!DEPRECATED
   convertDateString1(dateString: string): string {
     const dateParts = dateString.split('/');
     const year = dateParts[0];
@@ -425,6 +519,7 @@ export class SearchDoctorComponent implements OnInit {
 
     return `${month} ${day}`;
   }
+   //!DEPRECATED
   convertDateString(dateString: string): string {
     const dateParts = dateString.split('/');
     const year = dateParts[0];
@@ -433,7 +528,7 @@ export class SearchDoctorComponent implements OnInit {
 
     return `${month} ${day} ${year}`;
   }
-
+ //!DEPRECATED
   getMonthName(monthNumber: number): string {
     const months = [
       'Jan',
@@ -452,6 +547,7 @@ export class SearchDoctorComponent implements OnInit {
 
     return months[monthNumber - 1];
   }
+   //!DEPRECATED
   getworkingDay(d: Doctor) {
     let workingday: workday[] = [];
     for (let i = 0; i < this.dayss.length; i++) {
@@ -481,6 +577,7 @@ export class SearchDoctorComponent implements OnInit {
     }
     return workingday;
   }
+   //!DEPRECATED
   toggleShifts(day: string, id: string): void {
     const elementId = `day-${day}-${id}`;
     const element = document.getElementById(elementId);
@@ -493,16 +590,18 @@ export class SearchDoctorComponent implements OnInit {
       }
     }
   }
-
+ //!DEPRECATED
   setmarker(cit: citie) {
     this.maploading = true;
     this.getCoordinates(cit.zip);
     this.searchTerm.setValue(`${cit.gov}, ${cit.deleg}, ${cit.cite}`);
   }
+   //!DEPRECATED
   setsize(e: any) {
     this.circleSize = 1000 * parseInt(e.target.value);
     if (this.circle) this.circle.setRadius(this.circleSize);
   }
+   //!DEPRECATED
   private initializeMap(): void {
     this.map = L.map(
       this.elementRef.nativeElement.querySelector('#map')
@@ -513,6 +612,7 @@ export class SearchDoctorComponent implements OnInit {
 
     this.map.zoomControl.setPosition('topright');
   }
+   //!DEPRECATED
   private initializeMapClickEvent(): void {
     this.map.on('click', (event: L.LeafletMouseEvent) => {
       const { lat, lng } = event.latlng;
@@ -542,26 +642,15 @@ export class SearchDoctorComponent implements OnInit {
       this.saveLocation(lat, lng);
     });
   }
-
+ //!DEPRECATED
   private saveLocation(latitude: number, longitude: number): void {
     // Perform logic to save the location here
 
     this.location = latitude + ',' + longitude;
   }
 
-  searchDoctorsBySpeciality(){
-    if (this.selectedspeciality) {
-      const specialityName = this.selectedspeciality.name; 
-      console.log("SpecialtyName : "+ specialityName)
-      this.specialtyservice
-        .getDoctorsBySpeciality(specialityName)
-        .subscribe((doctors) => {
-          console.log("THE DOCTORS HERE :"+ doctors);
-          this.doctor = doctors;
-        });
-    }
-  }
-
+  
+ //!DEPRECATED
   searchDoctors() {
     const millisecondsPerDay = 24 * 60 * 60 * 1000; // Number of milliseconds in a day
     const start = new Date(this.currentDateControl.value);
@@ -623,53 +712,15 @@ export class SearchDoctorComponent implements OnInit {
           .getDoctorsBySpeciality(specialityName)
           .subscribe((doctors) => {
             console.log("THE DOCTORS HERE :"+ doctors);
-            this.doctor = doctors;
+            this.doctors = doctors;
           });
       }
 
       //this.patient.searchbydate(array).subscribe((k)=>{})
     }
   }
-  /*GET ALL SPECIALITIES */
-  loadspecialties() {
-    this.specialtyservice.getSpecialties().forEach((k) => {
-      let arr = k as SpecialtyModel[];
-      this.specialties = arr;
-    });
-  }
-  searchSpecialties(): void {
-    this.searchResults = this.specialties.filter((specialty) => {
-      const specialtyName = specialty.name.toLowerCase();
-      const specialtyDescription = specialty.description.toLowerCase();
-      const keyword = this.searchKeyword.toLowerCase();
+ 
 
-      const nameMatchPercentage = this.calculateMatchPercentage(
-        specialtyName,
-        keyword
-      );
-      if (nameMatchPercentage >= 40) {
-        return true;
-      }
-      return specialtyDescription.includes(keyword);
-    });
-  }
-  calculateMatchPercentage(source: string, keyword: string): number {
-    const sourceWords = source.toLowerCase().split(' ');
-    const keywordWords = keyword.toLowerCase().split(' ');
-
-    let matchCount = 0;
-    for (const word of sourceWords) {
-      for (const keyword of keywordWords) {
-        if (word.includes(keyword)) {
-          matchCount++;
-          break;
-        }
-      }
-    }
-
-    const totalWords = sourceWords.length;
-    return (matchCount / totalWords) * 100;
-  }
   stars = [
     { filled: true },
     { filled: false },
@@ -677,7 +728,7 @@ export class SearchDoctorComponent implements OnInit {
     { filled: false },
     { filled: false },
   ];
-
+ //!DEPRECATED
   rate(star: any) {
     // Reset all stars' filled status
     this.stars.forEach((s) => (s.filled = false));
@@ -688,9 +739,11 @@ export class SearchDoctorComponent implements OnInit {
       this.stars[i].filled = true;
     }
   }
+   //!DEPRECATED
   getmax() {
     return this.currentDateControl.value;
   }
+   //!DEPRECATED
   search(): void {
     if (this.searchTerm.value) {
       this.autocompleteService

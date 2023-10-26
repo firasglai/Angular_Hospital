@@ -1,0 +1,25 @@
+<!--TO STYLE MORE-->
+<h1 mat-dialog-title>Doctor Profile :</h1>
+<div mat-dialog-content>
+    <img
+    src="assets/images/male.jpg"
+    style="
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-right: 15px;
+    "
+    alt="Doctor Profile Image"
+  />
+  <p>Name: {{ data?.doctorName }}</p>
+  <p>Address: {{ data?.doctorAddress }}</p>
+  <p>Email: {{ data?.doctorEmail }}</p>
+  <p>Phone: {{ data?.doctorPhone }}</p>
+  <p>Date of Birth: {{ data?.doctorBirthDate }}</p>
+  <p>Rating: Still not implemented </p>
+  <p>Work Hours: Still not implemented </p>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Close</button>
+</div>
