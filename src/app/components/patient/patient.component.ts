@@ -25,10 +25,7 @@ export class PatientComponent {
     private UserService: UsersService,
     private router: Router,
     private tokenService: TokenService,
-
   ){
-    
-    
   }
   isActive = false;
   isActive1 = false;
@@ -174,20 +171,5 @@ export class PatientComponent {
   
 
 
-  toCall(){
-    this.router.navigate(['./chat'])
-  }
-  CancelCall(){
-  }
-  CancelAttempt(){
-   
-  }
-  AccpectCall(){
-    this.chatservice.updateCallstatu(this.Ccall.id,"approved")
-  
-  }
-  destroyCallWindow(){
-
-  }
 */
 }

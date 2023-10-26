@@ -89,7 +89,7 @@ export class RegisterComponent implements OnInit {
     password: '',
     email: '',
     role: '',
-    gender:   '',
+    gender: '',
     specialtyName:'',
   };
   signUpForm = new FormGroup(

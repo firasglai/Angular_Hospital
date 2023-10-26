@@ -62,7 +62,6 @@ export class DashboardComponent implements OnInit {
 
   constructor(private patService:patientService,
     private authService: SpringAuthService,
-    private cookieService: CookieService,
     private appointmentService: AppointmentService,
     ) {
     
@@ -70,7 +69,7 @@ export class DashboardComponent implements OnInit {
     }
 
 
-      //? RETRIEVE THE APPOINTMENTS
+      //! to change to get recent appointments
       getAppoitnments(userId: number) {
         this.appointmentService.getUserAppointments(userId)
           .subscribe(
@@ -121,7 +120,6 @@ export class DashboardComponent implements OnInit {
         if (user) {
           this.userProfile = user;
           console.log("this is the user id: "+this.userProfile.id)
-          
         }
       },
       (error) => {
@@ -133,9 +131,6 @@ export class DashboardComponent implements OnInit {
   const PendingStatus = StatusAPT.PENDING;
     this.getAppoitnments(userId);
       console.log(this.userAppointments)
-
- 
-    
     // Call sortdetails() function
   this.sortdetails();
   }

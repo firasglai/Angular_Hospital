@@ -77,7 +77,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavbarComponent } from './components/global/navbar/navbar.component';
+import { ProfilePageComponent } from './components/global/profile-page/profile-page.component';
+import { PatientSidebarComponent } from './components/global/patient-sidebar/patient-sidebar.component';
+import { DoctorSidebarComponent } from './components/global/doctor-sidebar/doctor-sidebar.component'; 
 
 //? MDB IMPORTS
 
@@ -122,6 +126,10 @@ export function playerFactory() {
     SearchDoctorComponent,
     FilterAppointmentsPipe,
     StepperComponent,
+    NavbarComponent,
+    ProfilePageComponent,
+    PatientSidebarComponent,
+    DoctorSidebarComponent,
   ],
   imports: [
     StoreModule.forRoot({currentUser : userReducer}, {}),
