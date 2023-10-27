@@ -18,10 +18,11 @@
             "
             [formGroup]="loginForm"
             (ngSubmit)="submit()"
+            class="example-form"
           >
             <div>
               <div class="searchTitle pb-5">Login</div>
-              <mat-form-field class="input">
+              <mat-form-field appearance="fill" class="example-full-width">
                 <input
                   matInput
                   placeholder="Email address"
@@ -34,23 +35,34 @@
                   Please enter a correct email format
                 </mat-error>
               </mat-form-field>
-              <mat-form-field class="input">
+              <br><br>
+              <mat-form-field class="example-full-width">
                 <input
                   matInput
                   placeholder="Password"
                   formControlName="password"
                   type="password"
+                  matInput [type]="hide ? 'password' : 'text'"
                 />
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
                 <mat-error *ngIf="password?.errors?.['required']" class="error">
                   Password is required
                 </mat-error>
               </mat-form-field>
+              <br><br>
               <span class="center margin-top"
                 >New to our platform?
                 <a class="sign-up-link" routerLink="/CreateAccount"
                   >Sign Up!</a
-                ></span
-              >
+                ></span>
+                <br><br>  
+                <span class="center margin-top"
+                >Forgot your password
+                <a class="sign-up-link" routerLink="/CreateAccount"
+                  >Recover it !</a
+                ></span>
             </div>
             <div class="center margin-top">
               <button

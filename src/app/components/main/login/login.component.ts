@@ -34,6 +34,8 @@ export class LoginComponent {
   };
   //? Loading spinner
   loading=false
+  //? Password visibility
+  hide = true;
 
 
   loginForm = new FormGroup({
@@ -84,7 +86,7 @@ export class LoginComponent {
   
     this.loading = true; //? Show loading spinner
   
-    setTimeout(() => { // Add a delay of 1 second (1000 milliseconds)
+    setTimeout(() => {
       this.auth.login(user).subscribe(
         (response) => {
           if (response && 'token' in response) {
@@ -119,8 +121,8 @@ export class LoginComponent {
         }
       );
   
-      this.loading = false; // Hide loading spinner when the request is complete
-    }, 1000); // Add a delay of 1 second (1000 milliseconds)
+      this.loading = false; 
+    }, 1000); 
   }
   
 }

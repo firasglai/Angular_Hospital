@@ -83,7 +83,13 @@ import { DoctorSidebarComponent } from './components/global/doctor-sidebar/docto
 import {MatDialogModule} from '@angular/material/dialog';
 import { DoctorProfileComponent } from './components/patient/modals/doctor-profile/doctor-profile.component';
 import { AppointmentDetailsComponent } from './components/patient/modals/appointment-details/appointment-details.component';
-//? MDB IMPORTS
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { AppointmentBookingComponent } from './components/patient/modals/appointment-booking/appointment-booking.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatNativeDateModule } from '@angular/material/core';
+import { PasswordRecoverComponent } from './components/main/password-recover/password-recover.component';
+import { NotFoundComponent } from './components/main/not-found/not-found.component';
 
 //import { EffectsModule } from '@ngrx/effects';
 //import { UserEffects } from './store/effects/user-effects';
@@ -132,8 +138,12 @@ export function playerFactory() {
     DoctorSidebarComponent,
     DoctorProfileComponent,
     AppointmentDetailsComponent,
+    AppointmentBookingComponent,
+    PasswordRecoverComponent,
+    NotFoundComponent,
   ],
   imports: [
+    //! DEPRECATED
     StoreModule.forRoot({currentUser : userReducer}, {}),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
@@ -146,6 +156,7 @@ export function playerFactory() {
     LottieModule.forRoot({ player: playerFactory }),
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    //? ANGULAR MATERIAL IMPORTS
     MatMenuModule,
     MatFormFieldModule,
     MatInputModule,
@@ -163,13 +174,20 @@ export function playerFactory() {
     MatCardModule,
     MatButtonModule,
     MatDialogModule,
+    MatTooltipModule,
+    //? DATE AND TIMEPICKER IMPORTS
+    NgxMaterialTimepickerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+  
     ToastrModule.forRoot(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideStorage(() => getStorage()),
     provideFirestore(() => getFirestore()),
     
-    //? MDB IMPORTS
+    
+   
 
 
   ],

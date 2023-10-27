@@ -14,10 +14,13 @@ import { Subscription, take } from 'rxjs';
 import { Appoitment } from 'src/app/models/user.model';
 import { SpecialtyModel } from 'src/app/models/specialty.model';
 import { SpecialtyService } from 'src/app/services/specialty/specialty.service';
-import { Doctor as doc } from 'src/app/models/doctor';
+import { Doctor as DoctorModel } from 'src/app/models/doctor';
 import { DoctorService } from 'src/app/services/doctor/doctor.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DoctorProfileComponent } from '../modals/doctor-profile/doctor-profile.component';
+import { AppointmentBookingComponent } from '../modals/appointment-booking/appointment-booking.component';
+import { AnimationOptions } from 'ngx-lottie';
+
 interface citie {
   id: String;
   gov: string;
@@ -43,6 +46,14 @@ interface done {
   styleUrls: ['./search-doctor.component.css'],
 })
 export class SearchDoctorComponent implements OnInit {
+
+  public lottieConfig: AnimationOptions = {
+    path: 'assets/animations/User interface research.json',
+    loop: true,
+    autoplay: true,
+  };
+  
+
   doctorToshow: Doctor | undefined;
   showmap = false;
   currentDate: string;
@@ -81,7 +92,7 @@ export class SearchDoctorComponent implements OnInit {
   totalpages = 0;
   pagecounte = 0;
   doctorArray: Doctor[] = [];
-  doctors: doc[] = [];
+  doctors: DoctorModel[] = [];
   circleSize: number = 20000;
   @Input() selectedDate!: Date;
   selectedDate1: string;
@@ -97,6 +108,9 @@ export class SearchDoctorComponent implements OnInit {
   resposne: done | undefined;
   usersub: Subscription;
   errorofhour = '';
+  //? ANIMATIONS
+  showAnimation = true;
+  loading = false;
 
   constructor(
     private datePipe: DatePipe,
@@ -118,7 +132,6 @@ export class SearchDoctorComponent implements OnInit {
         this.searchResults = [];
       }
     });
-
     this.currentDate = new Date().toISOString().split('T')[0];
     this.searchTerm = new FormControl('');
     this.currentDateControl = new FormControl(
@@ -146,6 +159,7 @@ export class SearchDoctorComponent implements OnInit {
       this.totalpages = resu.totalPages;
     });
     this.selectedDate = new Date();
+
   }
   //? LOAD SPECIALITY API CALL
    loadspecialties() {
@@ -177,7 +191,6 @@ export class SearchDoctorComponent implements OnInit {
       const specialtyName = specialty.name.toLowerCase();
       const specialtyDescription = specialty.description.toLowerCase();
       const keyword = this.searchKeyword.toLowerCase();
-
       const nameMatchPercentage = this.calculateMatchPercentage(
         specialtyName,
         keyword
@@ -189,24 +202,46 @@ export class SearchDoctorComponent implements OnInit {
     });
   }
 
+  clearSelectedSpecialty(): void {  
+    this.selectedspeciality = undefined;
+    this.searchControll.setValue('');
+    this.searchResults = []
+  }
 
-  //? SEARCH DOCTORS BY SPECIALTY
-  searchDoctorsBySpeciality(){
-    if (this.selectedspeciality) {
-      const specialityName = this.selectedspeciality.name; 
-      console.log("SpecialtyName : "+ specialityName)
+  resetSearch(){
+    this.doctors = [];
+    this.showAnimation = true;
+  }
+
+
+ //? SEARCH DOCTORS BY SPECIALTY
+searchDoctorsBySpeciality() {
+  if (this.selectedspeciality) {
+    const specialityName = this.selectedspeciality.name; 
+    console.log("SpecialtyName : "+ specialityName)
+
+    // Hide the Lottie animation first
+    this.showAnimation = false;
+    this.loading = true;
+    // Delay showing the loading spinner by 200 milliseconds
+    setTimeout(() => {
+      // Show the loading spinner
       this.specialtyservice
         .getDoctorsBySpeciality(specialityName)
         .subscribe((doctors) => {
           console.log("THE DOCTORS HERE :"+ doctors);
           this.doctors = doctors;
+
+          // Hide the loading spinner after a timeout (e.g., 2 seconds)
+         this.loading= false 
         });
-    }
+    }, 1000);
   }
+}
+
 
   //? VIEW DOCTOR PROFILE DIALOG
-
-  openDialog(doctor:doc,enterAnimationDuration: string, exitAnimationDuration: string): void {
+  openDialog(doctor:DoctorModel,enterAnimationDuration: string, exitAnimationDuration: string): void {
     const dialogRef = this.dialog.open(DoctorProfileComponent, {
       data: {
         doctorName: doctor.fullName,
@@ -219,11 +254,24 @@ export class SearchDoctorComponent implements OnInit {
       width:'500px',
       enterAnimationDuration,
       exitAnimationDuration
-
     });
   }
-
-  
+  //? APPOINTMENT BOOKING DIALOG WITH ROUTING
+  openBookingDialog(doctor:DoctorModel, enterAnimationDuration: string, exitAnimationDuration: string){
+    const dialogRef = this.dialog.open(AppointmentBookingComponent, {
+        data: {
+          doctorID:doctor.id,
+          doctorName: doctor.fullName,
+          patientId: 123,
+          specialityName: doctor.specialty?.name
+        },
+        height:'800px',
+        width:'800px',
+        enterAnimationDuration,
+        exitAnimationDuration
+    }
+    )
+  }
 
   //!DEPRECATED
   unsubscribetodoctor() {

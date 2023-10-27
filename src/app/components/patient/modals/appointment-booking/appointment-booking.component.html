@@ -1,0 +1,52 @@
+<!--TO STYLE MORE-->
+<h1 mat-dialog-title>BOOK APPOINTMENT IN {{data.specialityName}} Department</h1>
+<div mat-dialog-content>
+  <mat-card class="demo-inline-calendar-card">
+    <mat-calendar [(selected)]="selected"></mat-calendar>
+  </mat-card>
+  <p>Selected date: {{selected}}</p>
+  <p>Time: TIMEPICKER COMPONENT </p>
+  <form class="example-form">
+    <mat-form-field appearance="fill">
+      <mat-label>Fill form field</mat-label>
+      <input matInput placeholder="Placeholder">
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint>Hint</mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Reason Of Appointment </mat-label>
+      <textarea matInput placeholder="Iam feeling"></textarea>
+      <mat-icon matSuffix>short_text</mat-icon>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>The Doctor</mat-label>
+        <input matInput disabled value="{{data?.fullName}}" />
+        <input matInput hidden value="{{data?.doctorId}}"/>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>The Patient</mat-label>
+        <input matInput disabled value="{{data?.patientId}}"/>
+      </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions class="button-container">
+ 
+  <button 
+  mat-fab color="primary" 
+  #tooltip="matTooltip" 
+  matTooltip="Exit without saving"
+  matTooltipHideDelay="1000"
+  (click)="closeDialog()"
+  >
+    <mat-icon>exit_to_app</mat-icon>
+  </button>
+  
+  <button 
+  mat-fab color="accent"
+  #tooltip="matTooltip" 
+  matTooltip="Save the Appointment"
+  matTooltipHideDelay="1000"
+  >
+    <mat-icon>save_alt</mat-icon>
+  </button>
+</div>

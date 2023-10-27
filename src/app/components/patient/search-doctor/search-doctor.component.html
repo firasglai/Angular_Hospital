@@ -51,11 +51,7 @@
             {{ selectedspeciality.name }}
             <div
               class="delspec"
-              (click)="
-                selectedspeciality = undefined;
-                searchControll.setValue('');
-                searchResults = []
-              "
+              (click)=" clearSelectedSpecialty()"
             >
               <svg
                 version="1.2"
@@ -219,15 +215,28 @@
           </div>
         </div>
       </div>
+
+    
      
-      <div class="row buttons">
-        <input
-          type="submit"
-          value="Search"
+      <div class="row-cols-1">
+        <div class="search-button">
+          <button 
+          mat-fab extended 
+          style="background-color: #2A3563;"
           (click)="searchDoctorsBySpeciality()"
-          class="sub"
-        />
-        <mat-icon>search</mat-icon>
+          >
+            <mat-icon>search</mat-icon>
+            Search 
+          </button>
+          <button 
+          mat-fab extended 
+          style="background-color: #2A3563;"
+          (click)="resetSearch()"
+          >
+          <mat-icon>autorenew</mat-icon>
+            Reset 
+          </button>
+        </div>
       </div>
     </div>
   </form>
@@ -235,6 +244,15 @@
   <div class="col-9">
     <div class="doc-search" style="padding: 20px">
       <div class="row">
+          <!-- Lottie Animation -->
+          <div *ngIf="showAnimation" class="lottie-container">
+            <ng-lottie [options]="lottieConfig" [width]="'80%'"></ng-lottie>
+          </div>
+           <!-- Loading Spinner -->
+          <div *ngIf="loading" class="loading-spinner">
+            <img width="300px" src="assets/loading-unscreen.gif" alt="Loading..." />
+          </div>
+
         <div
           class="col-4"
           style="padding-top: 10px"
@@ -270,12 +288,13 @@
             <div style="display: flex; flex-direction: column">
               <button
                 class="viewProfile"
-                (click)="openDialog(d ,'700ms', '700ms')"
+                (click)="openDialog(d ,'600ms', '600ms')"
               >
                 View profile
               </button>
               <button
                 class="bookAppoitment"
+                (click)="openBookingDialog(d,'600ms', '600ms')"
               >
                 Book Appointment
               </button>
@@ -285,214 +304,7 @@
       </div>
     </div>
   </div>
-  <!--PROFILE-->
+
   
-  <!-- Book Appointment -->
-  <div class="profile2" [ngClass]="{ displayOn2: showbook }">
-    <div class="book-container">
-      <div class="maploding" [ngClass]="{ displayon: issendig }">
-        <img width="130px" src="assets/loading (1).gif" alt="" />
-      </div>
-      <div *ngIf="doctorToshow" style="padding: 10px">
-        <div class="doc">
-          <div
-            style="
-              display: flex;
-              justify-content: space-between;
-              width: 100%;
-              align-items: center;
-              align-content: center;
-            "
-          >
-            <div>
-              <img
-                src="{{ doctorToshow.profilepic }}"
-                ff
-                style="
-                  width: 60px;
-                  height: 60px;
-                  border-radius: 50%;
-                  margin-right: 15px;
-                "
-                alt=""
-              />
-            </div>
-            <div
-              class="x-shape"
-              (click)="doctorToshow = undefined; showbook = false"
-            >
-              <div class="line"></div>
-              <div class="line"></div>
-            </div>
-          </div>
-          <div class="dts-title">
-            Dr. {{ doctorToshow.name }} {{ doctorToshow.lastname }}
-          </div>
-          <div class="dts-description">{{ doctorToshow.description }}</div>
-        </div>
-        <div class="dts-title">Speciality :</div>
-        <div style="font-weight: 500; font-size: 15px">
-          {{ doctorToshow.specialty.name }}
-        </div>
-
-        <div class="dts-description">
-          {{ doctorToshow.specialty.description }}
-        </div>
-
-        <div class="days">
-          <div
-            style="flex-basis: 0; flex-grow: 1; flex-shrink: 1; padding: 7px"
-            *ngFor="let day of getworkingDay(doctorToshow)"
-          >
-            <div>
-              <div
-                class="day-title"
-                [ngClass]="{ empty: day.shifts.length === 0 }"
-              >
-                {{ day.name }}
-              </div>
-              <div>
-                <div class="day-data" *ngFor="let shift of day.shifts">
-                  {{ shift }}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div style="display: flex; align-items: center; margin-top: 15px">
-            <div class="dts-title" style="margin-right: 10px">
-              Appointment day :
-            </div>
-            <div class="open-cal" (click)="openCalendiar()">
-              {{ selectedDate1 }}
-            </div>
-            <div
-              style="margin-left: 0px; color: red; font-size: 15px"
-              *ngIf="isselecteddayvalid == false"
-            >
-              Please Select Valid Day
-            </div>
-          </div>
-        </div>
-
-        <div
-          class="cal-listener"
-          [ngClass]="{ displayCalON: calendarSelect == true }"
-          (click)="calendarSelect = false"
-        ></div>
-
-        <div
-          class="calendarSelect"
-          [ngClass]="{ displayCalON: calendarSelect == true }"
-        >
-          <div class="custom-calendar">
-            <div class="calendar-header">
-              <button class="prev-button" (click)="goToPreviousMonth()">
-                &lt;
-              </button>
-              <div class="month-year">
-                {{ selectedDate1 | date : "MMMM yyyy" }}
-              </div>
-              <button class="next-button" (click)="goToNextMonth()">
-                &gt;
-              </button>
-            </div>
-            <div class="calendar-grid">
-              <div class="weekday" *ngFor="let weekday of weekdays">
-                {{ weekday }}
-              </div>
-              <ng-container *ngFor="let week of weeks">
-                <div
-                  class="day"
-                  *ngFor="let day of week; let i = index"
-                  [class.disabled]="!isvalidDay(day)"
-                  [class.selected]="isDateSelected(day)"
-                  [ngClass]="{
-                    notvalid: isDateSelected(day) && isselecteddayvalid == false
-                  }"
-                  (click)="selectDate(day)"
-                >
-                  {{ day.getDate() }}
-                </div>
-              </ng-container>
-            </div>
-          </div>
-        </div>
-
-        <div
-          style="display: flex; align-items: center; margin-top: 15px"
-          *ngIf="isselecteddayvalid == true"
-        >
-          <div class="dts-title" style="margin-right: 10px">Select hour :</div>
-          <div>
-            <select
-              class="open-cal2"
-              #mySelect
-              [class.open]="isSelectOpen"
-              (change)="onSelectChange()"
-              name=""
-              id=""
-              [formControl]="hourcontroller"
-            >
-              <option *ngFor="let hour of gethoures()" [value]="hour">
-                {{ hour }}
-              </option>
-            </select>
-          </div>
-        </div>
-        <div style="margin-left: 0px; color: red; font-size: 15px">
-          {{ errorofhour }}
-        </div>
-        <div
-          style="display: flex; margin-top: 15px"
-          *ngIf="isselecteddayvalid == true"
-        >
-          <div
-            class="dts-title"
-            style="margin-right: 10px; display: block; min-width: 126px"
-          >
-            Notes to Doctor :
-          </div>
-          <div style="width: 100%">
-            <textarea
-              name=""
-              id=""
-              maxlength="255"
-              [formControl]="noteController"
-              class="textarea-tds"
-            ></textarea>
-          </div>
-        </div>
-      </div>
-      <div><button class="dts-bA" (click)="send()">Submit</button></div>
-    </div>
-  </div>
-  <!--manedrouch -->
-  <div class="profile" [ngClass]="{ displayOn: showdone }">
-    <div *ngIf="resposne != undefined" class="profile-container">
-      <div>Done</div>
-      <div>
-        <div>Appoitment ID :</div>
-        5
-      </div>
-      <div>
-        <div>User :</div>
-        SQHDQ DHQBDQ
-      </div>
-      <div>
-        <div>Doctor :</div>
-        sqddq
-      </div>
-      <div>
-        <div>Date :</div>
-        DATE
-      </div>
-      <div>
-        <div>Statu</div>
-        Waiting Doctor Approve
-      </div>
-      <button>Done</button>
-    </div>
-  </div>
+  
 </div>

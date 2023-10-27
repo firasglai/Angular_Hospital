@@ -1,0 +1,13 @@
+.button-container {
+    position: absolute;
+    display: flex;
+    bottom: 20px;
+     width: 100%;
+    justify-content: center;
+    align-items: last baseline;
+  }
+  
+  .button-container .mat-fab {
+    margin: 0 20px;
+    padding: 0 40px; 
+  }

@@ -220,7 +220,7 @@ display: unset;
   .displayu.active{
     display: flex !important;
   }
-  .viewProfile{
+  .viewProfile {
     background-color: white;
     border: 1px #54629b solid;
     color: #2A3563;
@@ -228,15 +228,27 @@ display: unset;
     padding: 7px;
     margin-top: 15px;
     font-weight: 500;
+    transition: background-color 0.3s, color 0.3s; /* Add a transition for smooth animation */
+    
+    &:hover {
+      background-color: #1eb592;
+      color: white;
+    }
   }
-  .bookAppoitment{
-    background-color: #2A3563;
+  .bookAppoitment {
+    background-color: #2a3563;
     border: 1px #54629b solid;
     color: white;
     border-radius: 4px;
     padding: 7px;
     margin-top: 7px;
     font-weight: 500;
+    transition: background-color 0.3s, color 0.3s; /* Add a transition for smooth animation */
+  
+    &:hover {
+      background-color: #1eb592;
+      color: white;
+    }
   }
   .profile{
     position: absolute;
@@ -574,4 +586,34 @@ padding: 12px 12px;
 }
 .substar.disabled{
   display: none;
+}
+
+
+
+/*LOADER*/
+.loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 68%;
+  transform: translate(-50%, -50%);
+}
+/*LOOTIE*/
+
+.lottie-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  left: 8%;
+}
+/*NEW */
+.search-button button{
+  padding: 7px 5px;
+  font-size: 17px;
+  font-weight: 500;
+  margin-top: 20px;
+  width: 100%;
 }

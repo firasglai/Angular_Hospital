@@ -19,7 +19,15 @@
   <p>Rating: Still not implemented </p>
   <p>Work Hours: Still not implemented </p>
 </div>
-
-<div mat-dialog-actions>
-  <button mat-button (click)="closeDialog()">Close</button>
+<div mat-dialog-actions class="button-container" >
+ 
+   
+  <button 
+  mat-fab color="accent"
+  #tooltip="matTooltip" 
+  matTooltip="Add to Favorites"
+  matTooltipHideDelay="1000"
+  >
+    <mat-icon>favorite</mat-icon>
+  </button>
 </div>
