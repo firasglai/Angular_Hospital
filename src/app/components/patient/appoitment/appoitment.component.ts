@@ -27,6 +27,7 @@ import { AppointmentService } from 'src/app/services/appointment/appointment.ser
 import { SpringAuthService } from 'src/app/services/authentication/spring-auth.service';
 import { Profile } from 'src/app/models/profile';
 import { StatusAPT } from 'src/app/enum/status-apt';
+import { MatDialog } from '@angular/material/dialog';
 /*EVENTS COLOR PALETTE */
 const colors: Record<string, EventColor> = {
   red: {
@@ -69,7 +70,8 @@ export class AppoitmentComponent implements OnInit, AfterViewInit {
 constructor(
   private appointmentService:AppointmentService,
   private springAuthService:SpringAuthService,
-  private cdr: ChangeDetectorRef ,
+  private cdr: ChangeDetectorRef,
+  private dialog: MatDialog,
   ) {
 
 }
@@ -133,12 +135,17 @@ constructor(
     this.cdr.detectChanges();
     this.events$.subscribe(events => console.log('Events$: ', events));
   }
+  //? EVENT ACTIONS
   actions: CalendarEventAction[] = [
     {
       label: '<i class="fa-solid fa-eye"></i>',
       a11yLabel: 'Details',
       onClick: ({ event }: { event: CalendarEvent }): void => {
-       alert('Event Details Modal') ;
+        const dialogRef = this.dialog.open(AppointmentDetailsComponent, {
+          height: '800px',
+          width: '600px',
+          data: { appointment: event.meta.appointment } ,
+        });
       },
     },
     {

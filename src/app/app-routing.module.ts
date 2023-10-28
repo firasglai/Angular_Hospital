@@ -20,12 +20,10 @@ import { TransactionComponent } from './components/doctor/transaction/transactio
 import { AppoitmentComponent } from './components/doctor/appoitment/appoitment.component';
 import { PatientlistComponent } from './components/doctor/patientlist/patientlist.component';
 import { ChatWindowComponent } from './components/main/chat-window/chat-window.component';
-
 import { DashboardComponent as DashboardComponentp } from './components/patient/dashboard/dashboard.component';
-import { AccountComponent as AccountComponentp } from './components/patient/account/account.component';
+import { AccountComponent as PatientAccount} from './components/patient/account/account.component';
 import { AnalyticsComponent as AnalyticsComponentp } from './components/patient/analytics/analytics.component';
 import { InboxComponent as InboxComponentp } from './components/patient/inbox/inbox.component';
-
 import { TransactionComponent as TransactionComponentp } from './components/patient/transaction/transaction.component';
 import { AppoitmentComponent as AppoitmentComponentp } from './components/patient/appoitment/appoitment.component';
 import { PatientlistComponent as PatientlistComponentp } from './components/patient/patientlist/patientlist.component';
@@ -43,6 +41,7 @@ import { DocGuardGuard } from './shared/doc-gaurd.guard';
 import { PatGuardGuard } from './shared/pat-guard.guard';
 import { SearchDoctorComponent } from './components/patient/search-doctor/search-doctor.component';
 import { HasRoleGuard } from './guard/has-role.guard';
+import { ProfilePageComponent } from './components/global/profile-page/profile-page.component';
 
 const redirectToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectToHome = () => redirectLoggedInTo(['doctor']);
@@ -153,7 +152,7 @@ const routes: Routes = [
       },
       {
         path: 'account',
-        component: AccountComponent,
+        component: ProfilePageComponent,
         canActivate: [PatGuardGuard],
       },
       {

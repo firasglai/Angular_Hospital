@@ -92,7 +92,7 @@ import { PasswordRecoverComponent } from './components/main/password-recover/pas
 import { NotFoundComponent } from './components/main/not-found/not-found.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-
+import {MatTabsModule} from '@angular/material/tabs';
 //import { EffectsModule } from '@ngrx/effects';
 //import { UserEffects } from './store/effects/user-effects';
 export function playerFactory() {
@@ -143,6 +143,7 @@ export function playerFactory() {
     AppointmentBookingComponent,
     PasswordRecoverComponent,
     NotFoundComponent,
+    
   ],
   imports: [
     //! DEPRECATED
@@ -177,6 +178,7 @@ export function playerFactory() {
     MatButtonModule,
     MatDialogModule,
     MatTooltipModule,
+    MatTabsModule,
     //? DATE AND TIMEPICKER IMPORTS
     NgxMaterialTimepickerModule,
     MatDatepickerModule,

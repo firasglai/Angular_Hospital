@@ -1,1 +1,56 @@
-<h1 mat-dialog-title>Doctor Profile :</h1>
+<h1 mat-dialog-title>Appointment Details :</h1>
+
+<div mat-dialog-content>
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card hover-lift hover-shadow-xl shadow-sm border-0">
+          <!--card-body-->
+          <div class="card-body p-4">
+            <div class="d-flex mb-4 align-items-center">
+              <!--Companies group-->
+              <div class="flex-grow-1 d-flex align-items-center">
+                <!--Doctor-->
+                <div
+                  class="width-5x height-5x p-2 bg-white shadow-sm position-relative flex-center rounded-circle border"
+                >
+                  <img
+                    src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                    class="img-fluid"
+                    alt=""
+                  />
+                </div>
+                <!--Patient-->
+                <div
+                  class="width-5x height-5x p-2 ms-n3 bg-white shadow-sm position-relative flex-center rounded-circle border"
+                >
+                  <img
+                    src="https://bootdey.com/img/Content/avatar/avatar2.png"
+                    class="img-fluid"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+            <h5 id="reason">
+              Appointment Reason : {{ data.appointment.reason }}
+            </h5>
+            <h5 id="doctor">
+              Doctor FullName : {{ data.appointment.doctor.fullName }}
+            </h5>
+            <h5 id="patient">
+              Patient FullName : {{ data.appointment.patient.fullName }}
+            </h5>
+            <h5 id="status">
+              Appointment Status : {{ data.appointment.statusAPT }}
+            </h5>
+            <p class="mb-0 text-muted">
+              Appointment Specialty:
+              {{ data.appointment.doctor.specialty.name }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
