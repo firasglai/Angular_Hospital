@@ -75,8 +75,6 @@ export class DashboardComponent implements OnInit {
           .subscribe(
             (appointments) => {
               this.userAppointments = appointments;
-              console.log('Appointments with status PENDING:', appointments);
-              
             },
             (error) => {
               console.error('Error fetching appointments with status PENDING:', error);
@@ -131,7 +129,6 @@ export class DashboardComponent implements OnInit {
   const PendingStatus = StatusAPT.PENDING;
     this.getAppoitnments(userId);
       console.log(this.userAppointments)
-    // Call sortdetails() function
   this.sortdetails();
   }
   sortdetails() {

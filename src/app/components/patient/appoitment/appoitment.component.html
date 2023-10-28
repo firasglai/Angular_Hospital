@@ -1,305 +1,104 @@
-<div class="body">
-  <div class="app-Title">
-    <h3>Appointment</h3>
-    <div *ngIf="DaysOnCalendar.length>0" >
-      <div style="display: flex;margin-right: 15px;">
-        <div class="open-cal" (click)="openCalendiar()">{{ convertDateString1(DaysOnCalendar[0])}} - {{
-          convertDateString1(DaysOnCalendar[3])}}</div>
-        <div class="switch-container">
-
-          <div class="cal-label" [ngClass]="{'isOnCal': CalendarDiplay1==true}" (click)="switchDisplayto1()">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M20.6665 9.9043H2.84253C2.42853 9.9043 2.09253 9.5683 2.09253 9.1543C2.09253 8.7403 2.42853 8.4043 2.84253 8.4043H20.6665C21.0805 8.4043 21.4165 8.7403 21.4165 9.1543C21.4165 9.5683 21.0805 9.9043 20.6665 9.9043Z" />
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M16.2011 13.8096C15.7871 13.8096 15.4471 13.4736 15.4471 13.0596C15.4471 12.6456 15.7781 12.3096 16.1921 12.3096H16.2011C16.6151 12.3096 16.9511 12.6456 16.9511 13.0596C16.9511 13.4736 16.6151 13.8096 16.2011 13.8096Z" />
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M11.7636 13.8096C11.3496 13.8096 11.0096 13.4736 11.0096 13.0596C11.0096 12.6456 11.3406 12.3096 11.7546 12.3096H11.7636C12.1776 12.3096 12.5136 12.6456 12.5136 13.0596C12.5136 13.4736 12.1776 13.8096 11.7636 13.8096Z" />
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M7.31689 13.8096C6.90289 13.8096 6.56189 13.4736 6.56189 13.0596C6.56189 12.6456 6.89389 12.3096 7.30789 12.3096H7.31689C7.73089 12.3096 8.06689 12.6456 8.06689 13.0596C8.06689 13.4736 7.73089 13.8096 7.31689 13.8096Z" />
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M16.2011 17.6963C15.7871 17.6963 15.4471 17.3603 15.4471 16.9463C15.4471 16.5323 15.7781 16.1963 16.1921 16.1963H16.2011C16.6151 16.1963 16.9511 16.5323 16.9511 16.9463C16.9511 17.3603 16.6151 17.6963 16.2011 17.6963Z" />
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M11.7636 17.6963C11.3496 17.6963 11.0096 17.3603 11.0096 16.9463C11.0096 16.5323 11.3406 16.1963 11.7546 16.1963H11.7636C12.1776 16.1963 12.5136 16.5323 12.5136 16.9463C12.5136 17.3603 12.1776 17.6963 11.7636 17.6963Z" />
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M7.31689 17.6963C6.90289 17.6963 6.56189 17.3603 6.56189 16.9463C6.56189 16.5323 6.89389 16.1963 7.30789 16.1963H7.31689C7.73089 16.1963 8.06689 16.5323 8.06689 16.9463C8.06689 17.3603 7.73089 17.6963 7.31689 17.6963Z" />
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M15.7935 5.791C15.3795 5.791 15.0435 5.455 15.0435 5.041V1.75C15.0435 1.336 15.3795 1 15.7935 1C16.2075 1 16.5435 1.336 16.5435 1.75V5.041C16.5435 5.455 16.2075 5.791 15.7935 5.791Z" />
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M7.71533 5.791C7.30133 5.791 6.96533 5.455 6.96533 5.041V1.75C6.96533 1.336 7.30133 1 7.71533 1C8.12933 1 8.46533 1.336 8.46533 1.75V5.041C8.46533 5.455 8.12933 5.791 7.71533 5.791Z" />
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M7.521 4.0791C4.928 4.0791 3.5 5.4621 3.5 7.9731V17.0221C3.5 19.5881 4.928 21.0001 7.521 21.0001H15.979C18.572 21.0001 20 19.6141 20 17.0981V7.9731C20.004 6.7381 19.672 5.7781 19.013 5.1181C18.335 4.4381 17.29 4.0791 15.988 4.0791H7.521ZM15.979 22.5001H7.521C4.116 22.5001 2 20.4011 2 17.0221V7.9731C2 4.6451 4.116 2.5791 7.521 2.5791H15.988C17.697 2.5791 19.11 3.0911 20.075 4.0581C21.012 4.9991 21.505 6.3521 21.5 7.9751V17.0981C21.5 20.4301 19.384 22.5001 15.979 22.5001V22.5001Z" />
-            </svg>
 
 
-          </div>
-          <div class="cal-label2" [ngClass]="{'isOnCal': CalendarDiplay1==false}" (click)="switchDisplayto2()"><svg
-              width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M7.08005 13.5928H0.779053C0.365053 13.5928 0.0290527 13.2568 0.0290527 12.8428C0.0290527 12.4288 0.365053 12.0928 0.779053 12.0928H7.08005C7.49405 12.0928 7.83005 12.4288 7.83005 12.8428C7.83005 13.2568 7.49405 13.5928 7.08005 13.5928Z"
-                fill="black" />
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M16.1909 3.9004H9.89087C9.47687 3.9004 9.14087 3.5644 9.14087 3.1504C9.14087 2.7364 9.47687 2.4004 9.89087 2.4004H16.1909C16.6049 2.4004 16.9409 2.7364 16.9409 3.1504C16.9409 3.5644 16.6049 3.9004 16.1909 3.9004Z"
-                fill="black" />
-              <mask id="mask0_368_375" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="7"
-                height="7">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M0 0.000396729H6.2258V6.192H0V0.000396729Z"
-                  fill="white" />
-              </mask>
-              <g>
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                  d="M3.11276 1.5C2.22376 1.5 1.49976 2.216 1.49976 3.097C1.49976 3.977 2.22376 4.692 3.11276 4.692C4.00276 4.692 4.72576 3.977 4.72576 3.097C4.72576 2.216 4.00276 1.5 3.11276 1.5ZM3.11276 6.192C1.39676 6.192 -0.000244141 4.804 -0.000244141 3.097C-0.000244141 1.39 1.39676 0 3.11276 0C4.82976 0 6.22576 1.39 6.22576 3.097C6.22576 4.804 4.82976 6.192 3.11276 6.192Z"
-                  fill="black" />
-              </g>
-              <path fill-rule="evenodd" clip-rule="evenodd"
-                d="M14.3877 11.208C13.4977 11.208 12.7737 11.924 12.7737 12.804C12.7737 13.685 13.4977 14.4 14.3877 14.4C15.2767 14.4 15.9997 13.685 15.9997 12.804C15.9997 11.924 15.2767 11.208 14.3877 11.208ZM14.3877 15.9C12.6707 15.9 11.2737 14.511 11.2737 12.804C11.2737 11.097 12.6707 9.708 14.3877 9.708C16.1037 9.708 17.4997 11.097 17.4997 12.804C17.4997 14.511 16.1037 15.9 14.3877 15.9Z"
-                fill="black" />
-            </svg>
-          </div>
-
-        </div>
-      </div>
-      <div class="calendarSelect" [ngClass]="{'displayCalON': calendarSelect==true}">
-        <div class="custom-calendar">
-          <div class="calendar-header">
-            <button class="prev-button" (click)="goToPreviousMonth()">&lt;</button>
-            <div class="month-year">{{ selectedDate1 | date: 'MMMM yyyy' }}</div>
-            <button class="next-button" (click)="goToNextMonth()">&gt;</button>
-          </div>
-          <div class="calendar-grid">
-            <div class="weekday" *ngFor="let weekday of weekdays">{{ weekday }}</div>
-            <ng-container *ngFor="let week of weeks">
-              <div class="day" *ngFor="let day of week; let i = index" [class.disabled]="!isCurrentMonth(day)"
-                [class.selected]="isDateSelected(day)" [ngClass]="{
-                'onSelectedDay': isCurrentOrNextThreeDays(day)
-              }" (click)="selectDate(day)">
-                {{ day.getDate() }}
-                <div class="nb-app" *ngIf="haveAppotmentes(day)>0; else noapp">
-                  <div class="tria"></div>
-                  {{haveAppotmentes(day)}} appointment(s)
-                </div>
-              </div>
-            </ng-container>
-            <ng-template #noapp>
-              <div class="nb-app">
-                <div class="tria"></div>
-                no appointment
-              </div>
-
-            </ng-template>
-          </div>
-        </div>
-
-      </div>
-    </div>
+<div class="container">
+  <div class="container-title">
+    <h1 style="font-size: xx-large; color: #2A3563"> Appointments </h1>
   </div>
-
-
-
-
-
-
-
-
-
-  <div class="cal-container2" [ngClass]="{'CAl-on':CalendarDiplay1===false}">
-    <div *ngIf="IsanyappIn()==false" style="text-align: center;
-    padding-top: 30px;">
-      No apoitments in these day
+    <div class="row text-center">
+      <div class="col-md-4">
+        <div class="btn-group">
+          <div
+            class="btn btn-primary"
+            mwlCalendarPreviousView
+            [view]="view"
+            [(viewDate)]="viewDate"
+            (viewDateChange)="closeOpenMonthViewDay()"
+          >
+            Previous
+          </div>
+          <div
+            class="btn btn-outline-secondary"
+            mwlCalendarToday
+            [(viewDate)]="viewDate"
+          > 
+            Today
+          </div>
+          <div
+            class="btn btn-primary"
+            mwlCalendarNextView
+            [view]="view"
+            [(viewDate)]="viewDate"
+            (viewDateChange)="closeOpenMonthViewDay()"
+          >
+            Next
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h2 class="calendar-view-date">{{ viewDate | calendarDate : view + "ViewTitle" : "en" }}</h2>
+      </div>
+      <div class="col-md-4">
+        <div class="btn-group">
+          <div
+            class="btn btn-primary"
+            (click)="setView(CalendarView.Month)"
+            [class.active]="view === CalendarView.Month"
+          >
+            Month
+          </div>
+          <div
+            class="btn btn-primary"
+            (click)="setView(CalendarView.Week)"
+            [class.active]="view === CalendarView.Week"
+          >
+            Week
+          </div>
+          <div
+            class="btn btn-primary"
+            (click)="setView(CalendarView.Day)"
+            [class.active]="view === CalendarView.Day"
+          >
+            Day
+          </div>
+        </div>
+      </div>
     </div>
-    <ng-container *ngFor="let day of DaysOnCalendar; let i = index">
+    <br />
+    <ng-template #loading>
+      <div class="text-center">
+        <i class="fas fa-spin fa-spinner fa-5x"></i> <br />
+        Loading events...
+      </div>
+    </ng-template>
     
-      <div class="dayTitle" *ngIf="getappByDay(day).length>0"> {{ convertDateString(day) }} </div>
-      <div *ngIf="getappByDay(day).length>0" class="row mx-3 ">
-        <div *ngFor="let app of getappByDay(day)" class="col-6 ">
-          <div class="app-container my-3">
-            <div class="patient-info" *ngFor="let p of  getpatientt(app.Docid)">
-
-              <div class="pt-info">
-                <img src="{{p.profilepic}}" alt="" class="img-patient " style="width: 50px;height: 50px;">
-                <div>
-                  <div class="pt-name" style="font-size: 17px;font-weight: 500;">{{p.name}} {{p.lastname}}</div>
-                  <div class="pt-address"> {{gethourByString(app.id)}}</div>
-                </div>
-              </div>
-              <div class="pt-address"
-                style="    color: #5c5c5c; padding-top: 15px; font-size: 17px;font-weight: 400;padding-bottom: 15px;display: flex; align-items: center;">
-                <div style="font-weight: 500;color: #192252; font-size: 15px;padding-right: 7px;">Appoitment Statu :</div>
-               <div class="StatApp {{app.statu}}">{{app.statu}}</div>
-              </div>
-              <button (click)="getInfoApp(app.id)" class="ViweApp">View Appointment</button>
-
-            </div>
-           
-          </div>
-        </div>
-
-      </div>
-    </ng-container>
-  </div>
-
-  <ng-template #noappthisday>
-    <div class="dayTitle" style="font-weight: 400;font-size: 16px; color: grey;">
-      You have no appointments this day
+    <div *ngIf="events$ | async; else loading; let events">
+    <div [ngSwitch]="view">
+      <mwl-calendar-month-view
+        *ngSwitchCase="CalendarView.Month"
+        [viewDate]="viewDate"
+        [events]="events"
+        [refresh]="refresh"
+        [activeDayIsOpen]="activeDayIsOpen"
+        (dayClicked)="dayClicked($event.day)"
+        
+      >
+      </mwl-calendar-month-view>
+      <mwl-calendar-week-view
+        *ngSwitchCase="CalendarView.Week"
+        [viewDate]="viewDate"
+        [events]="events"
+        [refresh]="refresh"
+        
+      >
+      </mwl-calendar-week-view>
+      <mwl-calendar-day-view
+        *ngSwitchCase="CalendarView.Day"
+        [viewDate]="viewDate"
+        [events]="events"
+        [refresh]="refresh"
+        
+      >
+      </mwl-calendar-day-view>
     </div>
-  </ng-template>
-
-
-
-
-
-
-
-
-  <div class="cal-container" [ngClass]="{'CAl-on':CalendarDiplay1===true}">
-    <div class="hours" #scrollContainer>
-      <table style="  border-width: 0 1px 1px 1px  !important;">
-        <thead style="top: 0;background-color: #f2f2f2;position: sticky;   border-width: 0 1px 1px 1px  !important;">
-          <tr style="top: 0;background-color: #f2f2f2;position: sticky;   border-width: 0 1px 1px 1px  !important;">
-            <th>
-              <div class="bot-bord th-time">Time</div>
-            </th> <!-- First Column: numbersArray -->
-            <th *ngFor="let date of DaysOnCalendar">
-
-              <div class="bot-bord">
-                {{ convertDateString(date) }}
-              </div>
-            </th> <!-- Other Columns: DaysOnCalendar -->
-          </tr>
-        </thead>
-        <tbody>
-
-          <tr *ngFor="let number of numbersArray; let i = index">
-            <td class="num">{{ number }}</td> <!-- First Column: numbersArray -->
-            <td (click)="getInfoApp(day[DaysOnCalendar.indexOf(date)][i])" *ngFor="let date of DaysOnCalendar"
-              [attr.rowspan]="day[DaysOnCalendar.indexOf(date)][i].length > 0 &&day[DaysOnCalendar.indexOf(date)][i]!='x' ? getapp(day[DaysOnCalendar.indexOf(date)][i]).durationByHour : 1"
-              [ngClass]="{'displayOff': day[DaysOnCalendar.indexOf(date)][i]=='x'}">
-              <div
-                *ngIf="day[DaysOnCalendar.indexOf(date)][i].length > 0 &&day[DaysOnCalendar.indexOf(date)][i]!='x'; else empty"
-                class="{{getstatu(day[DaysOnCalendar.indexOf(date)][i]).statu}} apptab"
-              >
-                <div class="border"></div>
-                <div *ngFor=" let patient of getpatientt(getapp(day[DaysOnCalendar.indexOf(date)][i]).Docid) "
-                  class="Appointment">
-                  <div class="Appointment-flex">
-                    <div class=" p-name">
-                      {{patient.name}}
-                    </div>
-                    <div class="date">
-                      {{gethourByString(day[DaysOnCalendar.indexOf(date)][i])}}
-                    </div>
-                  </div>
-                  <div class="title">
-                    {{getapp(day[DaysOnCalendar.indexOf(date)][i]).Title}}
-
-                  </div>
-
-
-                </div>
-              </div>
-
-
-            </td> <!-- Other Columns: day array -->
-          </tr>
-        </tbody>
-
-      </table>
-
     </div>
-  </div>
 </div>
-<ng-template #empty>
-
-</ng-template>
-<div *ngIf="appointment" class="container1">
-
-  <div class="con-body">
-    <div style="display: flex; justify-content: space-between;padding-left: 15px; padding-top: 20px;    align-items: center;
-    padding-right: 15px;">
-      <h4 style="min-width: 350px;">Appointment Details</h4>
-      <div (click)="closeServiceTab()" class="x-shape-con">
-        <div class="x-shape"></div>
-      </div>
-    </div>
-
-    <hr>
-    
-    <div class="patient-info" *ngFor="let p of  getpatientt(appointment.Docid)">
-      <div class="title-label">
-        Patient Information
-      </div>
-      <div class="pt-info">
-        <img src="{{p.profilepic}}" alt="" class="img-patient">
-        <div>
-          <div class="pt-name">{{p.name}}</div>
-         
-        </div>
-      </div>
-      <div class="app-details">
-        <div class="title-label2">
-          Appointment Details
-        </div>
-        <div>
-          <div class="app-label">Date</div>
-          <div class="app-text"> {{ convertDateString(appointment.day) }} On {{gethourByString(appointment.id)}}</div>
-        </div>
-        <div *ngIf="appointment.PatientNotes">
-          <div class="app-label">Patient Notes</div>
-          <div class="app-text">{{appointment.PatientNotes}}</div>
-        </div>
-        <div>
-          <div class="app-label">Provided Documunents</div>
-          <div *ngIf="appointment.Documents; else nodocuments">
-            <div *ngIf="appointment.Documents.length > 0; else nodocuments">
-              <a style="width: 100%;" *ngFor="let doc of appointment.Documents" [href]="getDownloadUrl(doc)"
-                download="file.txt">
-                <button class="download">
-                  <div>{{doc}}</div>
-                  <div>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <g id="Iconly/Light-Outline/Download">
-                        <g id="Download">
-                          <path id="Fill 1" fill-rule="evenodd" clip-rule="evenodd"
-                            d="M12.001 16.5411C11.587 16.5411 11.251 16.2051 11.251 15.7911V3.7501C11.251 3.3361 11.587 3.0001 12.001 3.0001C12.415 3.0001 12.751 3.3361 12.751 3.7501V15.7911C12.751 16.2051 12.415 16.5411 12.001 16.5411Z"
-                            fill="black" />
-                          <path id="Fill 3" fill-rule="evenodd" clip-rule="evenodd"
-                            d="M12.0011 16.5411C11.8021 16.5411 11.6101 16.4621 11.4701 16.3201L8.55407 13.3931C8.26207 13.0991 8.26307 12.6241 8.55607 12.3321C8.85007 12.0401 9.32407 12.0401 9.61607 12.3341L12.0011 14.7291L14.3861 12.3341C14.6781 12.0401 15.1521 12.0401 15.4461 12.3321C15.7391 12.6241 15.7401 13.0991 15.4481 13.3931L12.5321 16.3201C12.3921 16.4621 12.2001 16.5411 12.0011 16.5411Z"
-                            fill="black" />
-                          <g id="Group 7">
-                            <mask id="mask0_2_5840" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="2" y="7"
-                              width="20" height="15">
-                              <path id="Clip 6" fill-rule="evenodd" clip-rule="evenodd"
-                                d="M2.00024 7.7326H22V21.4766H2.00024V7.7326Z" fill="white" />
-                            </mask>
-                            <g>
-                              <path id="Fill 5" fill-rule="evenodd" clip-rule="evenodd"
-                                d="M17.5752 21.4766H6.43524C3.99024 21.4766 2.00024 19.4876 2.00024 17.0416V12.1566C2.00024 9.7166 3.98524 7.7326 6.42624 7.7326H7.36724C7.78124 7.7326 8.11724 8.0686 8.11724 8.4826C8.11724 8.8966 7.78124 9.2326 7.36724 9.2326H6.42624C4.81224 9.2326 3.50024 10.5436 3.50024 12.1566V17.0416C3.50024 18.6606 4.81624 19.9766 6.43524 19.9766H17.5752C19.1872 19.9766 20.5002 18.6636 20.5002 17.0516V12.1676C20.5002 10.5486 19.1832 9.2326 17.5662 9.2326H16.6342C16.2202 9.2326 15.8842 8.8966 15.8842 8.4826C15.8842 8.0686 16.2202 7.7326 16.6342 7.7326H17.5662C20.0112 7.7326 22.0002 9.7226 22.0002 12.1676V17.0516C22.0002 19.4916 20.0142 21.4766 17.5752 21.4766Z"
-                                fill="black" />
-                            </g>
-                          </g>
-                        </g>
-                      </g>
-                    </svg>
-
-                  </div>
-                </button>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div> <div [ngClass]="{'displayOn':appointment.statu=='waiting Approve'}" style="display: none;"><button>Decline</button><button>Accept Appointment</button></div>
-        <div [ngClass]="{'displayOn':appointment.statu=='approved'}" style="display: none;"><button>Finish</button></div>
-        <div [ngClass]="{'displayOn':appointment.statu=='finished'}" style="display: none;">Appoitment Finished</div></div>
-      </div>
-      <ng-template #nodocuments class="app-label">
-        No documents
-      </ng-template>
-    </div>
-
-
-
-
-  </div>
-
-</div>
-<div (click)="closeCalendiar()" class="container12" [ngClass]="{'displayCalON': calendarSelect==true}"></div>

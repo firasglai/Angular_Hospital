@@ -587,9 +587,6 @@ padding: 12px 12px;
 .substar.disabled{
   display: none;
 }
-
-
-
 /*LOADER*/
 .loading-spinner {
   display: flex;
@@ -606,8 +603,7 @@ padding: 12px 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  left: 8%;
+  
 }
 /*NEW */
 .search-button button{

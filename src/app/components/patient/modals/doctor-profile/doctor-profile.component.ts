@@ -13,7 +13,6 @@ export class DoctorProfileComponent {
   ) {
     console.log('Received Data:', data); 
   }
-  
   closeDialog(): void {
     this.dialogRef.close();
   }

@@ -90,6 +90,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { MatNativeDateModule } from '@angular/material/core';
 import { PasswordRecoverComponent } from './components/main/password-recover/password-recover.component';
 import { NotFoundComponent } from './components/main/not-found/not-found.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 //import { EffectsModule } from '@ngrx/effects';
 //import { UserEffects } from './store/effects/user-effects';
@@ -185,6 +187,8 @@ export function playerFactory() {
     provideAuth(() => getAuth()),
     provideStorage(() => getStorage()),
     provideFirestore(() => getFirestore()),
+    //? CALENDAR MODULE IMPORTS
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
     
     
    
