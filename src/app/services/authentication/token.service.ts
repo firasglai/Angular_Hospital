@@ -7,7 +7,9 @@ export class TokenService {
 
   private readonly TOKEN_KEY = 'token';
  
-  private readonly USER_ROLE= "role" // New key for user data
+  private readonly USER_ROLE= "role";
+
+  private readonly USER_DATA = "userData";
 
   constructor() {}
 

@@ -80,21 +80,21 @@ constructor(
   }
   ngOnInit(): void {
     this.springAuthService.getActiveUser()
-    .pipe(take(1))
-    .subscribe(
-      (user) => {
-        if (user) {
-          this.userProfile = user;
-          console.log("this is the user id: " + this.userProfile.id);
-          const userId = this.userProfile?.id || 0;
-          this.getAppointments(userId);
-        }
-      },
-      (error) => {
-        console.error('Error getting active user', error);
+  .pipe(take(1))
+  .subscribe(
+    ({currentUser}) => {
+      if (currentUser) {
+        this.userProfile = currentUser;
+        console.log("this is the user id: " + this.userProfile.id);
+        const userId = this.userProfile?.id || 0;
+        this.getAppointments(userId);
       }
+    },
+    (error) => {
+      console.error('Error getting active user', error);
+    }
   );
-}
+  }
 
   //? GETTING THE USER APPOINTMENTS
   getAppointments(userId: number) {

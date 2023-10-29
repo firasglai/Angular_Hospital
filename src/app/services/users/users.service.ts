@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { Profile } from 'src/app/models/profile';
-
+import { Patient } from 'src/app/models/patient';
+import { Doctor } from '../doctor-services.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -40,5 +41,9 @@ export class UsersService {
 
   getProfileImage(userId: number): Observable<Blob> {
     return this.http.get(`${this.apiUrl}/${userId}/profile-image`, { responseType: 'blob' });
+  }
+
+  getUserDetailsByEmail(email: string): Observable<Patient | Doctor> {
+    return this.http.get<Patient | Doctor>(`${this.apiUrl}/user-details/${email}`);
   }
 }

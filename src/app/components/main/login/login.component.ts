@@ -5,7 +5,7 @@ import { AnimationItem } from 'lottie-web/build/player/lottie_light';
 import { AnimationOptions } from 'ngx-lottie';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { ToastrService } from 'ngx-toastr';
-import { catchError, tap } from 'rxjs';
+import { catchError, tap, forkJoin } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { SpringAuthService } from 'src/app/services/authentication/spring-auth.service';
 import { AES } from 'crypto-js';
@@ -14,7 +14,6 @@ import { UsersService } from 'src/app/services/users/users.service';
 import { Profile } from 'src/app/models/profile';
 import { Store,select } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
-
 import * as UserActions from '../../../store/actions/user-actions'
 interface response{
   token:string,
@@ -80,7 +79,6 @@ export class LoginComponent {
     if (!this.loginForm.valid) {
       return;
     }
-  
     const { email, password } = this.loginForm.value;
     const user: Profile = { email: email!, password: password! };
   
@@ -94,25 +92,29 @@ export class LoginComponent {
             const resp = response as { token: string, userRole: string };
             this.tokenService.setToken(resp.token);
             this.tokenService.setUserRole(resp.userRole);
-  
-            this.userService.getCurrentUser().subscribe(
-              (user) => {
-                if (user) {
-                  this.cookieService.set('currentUser', JSON.stringify(user));
+            const email = user.email!; //? Get the email 
+            forkJoin({
+              currentUser:this.userService.getCurrentUser(), //USER-PROFILE
+              userDetails: this.userService.getUserDetailsByEmail(email) // USER-METADATA
+            }).subscribe(
+              (responses) => {
+                const { currentUser, userDetails } = responses;
+                this.cookieService.set('currentUser', JSON.stringify(currentUser));
+                this.cookieService.set('userDetails', JSON.stringify(userDetails));
+    
+                if (resp.userRole === "DOCTOR") {
+                  this.router.navigate(['/doctor']);
+                } else if (resp.userRole === "PATIENT") {
+                  this.router.navigate(['/patient']);
+                } else if (resp.userRole === "ADMIN") {
+                  this.router.navigate(['/admin']); 
                 }
               },
               (error) => {
-                console.error('Error getting current user', error);
-                this.toast.error('Error getting current user');
+                console.error('Error getting user details', error);
+                this.toast.error('Error getting user details');
               }
             );
-            if (resp.userRole === "DOCTOR") {
-              this.router.navigate(['/doctor']);
-            } else if (resp.userRole === "PATIENT") {
-              this.router.navigate(['/patient']);
-            } else if (resp.userRole === "ADMIN") {
-              this.router.navigate(['/admin']); 
-            }
           }
         },
         (error) => {
@@ -120,7 +122,7 @@ export class LoginComponent {
           this.toast.error('Error logging in', 'Error Logging In', {progressBar:true} );
         }
       );
-  
+    
       this.loading = false; 
     }, 1000); 
   }

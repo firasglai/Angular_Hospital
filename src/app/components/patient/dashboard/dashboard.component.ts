@@ -109,20 +109,23 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
 //? INIZILISING THE CURRENTUSER
-    this.authService.getActiveUser()
-    .pipe(takeUntil(this.unsubscribe$))
-    .subscribe(
-      (user) => {
-        if (user) {
-          this.userProfile = user;
-          console.log("this is the user id: "+this.userProfile.id)
-        }
-      },
-      (error) => {
-        console.error('Error getting active user', error);
-        
+this.authService.getActiveUser()
+.pipe(takeUntil(this.unsubscribe$))
+.subscribe(
+  ({ currentUser, userDetails }) => {
+    if (currentUser) {
+      this.userProfile = currentUser;
+      console.log("this is the user id: " + this.userProfile.id);
+
+      if (userDetails) {
+        // Handle userDetails if needed
       }
-  );
+    }
+  },
+  (error) => {
+    console.error('Error getting active user', error);
+  }
+);
   const userId = this.userProfile?.id || 0; 
   const PendingStatus = StatusAPT.PENDING;
     this.getAppoitnments(userId);

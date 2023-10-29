@@ -7,7 +7,8 @@ import { TokenService } from './token.service';
 import { UsersService } from '../users/users.service';
 import { Profile } from 'src/app/models/profile';
 import { CookieService } from 'ngx-cookie-service';
-
+import { Doctor } from 'src/app/models/doctor';
+import { Patient } from 'src/app/models/patient';
 @Injectable({
   providedIn: 'root',
 })
@@ -16,10 +17,11 @@ export class SpringAuthService {
   private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this._isLoggedIn$.asObservable();
   private _currentUser$ = new BehaviorSubject<Profile | null>(null);
-  currentUser$ = this._currentUser$.asObservable();
-  user!: User;
-
+  currentUser$ = this._currentUser$.asObservable(); 
+  private _userDetails$ = new BehaviorSubject<Patient | Doctor | null>(null);
+  userDetails$ = this._userDetails$.asObservable();
   currentUser : Profile | null = null;
+  user!: User;
 
   constructor(private http: HttpClient,
     private tokenService: TokenService,
@@ -41,18 +43,19 @@ export class SpringAuthService {
 
  
 
-  getActiveUser(): Observable<Profile | null> {
-    const currentUserData = this.cookieService.get('currentUser');
-    if (currentUserData) {
-      const user = JSON.parse(currentUserData);
-      this._currentUser$.next(user);
-      return this._currentUser$.asObservable();
-    } else {
-      this._currentUser$.next(null);
-      return this._currentUser$.asObservable();
-    }
-  }
-  
+getActiveUser(): Observable<{ currentUser: Profile | null, userDetails: Patient | Doctor | null }> {
+  const currentUserData = this.cookieService.get('currentUser');
+  const userDetailsData = this.cookieService.get('userDetails');
+
+  const currentUser = currentUserData ? JSON.parse(currentUserData) : null;
+  const userDetails = userDetailsData ? JSON.parse(userDetailsData) : null;
+
+  this._currentUser$.next(currentUser);
+  this._userDetails$.next(userDetails);
+
+  return of({ currentUser, userDetails });
+}
+
 
   //? A FUTURE FUNCTION TO STORE CURRENT DOCTOR/PATIENT/ADMIN IN COOKIES STORAGE
   getUserDetails(uid: string) {
@@ -90,6 +93,7 @@ export class SpringAuthService {
     this.tokenService.removeToken();
    this.tokenService.removeUserRole();
    this.cookieService.delete('currentUser');
+   this.cookieService.delete('userDetails');
   }
 
   updateuser(uid: string) {

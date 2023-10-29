@@ -1,3 +1,11 @@
+.body
+{
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px !important;
+
+}
+
 .sidebar{
     background-color: #ffffff;
     border: #A9B4CD solid;
@@ -24,4 +32,17 @@
 }
 .sidebar-button:hover{
    color: #192252;
+}
+.sidebar-button path{
+    fill: #848FAC;
+}
+.sidebar-button.active {
+    color: #192252;
+   background-color: #EFF3FA;
+  }
+  .sidebar-button.active  path{
+    fill: #192252;
+}
+button svg{
+    margin-right: 10px;
 }

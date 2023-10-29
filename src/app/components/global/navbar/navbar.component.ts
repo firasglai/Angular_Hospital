@@ -22,18 +22,22 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.getActiveUser()
-    .pipe(takeUntil(this.unsubscribe$))
-    .subscribe(
-      (user) => {
-        if (user) {
-          this.user = user;
-        }
-      },
-      (error) => {
-        console.error('Error getting active user', error);
-        
+.pipe(takeUntil(this.unsubscribe$))
+.subscribe(
+  ({ currentUser, userDetails }) => {
+    if (currentUser) {
+      this.user = currentUser;
+      console.log("this is the user id: " + this.user.id);
+
+      if (userDetails) {
+        // Handle userDetails if needed
       }
-  );
+    }
+  },
+  (error) => {
+    console.error('Error getting active user', error);
+  }
+);
   }
   ngOnDestroy() {
     this.unsubscribe$.next();
