@@ -56,7 +56,6 @@ import { PresenceService } from './services/presence.service';
 import { ChatWindowComponent } from './components/main/chat-window/chat-window.component';
 import { AppoitmentComponent } from './components/doctor/appoitment/appoitment.component';
 import { MatSelectModule } from '@angular/material/select';
-import { AppoitmentComponent as AppoitmentComponentp } from './components/patient/appoitment/appoitment.component';
 import { PatientComponent } from './components/patient/patient.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { TokenInterceptorService } from './services/authentication/token-interceptor.service';
@@ -93,6 +92,9 @@ import { NotFoundComponent } from './components/main/not-found/not-found.compone
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import {MatTabsModule} from '@angular/material/tabs';
+import { CalendarComponent } from './components/patient/calendar/calendar.component';
+import { AppointmentsComponent } from './components/patient/appointments/appointments.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 //import { EffectsModule } from '@ngrx/effects';
 //import { UserEffects } from './store/effects/user-effects';
 export function playerFactory() {
@@ -127,7 +129,7 @@ export function playerFactory() {
     InboxComponentp,
     TransactionComponentp,
     PatientlistComponentp,
-    AppoitmentComponentp,
+    CalendarComponent,
     DashboardComponentp,
     FinishRgisterDoctorComponent,
     FinishRgisterPatientComponent,
@@ -143,7 +145,8 @@ export function playerFactory() {
     AppointmentBookingComponent,
     PasswordRecoverComponent,
     NotFoundComponent,
-    
+    AppointmentsComponent,
+
   ],
   imports: [
     //! DEPRECATED
@@ -179,7 +182,7 @@ export function playerFactory() {
     MatDialogModule,
     MatTooltipModule,
     MatTabsModule,
-    //? DATE AND TIMEPICKER IMPORTS
+    MatProgressSpinnerModule,    //? DATE AND TIMEPICKER IMPORTS
     NgxMaterialTimepickerModule,
     MatDatepickerModule,
     MatNativeDateModule,

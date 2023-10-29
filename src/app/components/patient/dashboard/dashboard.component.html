@@ -37,9 +37,9 @@
             <th>Action</th> <!-- Displays a column for actions related to payments -->
           </tr>
         </thead>
-        <tbody *ngFor="let P of userAppointments"> <!-- Iterates through an array of lastPayments to display payment information -->
+        <tbody *ngFor="let P of userAppointments"> 
           <tr>
-            <td class="patient-column"><img src='assets/image/d1.png' class="Patient-profile"> <!-- Displays the profile picture of the patient -->
+            <td class="patient-column"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="Patient-profile"> <!-- Displays the profile picture of the patient -->
               <div style="padding-left: 15px;">
                 <div class="patient-column-name">{{P?.doctor?.fullName || 'Name not available'}}</div> <!-- Displays the name and title of the patient -->
                 <div class="patient-column-id">{{P?.doctor?.id || 'ID not available'}}</div> <!-- Displays the ID of the patient -->

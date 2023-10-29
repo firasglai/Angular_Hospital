@@ -1,0 +1,27 @@
+.sidebar{
+    background-color: #ffffff;
+    border: #A9B4CD solid;
+    border-width:  0 1px 0 0 ;
+    height: 100%;
+    display: flex;
+    columns: auto;
+    flex-direction: column;
+    width: 351.23px    ;
+    z-index: 3;
+    padding: 30px 20px;
+    position: sticky;
+}
+.sidebar-button{
+    font-size:  larger;
+    background-color: #ffffff;
+    color: #848FAC;
+    border: white solid;
+    border-width:   0 0 0px  0;
+    text-align: left;
+    padding-left: 15px;
+    padding: 30px 40px;
+    border-radius: 10px;
+}
+.sidebar-button:hover{
+   color: #192252;
+}

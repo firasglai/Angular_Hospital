@@ -25,7 +25,6 @@ import { AccountComponent as PatientAccount} from './components/patient/account/
 import { AnalyticsComponent as AnalyticsComponentp } from './components/patient/analytics/analytics.component';
 import { InboxComponent as InboxComponentp } from './components/patient/inbox/inbox.component';
 import { TransactionComponent as TransactionComponentp } from './components/patient/transaction/transaction.component';
-import { AppoitmentComponent as AppoitmentComponentp } from './components/patient/appoitment/appoitment.component';
 import { PatientlistComponent as PatientlistComponentp } from './components/patient/patientlist/patientlist.component';
 import {
   canActivate,
@@ -42,6 +41,8 @@ import { PatGuardGuard } from './shared/pat-guard.guard';
 import { SearchDoctorComponent } from './components/patient/search-doctor/search-doctor.component';
 import { HasRoleGuard } from './guard/has-role.guard';
 import { ProfilePageComponent } from './components/global/profile-page/profile-page.component';
+import { CalendarComponent } from './components/patient/calendar/calendar.component';
+import { AppointmentsComponent } from './components/patient/appointments/appointments.component';
 
 const redirectToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectToHome = () => redirectLoggedInTo(['doctor']);
@@ -161,6 +162,12 @@ const routes: Routes = [
         canActivate: [PatGuardGuard],
       },
       {
+        path: 'appointments',
+        component: AppointmentsComponent,
+        canActivate: [PatGuardGuard],
+      },
+      
+      {
         path: 'inbox',
         component: InboxComponentp,
         canActivate: [PatGuardGuard],
@@ -171,8 +178,8 @@ const routes: Routes = [
         canActivate: [PatGuardGuard],
       },
       {
-        path: 'appoitment',
-        component: AppoitmentComponentp,
+        path: 'calendar',
+        component: CalendarComponent,
         canActivate: [PatGuardGuard],
       },
       {

@@ -108,8 +108,6 @@ export class DashboardComponent implements OnInit {
   
 
   ngOnInit(): void {
-   
-
 //? INIZILISING THE CURRENTUSER
     this.authService.getActiveUser()
     .pipe(takeUntil(this.unsubscribe$))

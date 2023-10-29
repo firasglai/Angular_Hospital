@@ -19,7 +19,7 @@ import {
   CalendarView,
 } from 'angular-calendar';
 import { EventColor } from 'calendar-utils';
-import { AppointmentDetailsComponent } from './../modals/appointment-details/appointment-details.component';
+import { AppointmentDetailsComponent } from '../modals/appointment-details/appointment-details.component';
 import { Appointment } from 'src/app/models/appointment';
 import { Patient } from 'src/app/models/patient';
 import { Doctor } from 'src/app/models/doctor';
@@ -47,13 +47,13 @@ const colors: Record<string, EventColor> = {
 
 
 @Component({
-  selector: 'app-appoitment',
-  templateUrl: './appoitment.component.html',
+  selector: 'app-calendar',
+  templateUrl: './calendar.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./appoitment.component.css']
+  styleUrls: ['./calendar.component.css']
 })
 
-export class AppoitmentComponent implements OnInit, AfterViewInit {
+export class CalendarComponent implements OnInit, AfterViewInit {
 
   userProfile: Profile | null = {};
   userAppointments: Appointment[] = [];

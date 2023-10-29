@@ -3,6 +3,10 @@ import { Observable, of } from 'rxjs';
 import { patientProfile } from 'src/app/models/user-profile';
 import { Doctor } from 'src/app/services/doctor-services.service';
 import { patientService } from 'src/app/services/patientService';
+import { Appointment } from 'src/app/models/appointment';
+import { AppointmentService } from 'src/app/services/appointment/appointment.service';
+import { SpringAuthService } from 'src/app/services/authentication/spring-auth.service';
+import { Profile } from 'src/app/models/profile';
 interface appointmentHistory {
   history: AppointmentRecord[]
 }
@@ -49,26 +53,28 @@ export class PatientlistComponent implements OnInit {
   totalPages:number=0
   profilesDetails:patientDetails[]=[]
   user!:patientProfile
-  constructor(private patser:patientService){
-    this.patser.patient.subscribe((k)=>{
-      this.user=k
-      console.log(k)
-    })
-  }
+  constructor(
+              private patser:patientService,
+              private SpringAuthService:SpringAuthService,
+              private appointmentService:AppointmentService,
+
+
+    ){
+  
+    }
+  
   ngOnInit(): void {
+    
     this.getpatients()
   }
   getpatients() {
-
     this.patser.patient.subscribe((k)=>{
       this.user=k
       console.log(k)
       console.log(this.user)
       this.patser.getalldoctors(0,9).subscribe((re)=>{
-        let resu=re as unknown as Doctor[]
-       
+        let resu=re as unknown as Doctor[]    
         this.pages = this.paginate(resu, 9);
-     
       })
 
     console.log(this.pages)
@@ -76,9 +82,7 @@ export class PatientlistComponent implements OnInit {
     
 
   }
-  setapps(){
-
-  }
+ 
   paginate(items: Doctor[], pageSize: number): Doctor[][] {
     const pages = [];
     let currentPage: Doctor[] = [];

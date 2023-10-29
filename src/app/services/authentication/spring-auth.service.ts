@@ -52,6 +52,7 @@ export class SpringAuthService {
       return this._currentUser$.asObservable();
     }
   }
+  
 
   //? A FUTURE FUNCTION TO STORE CURRENT DOCTOR/PATIENT/ADMIN IN COOKIES STORAGE
   getUserDetails(uid: string) {
