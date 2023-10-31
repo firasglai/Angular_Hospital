@@ -1,1 +1,77 @@
-<p>appointments works!</p>
+<div class="container">
+    <div class="header">
+        <h1>Appointments </h1>
+    </div>
+        <div class="search-filters">
+            <form class="form-field">
+                <mat-form-field class="search-bar">
+                  <mat-label>Search Here</mat-label>
+                  <input type="tel" matInput placeholder="Doctor Name">
+                  <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+              </form>
+            <mat-chip-listbox  aria-label="Status filter">
+                <mat-chip-option>Pending</mat-chip-option>
+                <mat-chip-option style="border-inline-color: #4b9297 " >Approved</mat-chip-option>
+                <mat-chip-option color="accent" selected>Canceled</mat-chip-option>
+                <mat-chip-option color="warn">Done</mat-chip-option>
+              </mat-chip-listbox>
+        </div>
+        <div class="payments">
+            <h5>Recent Appoitments</h5> <!-- Displays a heading for recent payment information -->
+            <div class="table-container">
+              <table class="table table-borderless">
+                <thead>
+                  <tr>
+                    <th>Doctor</th> 
+                    <th>Speciality</th>
+                    <th>Date</th>
+                    <th>Reason</th> 
+                    <th>Status</th> 
+                    <th>Action</th> 
+                  </tr>
+                </thead>
+                <tbody *ngFor="let P of appointments"> 
+                  <tr>
+                    <td class="patient-column"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="Patient-profile"> <!-- Displays the profile picture of the patient -->
+                      <div style="padding-left: 15px;">
+                        <div class="patient-column-name">{{P?.doctor?.fullName || 'Name not available'}}</div> <!-- Displays the name and title of the patient -->
+                        <div class="patient-column-id">{{P?.doctor?.id || 'ID not available'}}</div> <!-- Displays the ID of the patient -->
+                      </div>
+                    </td>
+                    <td class="appointment-column">
+                      {{P?.doctor?.specialty?.name || 'Specialty not available'}}<!-- Displays the speciality of the patient -->
+                    </td>
+                    <td class="date-column">
+                      {{P?.date || 'Date not available'}} <!-- Displays the payment date -->
+                    </td>
+                    <td class="total-column">
+                      <div class="total-column-amount">{{P?.reason || 'Reason not available'}}</div> <!-- Displays the payment amount -->
+        
+                    </td>
+                    <td class="statu-column {{P['statusAPT']}}">
+                      <div class="statu-column  {{P['statusAPT']}}">
+                        {{P?.statusAPT || 'Status not available'}}
+                      </div>
+                    </td>
+                    <td class="action-column  custom-action-column">
+                      <div class="action-icons">
+                        <i class="fas fa-eye" ></i> <!--TO ADD APPOINTMENT DETAILS PAGE-->
+                        <i class="fas fa-print" ></i> <!-- PRINT DETAILS OF APPOINTMENT -->
+                        <i class="fas fa-trash"></i> <!-- DELETE APPOINTMENT -->
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="paginator">
+            <mat-paginator [length]="100"
+            [pageSize]="10"
+            [pageSizeOptions]="[5, 10, 25, 100]"
+            aria-label="Select page">
+            </mat-paginator>
+          </div>
+    
+</div>

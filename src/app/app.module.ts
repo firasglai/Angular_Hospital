@@ -95,6 +95,9 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { CalendarComponent } from './components/patient/calendar/calendar.component';
 import { AppointmentsComponent } from './components/patient/appointments/appointments.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatPaginatorModule} from '@angular/material/paginator';
 //import { EffectsModule } from '@ngrx/effects';
 //import { UserEffects } from './store/effects/user-effects';
 export function playerFactory() {
@@ -186,6 +189,9 @@ export function playerFactory() {
     NgxMaterialTimepickerModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatChipsModule,
+    MatSlideToggleModule,
+    MatPaginatorModule,
   
     ToastrModule.forRoot(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),

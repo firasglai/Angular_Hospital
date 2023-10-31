@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Chart, registerables, ChartConfiguration } from 'node_modules/chart.js';
 import { Observable, Subject, of, takeUntil } from 'rxjs';
 import { ProfileUser, patientProfile } from 'src/app/models/user-profile';
@@ -42,7 +42,7 @@ const getpatientdata: Observable<patientData[]> = of([{
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit , OnDestroy {
 
 
   private unsubscribe$ = new Subject<void>();
@@ -126,9 +126,9 @@ this.authService.getActiveUser()
     console.error('Error getting active user', error);
   }
 );
-  const userId = this.userProfile?.id || 0; 
+  const userId = this.userProfile?.id; 
   const PendingStatus = StatusAPT.PENDING;
-    this.getAppoitnments(userId);
+    this.getAppoitnments(userId!);
       console.log(this.userAppointments)
   this.sortdetails();
   }

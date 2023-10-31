@@ -1,0 +1,170 @@
+
+h1 {
+  color: #192252; 
+  margin-bottom: 50px; 
+  font-weight: 700;
+  font-style: italic;
+}
+h3{
+    padding-top: 20px;
+    padding-left: 20px;
+    color: #192252;
+}
+h5{
+    padding: 0px 0 3px 0;
+    color: #192252;
+    font-weight: 500;
+    font-size: 23px;
+}
+.body{
+    margin: 0px 20px;
+    width: -webkit-fill-available !important;
+    width: fill-available !important;
+    padding-bottom: 20px;
+}
+.payments{
+    min-width: calc(100% - 20px) !important;
+    border-width: 1px;
+    border-color: #A9B4CD;
+    border-style: solid;
+    border-radius: 10px;
+    padding: 15px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
+    }
+    .table-container{
+        margin: 10px 5px 0px 5px;
+        width: 100%;
+    }
+    thead{
+        background-color: #EFF3FA;
+        color: #192252;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+      
+        border-radius: 5px 0 0 5px !important;
+        
+    }thead th {
+        vertical-align: middle;
+        font-weight: 500;
+        font-size: 20px;
+        padding: 17px 25px;
+      }
+     
+    thead th:first-child {
+        border-radius: 7px 0 0 7px;
+      }
+      thead th:last-child {
+        border-radius: 0 7px   7px 0;
+      }
+      thead th:first-child{
+        font-weight: 500;
+        font-size: 20px;
+        padding: 17px 25px;
+       
+      }
+      tbody tr{
+        vertical-align: middle;
+       
+      }
+      .Patient-profile{
+        border-radius: 50%;
+        width: 60px;
+      }
+    .patient-column{
+        display: flex;
+        margin: 3px 0 0px 0;
+    }
+    .patient-column-name{
+     font-size: 15px;
+     font-weight: 600;
+     color: #192252;
+    }
+    .patient-column-id{
+        font-size: 15px;
+        color: #A9B4CD;
+    }
+    .appointment-column{
+        font-size: 18px;
+        font-weight: 400;
+        color: #192252;
+    }
+    .date-column{
+        font-size: 16px;
+        font-weight: 600;
+        color: #192252;
+    }
+    .total-column{
+    
+    }
+    .total-column-amount{
+        font-size: 16px;
+        font-weight: 600;
+        color: #192252;
+    }
+    .total-column-method{
+        font-size: 15px;
+        color: #A9B4CD;
+    }
+    .statu-column{
+        border-radius: 5px;
+        padding: 10px;
+        text-align: center;
+    }
+    .statu-column .APPROVED{
+        color: #0F595A;
+        background-color: #CFFCD4;
+    
+    }
+    .statu-column .PENDING{
+        color: #7A4B04;
+        background-color: #FFF7D0;
+    }
+    .statu-column .CANCELED{
+        color: #7A0E40;
+        background-color: #FFE4DB;
+    }
+    .statu-column .DONE{
+        color: #0b31ef;
+        background-color: #FFE4DB;
+    }
+  
+    .action-icons {
+        display: flex;
+        justify-content: flex-start;
+        font-size: 22px;
+      }
+      
+      .action-icons i {
+        cursor: pointer;
+        color: #848FAC;;
+        margin-right: 5px;
+        background-color: transparent;
+        padding: 10px;
+        border-radius: 50%;
+      }
+      
+      .action-icons i:hover {
+        background-color: #EFF3FA;
+        color: #192252; /* Change the color on hover to blue, you can use any desired color */
+      }
+      .custom-action-column {
+        width: 60px; /* Adjust the width to make the action column smaller or larger */
+      }
+      .search-filters{
+      display: flex;
+      justify-content: space-between;
+      align-self: start;  
+      }
+      .form-field {
+        min-width: 150px;
+        max-width: 500px;
+        width: 100%;
+      }
+      
+      .search-bar {
+        width: 100%;
+        padding-left: 20px;
+      }
+    

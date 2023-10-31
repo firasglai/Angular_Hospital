@@ -1,3 +1,10 @@
+
+h1 {
+    color: #2a3563; 
+    margin-bottom: 50px; 
+    font-weight: 700;
+    font-style: italic;
+  }
 h3{
     padding-top: 20px;
     padding-left: 20px;
@@ -216,3 +223,5 @@ thead th:first-child {
   .custom-action-column {
     width: 60px; /* Adjust the width to make the action column smaller or larger */
   }
+
+  
