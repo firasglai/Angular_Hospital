@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Chart, registerables, ChartConfiguration } from 'node_modules/chart.js';
-import { Observable, Subject, of, takeUntil } from 'rxjs';
+import { Observable, Subject, of, switchMap, takeUntil } from 'rxjs';
 import { ProfileUser, patientProfile } from 'src/app/models/user-profile';
 import { patientService } from 'src/app/services/patientService';
 import { Appointment } from 'src/app/models/appointment';
@@ -69,7 +69,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
     }
 
 
-      //! to change to get recent appointments
+      //! to change to get Approved appointments
       getAppoitnments(userId: number) {
         this.appointmentService.getUserAppointments(userId)
           .subscribe(
@@ -81,6 +81,21 @@ export class DashboardComponent implements OnInit , OnDestroy {
             }
           );
       }
+
+      getAppointmentsForActiveUser(patientId: number) {
+        this.appointmentService.getUpcomingPatientAppointments(patientId)
+          .pipe(takeUntil(this.unsubscribe$))
+          .subscribe(
+            (appointments) => {
+              this.userAppointments = appointments;
+              console.log(this.userAppointments);
+            },
+            (error) => {
+              console.error('Error fetching upcoming patient appointments:', error);
+            }
+          );
+      }
+      
 
 
   // Function to calculate percentage based on patient data
@@ -108,35 +123,31 @@ export class DashboardComponent implements OnInit , OnDestroy {
   
 
   ngOnInit(): void {
-//? INIZILISING THE CURRENTUSER
-this.authService.getActiveUser()
-.pipe(takeUntil(this.unsubscribe$))
-.subscribe(
-  ({ currentUser, userDetails }) => {
-    if (currentUser) {
-      this.userProfile = currentUser;
-      console.log("this is the user id: " + this.userProfile.id);
+    //? INIZILISING THE CURRENTUSER
+    this.authService.getActiveUser()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(
+        ({ currentUser, userDetails }) => {
+          if (currentUser) {
+            this.userProfile = currentUser;
+            console.log("this is the user id: " + this.userProfile.id);
+  
+            if (userDetails) {
+              // Handle userDetails if needed
+            }
+  
+            const patientId = userDetails?.id;
+            if (patientId) {
+              this.getAppointmentsForActiveUser(patientId);
+            }
+          }
+        },
+        (error) => {
+          console.error('Error getting active user', error);
+        }
+      );
+  }
 
-      if (userDetails) {
-        // Handle userDetails if needed
-      }
-    }
-  },
-  (error) => {
-    console.error('Error getting active user', error);
-  }
-);
-  const userId = this.userProfile?.id; 
-  const PendingStatus = StatusAPT.PENDING;
-    this.getAppoitnments(userId!);
-      console.log(this.userAppointments)
-  this.sortdetails();
-  }
-  sortdetails() {
-    // Calculate the total data
-    this.patientDatas1=this.calculateStatusPercentage(this.patientDatas1)
-    
-  }
  
   calculateStatusPercentage(patients: patientData[]): patientData[] {
     patients=this.patientDatas1

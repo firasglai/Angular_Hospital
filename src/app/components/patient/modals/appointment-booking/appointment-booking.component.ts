@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AppointmentService } from 'src/app/services/appointment/appointment.service';
 import { Appointment } from 'src/app/models/appointment';
-import { taskAppointmentSvg } from 'src/assets/svg/task-appointment';
+
 @Component({
   selector: 'app-appointment-booking',
   templateUrl: './appointment-booking.component.html',

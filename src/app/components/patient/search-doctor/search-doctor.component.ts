@@ -91,7 +91,9 @@ export class SearchDoctorComponent implements OnInit {
   maploading = false;
   totalpages = 0;
   pagecounte = 0;
+  //!Deprecated
   doctorArray: Doctor[] = [];
+  //? Used WITH DOCTORMODEL
   doctors: DoctorModel[] = [];
   circleSize: number = 20000;
   @Input() selectedDate!: Date;
@@ -235,7 +237,7 @@ searchDoctorsBySpeciality() {
           this.doctors = doctors;
           }
           else {
-            //handle no Doctors Availaible Animation Show
+            this.doctors= [];
           }
           // Hide the loading spinner after a timeout (e.g., 2 seconds)
          this.loading= false 

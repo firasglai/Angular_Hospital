@@ -252,8 +252,9 @@
           <div *ngIf="loading" class="loading-spinner">
             <img width="300px" src="assets/loading-unscreen.gif" alt="Loading..." />
           </div>
-
-        <div
+          <!-- Doctors Card -->
+          <ng-container *ngIf="doctors; else noDoctors">
+            <div
           class="col-4"
           style="padding-top: 10px"
           *ngFor="let d of doctors"
@@ -301,6 +302,15 @@
             </div>
           </div>
         </div>
+          </ng-container>
+        
+        <!--NO DOCTORS -->
+        <ng-template #noDoctors>
+          <div class="no-result">
+            <!-- Display no-result SVG here -->
+            <img src="assets/svg/no-results.svg" alt="No Results" />
+          </div>
+        </ng-template>
       </div>
     </div>
   </div>

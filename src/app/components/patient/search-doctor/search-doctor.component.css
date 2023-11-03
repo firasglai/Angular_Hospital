@@ -613,3 +613,9 @@ padding: 12px 12px;
   margin-top: 20px;
   width: 100%;
 }
+
+.no-result{
+  justify-content: center;
+  height: 50px;
+  width: 50px;
+}
