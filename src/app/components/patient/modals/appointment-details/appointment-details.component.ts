@@ -11,7 +11,7 @@ export class AppointmentDetailsComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<AppointmentDetailsComponent>
   ){
-
+      //console.log("Detaildata", data)
   }
   closeDialog(): void {
     this.dialogRef.close();

@@ -11,6 +11,8 @@ import { Store, select } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
 import { selectCurrentUser } from 'src/app/store/selectors/user-selector';
 import { StatusAPT } from 'src/app/enum/status-apt';
+import { AppointmentDetailsComponent } from '../modals/appointment-details/appointment-details.component';
+import { MatDialog } from '@angular/material/dialog';
 
 Chart.register(...registerables)
 
@@ -63,6 +65,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
   constructor(private patService:patientService,
     private authService: SpringAuthService,
     private appointmentService: AppointmentService,
+    private dialog: MatDialog
     ) {
     
 
@@ -95,7 +98,13 @@ export class DashboardComponent implements OnInit , OnDestroy {
             }
           );
       }
-      
+      openAppointmentDetailsModal(appointmentData: any, enterAnimationDuration: string, exitAnimationDuration: string): void {
+        const dialogRef = this.dialog.open(AppointmentDetailsComponent, {
+          width: '800px',
+          height: '500px',
+          data: { appointment: appointmentData } // Pass the appointment data to the modal
+        });
+      }
 
 
   // Function to calculate percentage based on patient data
