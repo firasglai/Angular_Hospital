@@ -11,10 +11,11 @@
                 </mat-form-field>
               </form>
             <mat-chip-listbox  aria-label="Status filter">
-                <mat-chip-option>Pending</mat-chip-option>
-                <mat-chip-option style="border-inline-color: #4b9297 " >Approved</mat-chip-option>
-                <mat-chip-option color="accent" selected>Canceled</mat-chip-option>
-                <mat-chip-option color="warn">Done</mat-chip-option>
+              <mat-chip-option (click)="onStatusFilter('PENDING')">Pending</mat-chip-option>
+  <mat-chip-option (click)="onStatusFilter('APPROVED')">Approved</mat-chip-option>
+  <mat-chip-option (click)="onStatusFilter('CANCELLED')" color="accent">Canceled</mat-chip-option>
+  <mat-chip-option (click)="onStatusFilter('DONE')" color="warn">Done</mat-chip-option>
+  <mat-chip-option (click)="onStatusFilter(null)" color="accent">All</mat-chip-option>
               </mat-chip-listbox>
         </div>
         <div class="payments">
@@ -30,7 +31,7 @@
                     <th>Action</th> 
                   </tr>
                 </thead>
-                <tbody *ngFor="let P of appointments"> 
+                <tbody *ngFor="let P of displayedAppointments"> 
                   <tr>
                     <td class="patient-column"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="Patient-profile"> <!-- Displays the profile picture of the patient -->
                       <div style="padding-left: 15px;">
@@ -61,16 +62,22 @@
                       </div>
                     </td>
                   </tr>
+                
                 </tbody>
+              
               </table>
+              <div class="paginator">
+                <mat-paginator
+                [length]="appointments.length"
+                [pageSize]="pageSize"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+                (page)="onPageChange($event)"
+                aria-label="Select page"
+              >
+              </mat-paginator>
+              </div>
             </div>
           </div>
-          <div class="paginator">
-            <mat-paginator [length]="100"
-            [pageSize]="10"
-            [pageSizeOptions]="[5, 10, 25, 100]"
-            aria-label="Select page">
-            </mat-paginator>
-          </div>
+         
     
 </div>

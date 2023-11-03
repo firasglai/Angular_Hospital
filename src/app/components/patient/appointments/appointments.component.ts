@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Appointment } from 'src/app/models/appointment';
 import { AppointmentService } from 'src/app/services/appointment/appointment.service';
 import { Router } from '@angular/router';
@@ -6,6 +6,7 @@ import { SpringAuthService } from 'src/app/services/authentication/spring-auth.s
 import { StatusAPT } from 'src/app/enum/status-apt';
 import { Profile } from 'src/app/models/profile';
 import { Subject, takeUntil } from 'rxjs';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 @Component({
   selector: 'app-appointments',
   templateUrl: './appointments.component.html',
@@ -13,8 +14,15 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class AppointmentsComponent  implements OnInit{
   appointments: Appointment[] = [];
+  displayedAppointments: Appointment[] = [];
   userProfile: Profile | null = {};
   private unsubscribe$ = new Subject<void>();
+  selectedStatus: string | null = null;
+  //initlize Paginator variables
+  page = 0;
+  pageSize = 10;
+    // Inject the MatPaginator
+    @ViewChild(MatPaginator) paginator!: MatPaginator;
   
   constructor(
     private appointmentService: AppointmentService,
@@ -50,11 +58,36 @@ export class AppointmentsComponent  implements OnInit{
       .subscribe(
         (appointments) => {
           this.appointments = appointments;
+          this.updateDisplayedAppointments();
         },
         (error) => {
           console.error('Error fetching appointments with status PENDING:', error);
         }
       );
+  }
+  //? UPDATING THE DISPLAYED APPOINTMENTS BASED ON PAGINATOR
+  updateDisplayedAppointments() {
+    const startIndex = this.page * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+  
+    if (this.selectedStatus) {
+      this.displayedAppointments = this.appointments
+        .filter(appointment => appointment.statusAPT === this.selectedStatus)
+        .slice(startIndex, endIndex);
+    } else {
+      this.displayedAppointments = this.appointments.slice(startIndex, endIndex);
+    }
+  }
+
+  onPageChange(event: PageEvent) {
+    this.page = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.updateDisplayedAppointments();
+  } 
+
+  onStatusFilter(status: string | null) {
+    this.selectedStatus = status;
+    this.updateDisplayedAppointments();
   }
   ngOnDestroy() {
     this.unsubscribe$.next();
