@@ -5,7 +5,7 @@ export interface Appointment {
   id?: number;
   date: Date; 
   reason: string;
-  statusAPT: StatusAPT;
+  statusAPT?: StatusAPT;
   doctor: Doctor;
   patient: Patient;
 }

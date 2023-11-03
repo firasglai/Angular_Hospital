@@ -98,6 +98,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatBadgeModule} from '@angular/material/badge';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+
 //import { EffectsModule } from '@ngrx/effects';
 //import { UserEffects } from './store/effects/user-effects';
 export function playerFactory() {
@@ -185,13 +188,15 @@ export function playerFactory() {
     MatDialogModule,
     MatTooltipModule,
     MatTabsModule,
-    MatProgressSpinnerModule,    //? DATE AND TIMEPICKER IMPORTS
-    NgxMaterialTimepickerModule,
-    MatDatepickerModule,
+    MatProgressSpinnerModule,    
+    NgxMaterialTimepickerModule,//? MATERIAL TIMEPICKER MODULE
+    TimepickerModule,//? BOOTSTRAP TIMEPICKER MODULE
+    MatDatepickerModule,//? DATE MATERIAL IMPORTS
     MatNativeDateModule,
     MatChipsModule,
     MatSlideToggleModule,
     MatPaginatorModule,
+    MatBadgeModule,
   
     ToastrModule.forRoot(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),

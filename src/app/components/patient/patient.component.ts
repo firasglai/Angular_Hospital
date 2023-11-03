@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, Subject, Unsubscribable, map, take, takeUntil } from 'rxjs';
 import { CALL } from 'src/app/models/chat';
 import { ProfileUser, patientProfile } from 'src/app/models/user-profile';
-import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { AuthenticationService } from 'src/app/services/authentication/auth2.service';
 import { ChatsService } from 'src/app/services/chats.service';
 import { call } from 'src/app/services/doctor/doctor-chat.service';
 import { PatientChatService } from 'src/app/services/patient/patient-chat.service';

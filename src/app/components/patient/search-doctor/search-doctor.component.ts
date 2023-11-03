@@ -20,7 +20,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DoctorProfileComponent } from '../modals/doctor-profile/doctor-profile.component';
 import { AppointmentBookingComponent } from '../modals/appointment-booking/appointment-booking.component';
 import { AnimationOptions } from 'ngx-lottie';
-
+import { SpringAuthService } from 'src/app/services/authentication/spring-auth.service';
 interface citie {
   id: String;
   gov: string;
@@ -120,7 +120,9 @@ export class SearchDoctorComponent implements OnInit {
     private elementRef: ElementRef,
     private specialtyservice: SpecialtyService,
     private doctorService: DoctorService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private auth: SpringAuthService,  
+    
   ) {
     this.currentMonth = new Date();
     this.selectedDate1 = new Date().toDateString();
@@ -219,7 +221,6 @@ searchDoctorsBySpeciality() {
   if (this.selectedspeciality) {
     const specialityName = this.selectedspeciality.name; 
     console.log("SpecialtyName : "+ specialityName)
-
     // Hide the Lottie animation first
     this.showAnimation = false;
     this.loading = true;
@@ -229,17 +230,19 @@ searchDoctorsBySpeciality() {
       this.specialtyservice
         .getDoctorsBySpeciality(specialityName)
         .subscribe((doctors) => {
-          console.log("THE DOCTORS HERE :"+ doctors);
+          if (doctors){
+            console.log("THE DOCTORS HERE :"+ doctors);
           this.doctors = doctors;
-
+          }
+          else {
+            //handle no Doctors Availaible Animation Show
+          }
           // Hide the loading spinner after a timeout (e.g., 2 seconds)
          this.loading= false 
         });
     }, 1000);
   }
 }
-
-
   //? VIEW DOCTOR PROFILE DIALOG
   openDialog(doctor:DoctorModel,enterAnimationDuration: string, exitAnimationDuration: string): void {
     const dialogRef = this.dialog.open(DoctorProfileComponent, {
@@ -257,21 +260,25 @@ searchDoctorsBySpeciality() {
     });
   }
   //? APPOINTMENT BOOKING DIALOG WITH ROUTING
-  openBookingDialog(doctor:DoctorModel, enterAnimationDuration: string, exitAnimationDuration: string){
-    const dialogRef = this.dialog.open(AppointmentBookingComponent, {
-        data: {
-          doctorID:doctor.id,
-          doctorName: doctor.fullName,
-          patientId: 123,
-          specialityName: doctor.specialty?.name
-        },
-        height:'800px',
-        width:'800px',
-        enterAnimationDuration,
-        exitAnimationDuration
-    }
-    )
-  }
+  openBookingDialog(doctor: DoctorModel, enterAnimationDuration: string, exitAnimationDuration: string) {
+    this.auth.getActiveUser().subscribe(({ userDetails }) => {
+        const dialogRef = this.dialog.open(AppointmentBookingComponent, {
+            data: {
+                doctorId: doctor.id,
+                doctorName: doctor.fullName,
+                patientId: userDetails?.id, // Extract patient ID from UserDetails cookies
+                patientName: userDetails?.fullName,
+                specialityName: doctor.specialty?.name
+            },
+            height: '1000px',
+            width: '1000px',
+            //scrollStrategy: this.overlay.scrollStrategies.block(),
+            enterAnimationDuration,
+            exitAnimationDuration
+        });
+    });
+}
+
 
   //!DEPRECATED
   unsubscribetodoctor() {

@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router , ActivatedRoute} from '@angular/router';
 import { AnimationItem } from 'lottie-web/build/player/lottie_light';
 import { AnimationOptions } from 'ngx-lottie';
-import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { AuthenticationService } from 'src/app/services/authentication/auth2.service';
 import { ToastrService } from 'ngx-toastr';
 import { catchError, tap, forkJoin } from 'rxjs';
 import { User } from 'src/app/models/user.model';
@@ -14,11 +14,8 @@ import { UsersService } from 'src/app/services/users/users.service';
 import { Profile } from 'src/app/models/profile';
 import { Store,select } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
-import * as UserActions from '../../../store/actions/user-actions'
-interface response{
-  token:string,
-  user:User
-}
+//import * as UserActions from '../../../store/actions/user-actions'
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -101,7 +98,6 @@ export class LoginComponent {
                 const { currentUser, userDetails } = responses;
                 this.cookieService.set('currentUser', JSON.stringify(currentUser));
                 this.cookieService.set('userDetails', JSON.stringify(userDetails));
-    
                 if (resp.userRole === "DOCTOR") {
                   this.router.navigate(['/doctor']);
                 } else if (resp.userRole === "PATIENT") {
@@ -122,7 +118,6 @@ export class LoginComponent {
           this.toast.error('Error logging in', 'Error Logging In', {progressBar:true} );
         }
       );
-    
       this.loading = false; 
     }, 1000); 
   }

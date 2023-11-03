@@ -5,7 +5,7 @@ import { Database, getDatabase, onDisconnect, onValue, push, ref, set, update } 
 import { Observable, Subject, Subscription, filter, from, interval, map, of, pipe, pluck, switchMap, take, takeUntil, tap } from 'rxjs';
 import { CALL, Call, Callstatu, Chat } from 'src/app/models/chat';
 import { ProfileUser } from 'src/app/models/user-profile';
-import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { AuthenticationService } from 'src/app/services/authentication/auth2.service';
 
 import { ChatsService } from 'src/app/services/chats.service';
 import { PresenceService } from 'src/app/services/presence.service';

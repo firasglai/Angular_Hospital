@@ -57,11 +57,7 @@ getActiveUser(): Observable<{ currentUser: Profile | null, userDetails: Patient 
 }
 
 
-  //? A FUTURE FUNCTION TO STORE CURRENT DOCTOR/PATIENT/ADMIN IN COOKIES STORAGE
-  getUserDetails(uid: string) {
 
-  }
-  
 
   isAuthenticated() {
     if (this.tokenService.getToken() == '') {

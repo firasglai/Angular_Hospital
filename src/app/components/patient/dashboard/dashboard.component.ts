@@ -172,14 +172,14 @@ this.authService.getActiveUser()
     const statusCounts:any = {};
   
     // Calculate status counts from userAppointments
-    for (const appointment of this.userAppointments) {
-      const status = appointment.statusAPT;
-      if (statusCounts[status]) {
-        statusCounts[status]++;
-      } else {
-        statusCounts[status] = 1;
-      }
-    }
+   // for (const appointment of this.userAppointments) {
+      //const status = appointment.statusAPT;
+     // if (statusCounts[status]) {
+    //    statusCounts[status]++;
+    //  } else {
+     //   statusCounts[status] = 1;
+    //  }
+   // }
   
     // Convert status counts into data and labels arrays
     for (const [status, count] of Object.entries(statusCounts)) {

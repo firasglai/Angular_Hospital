@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Observable, Subject, Unsubscribable, map, take, takeUntil } from 'rxjs';
 import { CALL } from 'src/app/models/chat';
 import { ProfileUser } from 'src/app/models/user-profile';
-import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { AuthenticationService } from 'src/app/services/authentication/auth2.service';
 import { ChatsService } from 'src/app/services/chats.service';
 import { PresenceService } from 'src/app/services/presence.service';
 import { SpringAuthService } from 'src/app/services/authentication/spring-auth.service';

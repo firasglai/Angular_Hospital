@@ -5,7 +5,7 @@ import { Observable, from, of } from 'rxjs';
 import firebase from 'firebase/compat/app';
 import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
-import { AuthenticationService } from './authentication/authentication.service';
+import { AuthenticationService } from './authentication/auth2.service';
 import { getDatabase, ref, onDisconnect, onValue, Database, get, DatabaseReference, set } from 'firebase/database';
 import { User } from '../models/user.model';
 import { DocumentReference, DocumentSnapshot, getDoc } from 'firebase/firestore';

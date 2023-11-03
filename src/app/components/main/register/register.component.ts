@@ -12,7 +12,7 @@ import {
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observer, map, switchMap } from 'rxjs';
-import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { AuthenticationService } from 'src/app/services/authentication/auth2.service';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
 import { User, session } from 'src/app/models/user.model';
 import { SpringAuthService } from 'src/app/services/authentication/spring-auth.service';
