@@ -100,6 +100,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatBadgeModule} from '@angular/material/badge';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { SearchPipe } from './models/pipes/search.pipe';
 
 //import { EffectsModule } from '@ngrx/effects';
 //import { UserEffects } from './store/effects/user-effects';
@@ -141,6 +142,7 @@ export function playerFactory() {
     FinishRgisterPatientComponent,
     SearchDoctorComponent,
     FilterAppointmentsPipe,
+
     StepperComponent,
     NavbarComponent,
     ProfilePageComponent,
@@ -152,6 +154,7 @@ export function playerFactory() {
     PasswordRecoverComponent,
     NotFoundComponent,
     AppointmentsComponent,
+    SearchPipe,
 
   ],
   imports: [
@@ -177,7 +180,6 @@ export function playerFactory() {
     MatAutocompleteModule,
     MatDividerModule,
     MatFormFieldModule,
-    ReactiveFormsModule,
     AppRoutingModule,
     MatListModule,
     MatSelectModule,

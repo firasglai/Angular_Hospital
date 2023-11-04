@@ -7,4 +7,6 @@ export class FilterAppointmentsPipe implements PipeTransform {
   transform(appointments: any[], selectedDate: Date): any[] {
     return appointments.filter(appointment => appointment.date === selectedDate);
   }
+  
 }
+
