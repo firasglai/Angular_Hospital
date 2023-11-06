@@ -1,6 +1,6 @@
 <div class="body">
   <div>
-    <h3> Welcome back, Dr. {{username}} </h3> <!-- Displays a welcome message with the username of the logged-in user -->
+    <h1>Welcome back, <span><i>{{userProfile.fullName}}</i></span></h1><!-- Displays a welcome message with the username of the logged-in user -->
   </div>
 
   <div class="rowa">
@@ -11,39 +11,45 @@
       </div>
       <div class="chartLegend">
         <div class="chartLegend-element">
-          <div class="legendCircle" style="background-color: #1D3EAF;"></div>
+          <div class="legendCircle" style="background-color: #c0780d;"></div>
           <div class="legendtext">PENDING</div>
-          <div class="legendpercent">{{ calcpercentage('PENDING') }} %</div>
+          <div class="legendpercent">{{ calcPercentage('PENDING') }} %</div>
         </div>
         <div class="chartLegend-element">
-          <div class="legendCircle" style="background-color: #FF4C5E;"></div>
+          <div class="legendCircle" style="background-color: #0F595A;"></div>
           <div class="legendtext">APPROVED</div>
-          <div class="legendpercent">{{ calcpercentage('APPROVED') }} %</div>
+          <div class="legendpercent">{{ calcPercentage('APPROVED') }} %</div>
         </div>
         <div class="chartLegend-element">
-          <div class="legendCircle" style="background-color: #848FAC;"></div>
+          <div class="legendCircle" style="background-color: #0b31ef;"></div>
           <div class="legendtext">DONE</div>
-          <div class="legendpercent">{{ calcpercentage('DONE') }} %</div>
+          <div class="legendpercent">{{ calcPercentage('DONE') }} %</div>
+        </div>
+        <div class="chartLegend-element">
+          <div class="legendCircle" style="background-color: #7A0E40;"></div>
+          <div class="legendtext">CANCELED</div>
+          <div class="legendpercent">{{ calcPercentage('CANCELED') }} %</div>
         </div>
       </div>
       
 
     </div>
-    <div class=" data2">
+    <div class="data2">
       <h5>Appoitments analytics</h5> <!-- Displays a heading for money earned statistics -->
       <div class="chart-container" style="height: 300px;">
-        <canvas id="chart2" #chart2></canvas> <!-- Renders a chart with the chart id and reference #chart2 -->
+        <canvas id="PieChart"></canvas>
+        
       </div>
 
     </div>
 
   </div>
-  <div *ngIf="!thisdayhaveApps()"  class="payments" style="height: calc(100vh - 602px);">
+  <div *ngIf="!todaysAppointments"  class="payments" style="height: calc(100vh - 602px);">
     <h5>Today's Appoitments</h5>
     <div style="text-align: center;padding:  15px;">    You have no appoitments this day</div>
 
   </div>
-  <div  *ngIf="thisdayhaveApps()" class="payments">
+  <div  *ngIf="todaysAppointments" class="payments">
    
     <h5>Today's Appoitments</h5>
     <div class="table-container">
@@ -51,28 +57,38 @@
         <thead>
           <tr>
             <th>Patient</th>
-            <th>Appointment</th>
-            <th>Date</th>
-
+            <th>Patient Email</th>
+            <th>Reason</th>
+            <th>Date and Time</th>
+            <th>MedicalHistory</th>
             <th>Status</th>
+            <th>Action</th>
           
           </tr>
         </thead>
-        <tbody  *ngFor="let appointment of appoitmentList">
+        <tbody  *ngFor="let appointment of todaysAppointments">
           <tr *ngIf="isSameDay(appointment.date.toString())" >
             <td class="patient-column">
-              {{appoitmentList[1].patient?.id}}
-              <img src='{{appointment.patient?.profilePic}}' class="Patient-profile">
+
+              <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="Patient-profile">
               <div style="padding-left: 15px;">
-                <div class="patient-column-name">{{appointment.patient?.name}} {{appointment.patient?.lastname}}</div>
+                <div class="patient-column-name">{{appointment.patient?.fullName}}</div>
                 <div class="patient-column-id">{{appointment.patient?.id}}</div>
               </div>
             </td>
+            
+            <td class="appointment-column">
+              {{appointment.patient.email}}
+            </td>
+            
             <td class="appointment-column">
               {{appointment.reason}}
             </td>
             <td class="date-column">
-              {{Dtosting(appointment.date.toString())}}
+              {{appointment.date}}
+            </td>
+            <td class="date-column">
+             No medical History available
             </td>
 
             <td class="statu-column {{appointment.statusAPT}}">
@@ -80,7 +96,12 @@
                 {{appointment.statusAPT}}
               </div>
             </td>
-            
+            <td class="action-column  custom-action-column">
+              <div class="action-icons">
+                <i class="fas fa-eye"></i> <!--TO ADD APPOINTMENT DETAILS PAGE-->
+                <i class="fas fa-list-dots"></i> <!-- PRINT DETAILS OF APPOINTMENT -->
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>

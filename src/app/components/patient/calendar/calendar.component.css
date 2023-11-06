@@ -5,10 +5,11 @@
     padding-bottom: 20px;
 }
 h1 {
-  color: #2a3563; 
-  margin-bottom: 50px; 
-  font-weight: 700;
-  font-style: italic;
+  text-transform: uppercase;
+  font-weight: 900;
+  border-left: 10px solid #11d993;
+  padding-left: 10px;
+  margin-bottom: 30px
 }
 h3{
     padding-top: 20px;

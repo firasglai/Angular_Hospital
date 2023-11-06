@@ -25,7 +25,7 @@ export class AppointmentsComponent implements OnInit {
 
   //initlize Paginator variables
   page = 0;
-  pageSize = 10;
+  pageSize = 5;
   // Inject the MatPaginator
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 

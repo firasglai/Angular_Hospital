@@ -17,7 +17,7 @@ import { InboxComponent } from './components/doctor/inbox/inbox.component';
 import { MainComponent } from './components/main/main.component';
 import { DoctorComponent } from './components/doctor/doctor.component';
 import { TransactionComponent } from './components/doctor/transaction/transaction.component';
-import { AppoitmentComponent } from './components/doctor/appoitment/appoitment.component';
+import { AppoitmentComponent  as DoctorAppointments} from './components/doctor/appoitment/appoitment.component';
 import { PatientlistComponent } from './components/doctor/patientlist/patientlist.component';
 import { ChatWindowComponent } from './components/main/chat-window/chat-window.component';
 import { DashboardComponent as DashboardComponentp } from './components/patient/dashboard/dashboard.component';
@@ -41,9 +41,10 @@ import { PatGuardGuard } from './shared/pat-guard.guard';
 import { SearchDoctorComponent } from './components/patient/search-doctor/search-doctor.component';
 import { HasRoleGuard } from './guard/has-role.guard';
 import { ProfilePageComponent } from './components/global/profile-page/profile-page.component';
-import { CalendarComponent } from './components/patient/calendar/calendar.component';
+import { CalendarComponent as PatientCalendar } from './components/patient/calendar/calendar.component';
 import { AppointmentsComponent } from './components/patient/appointments/appointments.component';
-
+import { DoctorCalendarComponent } from './components/doctor/doctor-calendar/doctor-calendar.component';
+import { ConsultationComponent as DoctorConsultation } from './components/doctor/consultation/consultation.component';
 const redirectToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectToHome = () => redirectLoggedInTo(['doctor']);
 const routes: Routes = [
@@ -103,7 +104,7 @@ const routes: Routes = [
      
       {
         path: 'account',
-        component: AccountComponent,
+        component: ProfilePageComponent,
   
       },
       {
@@ -112,18 +113,24 @@ const routes: Routes = [
       
       },
       {
-        path: 'inbox',
-        component: InboxComponent,
+        path: 'calendar',
+        component: DoctorCalendarComponent,
       
       },
+     
       {
         path: 'transaction',
         component: TransactionComponent,
     
       },
       {
-        path: 'appoitment',
-        component: AppoitmentComponent,
+        path: 'appointments',
+        component: DoctorAppointments,
+     
+      },
+      {
+        path: 'consultation',
+        component: DoctorConsultation,
      
       },
       {
@@ -179,7 +186,7 @@ const routes: Routes = [
       },
       {
         path: 'calendar',
-        component: CalendarComponent,
+        component: PatientCalendar,
         canActivate: [PatGuardGuard],
       },
       {
@@ -194,6 +201,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+exports: [RouterModule],
 })
 export class AppRoutingModule {}

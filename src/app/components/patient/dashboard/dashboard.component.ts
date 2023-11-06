@@ -138,13 +138,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
       .subscribe(
         ({ currentUser, userDetails }) => {
           if (currentUser) {
-            this.userProfile = currentUser;
-            console.log("this is the user id: " + this.userProfile.id);
-  
-            if (userDetails) {
-              // Handle userDetails if needed
-            }
-  
+            this.getAppointmentsForActiveUser(currentUser.id!);
             const patientId = userDetails?.id;
             if (patientId) {
               this.getAppointmentsForActiveUser(patientId);
@@ -157,7 +151,6 @@ export class DashboardComponent implements OnInit , OnDestroy {
       );
   }
 
- 
   calculateStatusPercentage(patients: patientData[]): patientData[] {
     patients=this.patientDatas1
     const statusCount: patientData[]= [];

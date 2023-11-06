@@ -1,0 +1,13 @@
+.body{
+    margin: 0px ;
+    width: -webkit-fill-available !important;
+    width: fill-available !important;
+    padding-bottom: 20px;
+}
+h1 {
+  text-transform: uppercase;
+  font-weight: 900;
+  border-left: 10px solid #11d993;
+  padding-left: 10px;
+  margin-bottom: 30px
+}

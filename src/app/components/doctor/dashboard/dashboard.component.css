@@ -1,3 +1,11 @@
+
+h1 {
+    text-transform: uppercase;
+    font-weight: 900;
+    border-left: 10px solid #11d993;
+    padding-left: 10px;
+    margin-bottom: 30px
+  }
 h3{
     padding-top: 20px;
     padding-left: 20px;
@@ -74,7 +82,6 @@ max-height: 200px;
     margin-top: 30px;
 }
 .data2{
-       
     border-width: 1px;
     border-color: #A9B4CD;
     border-style: solid;
@@ -173,16 +180,20 @@ thead th:first-child {
     padding: 10px;
     text-align: center;
 }
-.statu-column .Success{
+.statu-column .APPROVED{
     color: #0F595A;
     background-color: #CFFCD4;
 
 }
-.statu-column .Pending{
-    color: #7A4B04;
+.statu-column .DONE{
+    color: #0b31ef;
+    background-color: #FFE4DB;
+}
+.statu-column .PENDING{
+    color: #c0780d;
     background-color: #FFF7D0;
 }
-.statu-column .Failed{
+.statu-column .CANCELED{
     color: #7A0E40;
     background-color: #FFE4DB;
 }

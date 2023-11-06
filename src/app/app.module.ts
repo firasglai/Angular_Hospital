@@ -101,7 +101,10 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatBadgeModule} from '@angular/material/badge';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { SearchPipe } from './models/pipes/search.pipe';
-
+import { ConsultationComponent } from './components/doctor/consultation/consultation.component';
+import { PatientDetailsComponent } from './components/doctor/modals/patient-details/patient-details.component';
+import { DoctorCalendarComponent } from './components/doctor/doctor-calendar/doctor-calendar.component';
+import { FlatpickrModule } from 'angularx-flatpickr';
 //import { EffectsModule } from '@ngrx/effects';
 //import { UserEffects } from './store/effects/user-effects';
 export function playerFactory() {
@@ -155,6 +158,9 @@ export function playerFactory() {
     NotFoundComponent,
     AppointmentsComponent,
     SearchPipe,
+    ConsultationComponent,
+    PatientDetailsComponent,
+    DoctorCalendarComponent,
 
   ],
   imports: [
@@ -199,7 +205,7 @@ export function playerFactory() {
     MatSlideToggleModule,
     MatPaginatorModule,
     MatBadgeModule,
-  
+    FlatpickrModule.forRoot(),
     ToastrModule.forRoot(),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),

@@ -22,8 +22,8 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.getActiveUser()
-.pipe(takeUntil(this.unsubscribe$))
-.subscribe(
+    .pipe(takeUntil(this.unsubscribe$))
+    .subscribe(
   ({ currentUser, userDetails }) => {
     if (currentUser) {
       this.user = currentUser;

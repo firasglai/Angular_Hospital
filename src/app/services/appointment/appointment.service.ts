@@ -1,7 +1,7 @@
 // appointment.service.ts
 
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Appointment } from 'src/app/models/appointment';
 import { StatusAPT } from 'src/app/enum/status-apt';
@@ -63,13 +63,19 @@ export class AppointmentService {
     return this.http.delete<void>(`${this.apiUrl}/${appointmentId}`);
   }
 
-  getUserAppointments(userId: number, status?: StatusAPT): Observable<Appointment[]> {
+  getUserAppointments(userId: number, status?: StatusAPT, date?: string): Observable<Appointment[]> {
+    let params = new HttpParams();
     if (status) {
-      const params = { status: status };
-      return this.http.get<Appointment[]>(`${this.apiUrl}/user-appointments/${userId}`, { params });
-    } else {
-      return this.http.get<Appointment[]>(`${this.apiUrl}/user-appointments/${userId}`);
+      params = params.set('status', status);
     }
+    if (date) {
+      params = params.set('date', date);
+    }
+  
+    return this.http.get<Appointment[]>(`${this.apiUrl}/user-appointments/${userId}`, { params });
+  }
+  getUserTodaysAppointments(userId: number): Observable<Appointment[]> {
+    return this.http.get<Appointment[]>(`${this.apiUrl}/user-appointments/today/${userId}`);
   }
   
 }
