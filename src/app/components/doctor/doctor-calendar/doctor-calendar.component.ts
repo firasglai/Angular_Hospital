@@ -148,8 +148,10 @@ export class DoctorCalendarComponent implements OnInit {
         a11yLabel: 'Details',
         onClick: ({ event }: { event: CalendarEvent }): void => {
           const dialogRef = this.dialog.open(AppointmentDetailsComponent, {
-            height: '800px',
+            height: '600px',
             width: '600px',
+            enterAnimationDuration:'300ms',
+            exitAnimationDuration:'300ms',
             data: { appointment: event.meta.appointment } ,
           });
         },
@@ -163,6 +165,9 @@ export class DoctorCalendarComponent implements OnInit {
         },
       },
     ];
+
+
+
 
   async loadAppointments(userAppointments: Appointment[]) {
     const calendarEvents = userAppointments.map(appointment => this.convertAppointmentToCalendarEvent(appointment));

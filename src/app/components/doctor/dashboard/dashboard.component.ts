@@ -99,29 +99,7 @@ const last3Payments: Observable<paymentData[]> = of([
   },
 ]);
 
-// Observable for patient data
-const getpatientdata: Observable<patientData[]> = of([
-  {
-    name: 'Treatment',
-    data: 56,
-  },
-  {
-    name: 'Check-up',
-    data: 21,
-  },
-  {
-    name: 'operation2',
-    data: 15,
-  },
-  {
-    name: 'operation2',
-    data: 52,
-  },
-  {
-    name: 'operation3',
-    data: 10,
-  },
-]);
+
 
 @Component({
   selector: 'app-dashboard',
@@ -135,8 +113,6 @@ export class DashboardComponent implements OnInit {
   todaysAppointments: Appointment[] = [];
   userAppointments: Appointment[] = [];
   userProfile!: Profile;
-  lastPayments: paymentData[] = [];
-  patientDatas1: patientData[] = [];
   colors = ['#1D3EAF', '#FF4C5E', '#848FAC'];
   selectedDate!: Date;
   appoitmentList: apt[] = [];
@@ -146,34 +122,13 @@ export class DashboardComponent implements OnInit {
     private appointmentService: AppointmentService,
     private authService: SpringAuthService
   ) {
-    const currentDate = new Date();
-    this.selectedDate = currentDate;
-    const firstDate = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth(),
-      1,
-      0,
-      0,
-      0
-    );
-    const lastDate = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth() + 2,
-      0,
-      23,
-      59,
-      59
-    );
-  }
-  thisdayhaveApps() {
-    let res = false;
-    for (let a of this.appoitmentList) {
-      if (this.isSameDay(a.date.toString())) {
-        res = true;
-      }
+   
     }
-    return res;
-  }
+  thisdayhaveApps() {
+    //to return 
+    }
+   
+  
   isSameDay(d: string) {
     const targetDate = new Date(d);
     const currentDate = new Date();

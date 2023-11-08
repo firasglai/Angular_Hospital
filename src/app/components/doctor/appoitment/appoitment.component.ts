@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 import { AppointmentService } from 'src/app/services/appointment/appointment.service';
 import { SpringAuthService } from 'src/app/services/authentication/spring-auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { MatDialog } from '@angular/material/dialog';
+import { AppointmentDetailsComponent } from '../modals/appointment-details/appointment-details.component';
 @Component({
   selector: 'app-appoitment',
   templateUrl: './appoitment.component.html',
@@ -38,7 +40,8 @@ export class AppoitmentComponent implements OnInit, AfterViewInit {
     private appointmentService: AppointmentService,
     private router: Router,
     private authService: SpringAuthService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private dialog:MatDialog,
   ) {}
 
   ngAfterViewInit(): void {
@@ -62,6 +65,17 @@ export class AppoitmentComponent implements OnInit, AfterViewInit {
           console.error('Error getting active user', error);
         }
       );
+  }
+
+  //? Table Actions
+  openAppointmentDetailDialog(appointment: Appointment): void {
+    const dialogRef = this.dialog.open(AppointmentDetailsComponent, {
+      data: { appointment: appointment },
+      height: '600px',
+      width: '600px',
+      enterAnimationDuration:'300ms',
+      exitAnimationDuration:'300ms',
+    });
   }
 
   getAppoitnments(userId: number) {
@@ -95,6 +109,8 @@ export class AppoitmentComponent implements OnInit, AfterViewInit {
       );
     }
   }
+
+
 
   onPageChange(event: PageEvent) {
     this.page = event.pageIndex;

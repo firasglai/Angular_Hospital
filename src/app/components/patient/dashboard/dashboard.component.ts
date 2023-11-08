@@ -16,28 +16,6 @@ import { MatDialog } from '@angular/material/dialog';
 
 Chart.register(...registerables)
 
-// Interface for patient data
-interface patientData {
-  name: string,
-  data: number
-}
-
-
-
-
-
-// Observable for patient data
-const getpatientdata: Observable<patientData[]> = of([{
-  name: "Treatment", data: 56
-}, {
-  name: "Check-up", data: 21
-}, {
-  name: "operation2", data: 15
-}, {
-  name: "operation2", data: 52
-}, {
-  name: "operation3", data: 10
-}]);
 
 @Component({
   selector: 'app-dashboard',
@@ -55,7 +33,6 @@ export class DashboardComponent implements OnInit , OnDestroy {
   //initilising the userProfile
   userProfile: Profile | null = {};
   userAppointments: Appointment[] = [];
-  patientDatas1: patientData[] = [];
   colors = [
     '#1D3EAF',
     '#FF4C5E',
@@ -105,30 +82,6 @@ export class DashboardComponent implements OnInit , OnDestroy {
           data: { appointment: appointmentData } // Pass the appointment data to the modal
         });
       }
-
-
-  // Function to calculate percentage based on patient data
-  calcpercentage(number: number) {
-    var s = 0
-    for (let k of this.patientDatas1) {
-      s += k["data"]
-    }
-    return Math.round((number * 100 / s + Number.EPSILON) * 100) / 100
-  }
-
-  // Function to set color based on patient data
-  color(d: patientData) {
-    let c = 0
-    let c1 = 0
-    for (let k of this.patientDatas1) {
-      if (k === d) {
-        c1 = c
-      } else {
-        c++
-      }
-    }
-    return this.colors[c1]
-  }
   
 
   ngOnInit(): void {
@@ -138,6 +91,7 @@ export class DashboardComponent implements OnInit , OnDestroy {
       .subscribe(
         ({ currentUser, userDetails }) => {
           if (currentUser) {
+            this.userProfile=currentUser;
             this.getAppointmentsForActiveUser(currentUser.id!);
             const patientId = userDetails?.id;
             if (patientId) {
@@ -151,25 +105,11 @@ export class DashboardComponent implements OnInit , OnDestroy {
       );
   }
 
-  calculateStatusPercentage(patients: patientData[]): patientData[] {
-    patients=this.patientDatas1
-    const statusCount: patientData[]= [];
-  
-    // Count the occurrences of each status
-    patients.forEach(patient => {
-      console.log(statusCount.find(k => k.name==patient.name))
-       if(statusCount.find(k => k.name==patient.name)==undefined){
-        statusCount.push({
-          name:patient.name,
-          data:this.countOccurrences(patients,patient)
-        })
-       }
-      
-    });
+
  
   
-    return statusCount;
-  }
+  
+  
   countOccurrences(arr: any[], element: any): number {
     return arr.reduce((count, current) => {
       if (current.name === element.name) {

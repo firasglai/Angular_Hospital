@@ -45,6 +45,7 @@ import { CalendarComponent as PatientCalendar } from './components/patient/calen
 import { AppointmentsComponent } from './components/patient/appointments/appointments.component';
 import { DoctorCalendarComponent } from './components/doctor/doctor-calendar/doctor-calendar.component';
 import { ConsultationComponent as DoctorConsultation } from './components/doctor/consultation/consultation.component';
+import { ConsultationComponent as PatientConsultation } from './components/patient/consultation/consultation.component';
 const redirectToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectToHome = () => redirectLoggedInTo(['doctor']);
 const routes: Routes = [
@@ -175,8 +176,8 @@ const routes: Routes = [
       },
       
       {
-        path: 'inbox',
-        component: InboxComponentp,
+        path: 'consultation',
+        component: PatientConsultation,
         canActivate: [PatGuardGuard],
       },
       {

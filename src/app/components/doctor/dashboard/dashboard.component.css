@@ -90,7 +90,7 @@ max-height: 200px;
     min-width: calc(100% - 510px) !important;
     margin-left: 10px;
 }
-.payments{
+.appointments{
 min-width: calc(100% - 20px) !important;
 border-width: 1px;
 border-color: #A9B4CD;
@@ -163,9 +163,7 @@ thead th:first-child {
     font-weight: 600;
     color: #192252;
 }
-.total-column{
 
-}
 .total-column-amount{
     font-size: 16px;
     font-weight: 600;
@@ -197,9 +195,7 @@ thead th:first-child {
     color: #7A0E40;
     background-color: #FFE4DB;
 }
-.action-column{
 
-}
 .action-icons {
     display: flex;
     justify-content: flex-start;
@@ -222,3 +218,64 @@ thead th:first-child {
   .custom-action-column {
     width: 60px; /* Adjust the width to make the action column smaller or larger */
   }
+
+
+  .card {
+    width: 260px;
+    height: 170px;
+    background-color: #ffb3b3;
+    border-radius: 15px;
+    border: 1px solid rgb(156, 151, 151);
+    position: relative;
+    transition: all .3s ease;
+  }
+  
+  .card__icons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-right: 10px;
+    padding-top: 10px;
+    gap: 10px;
+    opacity: 0;
+    transition: all .3s ease;
+    cursor: pointer;
+  }
+  
+  .card__time {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1em;
+    font-weight: lighter;
+    border-radius: 5px;
+    text-align: center;
+    padding: 2px 8px;
+    color: whitesmoke;
+    background-color: rgb(77, 67, 67);
+  }
+  
+  .svg-icon {
+    background-color: rgb(77, 67, 67);
+    fill: #ece6e6;
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+    padding: 2px;
+    transition: all .5s ease-in-out;
+  }
+  
+  .card:hover {
+    opacity: 0.8;
+    animation: video 5s ease;
+  }
+  
+  .card:hover .card__icons {
+    opacity: 1;
+  }
+
+  
+  

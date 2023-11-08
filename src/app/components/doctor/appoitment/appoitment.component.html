@@ -1,112 +1,136 @@
-<div class="container">
-  <div class="header">
-      <h1>Appointments </h1>
-  </div>
-      <div class="search-filters col-md-11">
-        
 
-          <input type="text" class="form-control" placeholder="Search Patients" [(ngModel)]="searchText">       
-          <svg width="24" class="search-svg"
-        style="position: absolute;font-size: 20px;margin: 10px 10px;color: #EFF3FA ;" height="24"
-        viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g id="Iconly/Light-Outline/Search">
-            <g id="Search">
-                <g id="Group 3">
-                    <mask id="mask0_2_5793" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="2" y="2"
-                        width="20" height="20">
-                        <path id="Clip 2" fill-rule="evenodd" clip-rule="evenodd" d="M2 2H21.4768V21.477H2V2Z"
-                            fill="white" />
-                    </mask>
-                    <g mask="url(#mask0_2_5793)">
-                        <path id="Fill 1" fill-rule="evenodd" clip-rule="evenodd"
-                            d="M11.7388 3.5C7.19576 3.5 3.49976 7.195 3.49976 11.738C3.49976 16.281 7.19576 19.977 11.7388 19.977C16.2808 19.977 19.9768 16.281 19.9768 11.738C19.9768 7.195 16.2808 3.5 11.7388 3.5ZM11.7388 21.477C6.36876 21.477 1.99976 17.108 1.99976 11.738C1.99976 6.368 6.36876 2 11.7388 2C17.1088 2 21.4768 6.368 21.4768 11.738C21.4768 17.108 17.1088 21.477 11.7388 21.477Z"
-                            fill="black" />
-                    </g>
-                </g>
-                <g id="Group 6">
-                    <mask id="mask1_2_5793" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="17" y="17"
-                        width="6" height="6">
-                        <path id="Clip 5" fill-rule="evenodd" clip-rule="evenodd"
-                            d="M17.24 17.7069H22.264V22.7217H17.24V17.7069Z" fill="white" />
-                    </mask>
-                    <g mask="url(#mask1_2_5793)">
-                        <path id="Fill 4" fill-rule="evenodd" clip-rule="evenodd"
-                            d="M21.5142 22.7217C21.3232 22.7217 21.1312 22.6487 20.9842 22.5027L17.4602 18.9887C17.1672 18.6957 17.1662 18.2207 17.4592 17.9277C17.7512 17.6327 18.2262 17.6347 18.5202 17.9257L22.0442 21.4407C22.3372 21.7337 22.3382 22.2077 22.0452 22.5007C21.8992 22.6487 21.7062 22.7217 21.5142 22.7217Z"
-                            fill="black" />
-                    </g>
-                </g>
-            </g>
-        </g>
-           </svg>    
-          <mat-chip-listbox  aria-label="Status filter">
-          <mat-chip-option (click)="onStatusFilter('PENDING')">Pending</mat-chip-option>
-          <mat-chip-option (click)="onStatusFilter('APPROVED')">Approved</mat-chip-option>
-          <mat-chip-option (click)="onStatusFilter('CANCELLED')" color="warn">Canceled</mat-chip-option>
-          <mat-chip-option (click)="onStatusFilter('DONE')" color="accent">Done</mat-chip-option>
-          <mat-chip-option (click)="onStatusFilter(null)" color="accent">All</mat-chip-option>
-            </mat-chip-listbox>
-      </div>
-      <div class="payments">
-          <div class="table-container">
-            <table class="table table-borderless">
-              <thead>
-                <tr>
-                  <th>Patient</th> 
-                  <th>Email</th>
-                 
-                  <th>Date and Time</th>
-                  <th>Reason</th> 
-                  <th>Status</th> 
-                  <th>Action</th> 
-                </tr>
-              </thead>
-              <tbody *ngFor="let P of displayedAppointments | search: searchText"> 
-                <tr>
-                  <td class="patient-column"><img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="Patient-profile"> <!-- Displays the profile picture of the patient -->
-                    <div style="padding-left: 15px;">
-                      <div class="patient-column-name">{{P?.patient?.fullName || 'Name not available'}}</div> <!-- Displays the name and title of the patient -->
-                      <div class="patient-column-id">{{P?.patient?.id || 'ID not available'}}</div> <!-- Displays the ID of the patient -->
-                    </div>
-                  </td>
-                  <td class="appointment-column">
-                    {{P?.patient?.email|| 'Email not available'}}<!-- Displays the speciality of the patient -->
-                  </td>
-                  <td class="date-column">
-                    {{P?.date || 'Date not available'}} <!-- Displays the payment date -->
-                  </td>
-                  
-                  <td class="total-column">
-                    <div class="total-column-amount">{{P?.reason || 'Reason not available'}}</div> <!-- Displays the payment amount -->
-      
-                  </td>
-                  <td class="statu-column {{P['statusAPT']}}">
-                    <div class="statu-column  {{P['statusAPT']}}">
-                      {{P?.statusAPT || 'Status not available'}}
-                    </div>
-                  </td>
-                  <td class="action-column  custom-action-column">
-                    <div class="action-icons">
-                      <i class="fas fa-eye" ></i> <!--TO ADD APPOINTMENT DETAILS PAGE-->
-                      <i class="fas fa-print" ></i> <!-- PRINT DETAILS OF APPOINTMENT -->
-                      <i class="fas fa-trash"></i> <!-- DELETE APPOINTMENT -->
-                    </div>
-                  </td>
-                </tr>
+  <div class="body">
+    <div class="header">
+        <h1>Appointments </h1>
+    </div>
+        <div class="search-filters col-md-11">
+          
+  
+            <input type="text" class="form-control" placeholder="Search Patients" [(ngModel)]="searchText">       
+            <svg width="24" class="search-svg"
+          style="position: absolute;font-size: 20px;margin: 10px 10px;color: #EFF3FA ;" height="24"
+          viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g id="Iconly/Light-Outline/Search">
+              <g id="Search">
+                  <g id="Group 3">
+                      <mask id="mask0_2_5793" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="2" y="2"
+                          width="20" height="20">
+                          <path id="Clip 2" fill-rule="evenodd" clip-rule="evenodd" d="M2 2H21.4768V21.477H2V2Z"
+                              fill="white" />
+                      </mask>
+                      <g mask="url(#mask0_2_5793)">
+                          <path id="Fill 1" fill-rule="evenodd" clip-rule="evenodd"
+                              d="M11.7388 3.5C7.19576 3.5 3.49976 7.195 3.49976 11.738C3.49976 16.281 7.19576 19.977 11.7388 19.977C16.2808 19.977 19.9768 16.281 19.9768 11.738C19.9768 7.195 16.2808 3.5 11.7388 3.5ZM11.7388 21.477C6.36876 21.477 1.99976 17.108 1.99976 11.738C1.99976 6.368 6.36876 2 11.7388 2C17.1088 2 21.4768 6.368 21.4768 11.738C21.4768 17.108 17.1088 21.477 11.7388 21.477Z"
+                              fill="black" />
+                      </g>
+                  </g>
+                  <g id="Group 6">
+                      <mask id="mask1_2_5793" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="17" y="17"
+                          width="6" height="6">
+                          <path id="Clip 5" fill-rule="evenodd" clip-rule="evenodd"
+                              d="M17.24 17.7069H22.264V22.7217H17.24V17.7069Z" fill="white" />
+                      </mask>
+                      <g mask="url(#mask1_2_5793)">
+                          <path id="Fill 4" fill-rule="evenodd" clip-rule="evenodd"
+                              d="M21.5142 22.7217C21.3232 22.7217 21.1312 22.6487 20.9842 22.5027L17.4602 18.9887C17.1672 18.6957 17.1662 18.2207 17.4592 17.9277C17.7512 17.6327 18.2262 17.6347 18.5202 17.9257L22.0442 21.4407C22.3372 21.7337 22.3382 22.2077 22.0452 22.5007C21.8992 22.6487 21.7062 22.7217 21.5142 22.7217Z"
+                              fill="black" />
+                      </g>
+                  </g>
+              </g>
+          </g>
+             </svg>    
+            <mat-chip-listbox  aria-label="Status filter">
+            <mat-chip-option (click)="onStatusFilter('PENDING')">Pending</mat-chip-option>
+            <mat-chip-option (click)="onStatusFilter('APPROVED')">Approved</mat-chip-option>
+            <mat-chip-option (click)="onStatusFilter('CANCELLED')" color="warn">Canceled</mat-chip-option>
+            <mat-chip-option (click)="onStatusFilter('DONE')" color="accent">Done</mat-chip-option>
+            <mat-chip-option (click)="onStatusFilter(null)" color="accent">All</mat-chip-option>
+              </mat-chip-listbox>
+        </div>
+        <div class="payments">
+            <div class="table-container">
+              <table class="table table-borderless">
+                <thead>
+                  <tr>
+                    <th>Patient</th> 
+                    <th>Email</th> 
+                    <th>Date and Time</th>
+                    <th>Reason</th> 
+                    <th>Status</th> 
+                    <th>Action</th> 
+                  </tr>
+                </thead>
+                <tbody *ngFor="let P of displayedAppointments | search: searchText"> 
+                  <tr>
+                    <td class="patient-column"><img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="Patient-profile"> <!-- Displays the profile picture of the patient -->
+                      <div style="padding-left: 15px;">
+                        <div class="patient-column-name">{{P?.patient?.fullName || 'Name not available'}}</div> <!-- Displays the name and title of the patient -->
+                        <div class="patient-column-id">{{P?.patient?.id || 'ID not available'}}</div> <!-- Displays the ID of the patient -->
+                      </div>
+                    </td>
+                    <td class="appointment-column">
+                      {{P?.patient?.email|| 'Email not available'}}<!-- Displays the speciality of the patient -->
+                    </td>
+                    <td class="date-column">
+                      {{P?.date || 'Date not available'}} <!-- Displays the payment date -->
+                    </td>
+                    
+                    <td class="total-column">
+                      <div class="total-column-amount">{{P?.reason || 'Reason not available'}}</div> <!-- Displays the payment amount -->
+        
+                    </td>
+                    <td class="statu-column {{P['statusAPT']}}">
+                      <div class="statu-column  {{P['statusAPT']}}">
+                        {{P?.statusAPT || 'Status not available'}}
+                      </div>
+                    </td>
+                    <td class="action-column  custom-action-column">
+                      <div class="action-icons">
+                        <button mat-icon-button (click)="openAppointmentDetailDialog(P)" >
+                          <mat-icon>visibility</mat-icon>
+                          </button> 
+                        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                          <mat-icon>more_vert</mat-icon>
+                        </button>
+                         <!--Accept or Decline-->
+                        <mat-menu #menu="matMenu">
+                          <button mat-menu-item>
+                            <mat-icon>done</mat-icon>
+                            <span>Accept Appointment</span>
+                          </button>
+                          <button mat-menu-item >
+                            <mat-icon> cancel_presentation</mat-icon>
+                            <span>Cancel Appointment</span>
+                          </button>
+                        </mat-menu>
+                          <!-- PRINT DETAILS OF APPOINTMENT -->
+                         <button mat-icon-button >
+                          <mat-icon> local_printshop</mat-icon>
+                          </button> 
+                        <!-- DELETE APPOINTMENT -->
+                        <button mat-icon-button >
+                          <mat-icon> delete_sweep</mat-icon>
+                          </button> 
+                      </div>
+                    </td>
+                  </tr>
+                
+                </tbody>
               
-              </tbody>
-            
-            </table>
-            <div class="paginator">
-              <mat-paginator
-              [length]="appointments.length"
-              [pageSize]="pageSize"
-              [pageSizeOptions]="[5, 10, 25, 100]"
-              (page)="onPageChange($event)"
-              aria-label="Select page"
-            >
-            </mat-paginator>
+              </table>
+              <div class="paginator">
+                <mat-paginator
+                [length]="appointments.length"
+                [pageSize]="pageSize"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+                (page)="onPageChange($event)"
+                aria-label="Select page"
+              >
+              </mat-paginator>
+              </div>
             </div>
           </div>
-        </div>
-       
-</div>
+         
+  </div>
+
+

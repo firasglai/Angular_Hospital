@@ -1,1 +1,51 @@
-<p>appointment-details works!</p>
+
+<div mat-dialog-content class="custom-dialog-content">
+    <div class="card">
+        <div class="content">
+          <p class="heading">Appointment Details
+            <div class="d-flex mb-4 align-items-center">
+                <!--Companies group-->
+                <div class="flex-grow-1 d-flex align-items-center">
+                  <!--Doctor-->
+                  <div
+                    class="width-5x height-5x p-2 bg-white shadow-sm position-relative flex-center rounded-circle border"
+                  >
+                    <img
+                      src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                      class="img-fluid"
+                      alt=""
+                    />
+                  </div>
+                  <!--Patient-->
+                  <div
+                    class="width-5x height-5x p-2 ms-n3 bg-white shadow-sm position-relative flex-center rounded-circle border"
+                  >
+                    <img
+                      src="https://bootdey.com/img/Content/avatar/avatar2.png"
+                      class="img-fluid"
+                      alt=""
+                    />
+                  </div>
+                </div>
+              </div>
+            <div class="appointment-info">
+                <h3 id="reason">
+                  <span class="label"> Reason :</span> {{ data.appointment.reason }}             
+                </h3>
+                <h3 id="doctor">
+                  <span class="label">Doctor :</span> {{ data.appointment.doctor.fullName }}
+                </h3>
+                <h3 id="patient">
+                  <span class="label">Patient :</span> {{ data.appointment.patient.fullName }}
+                </h3>
+                <h3 id="status">
+                  <span class="label">Status :</span> {{ data.appointment.statusAPT }}
+                </h3>
+                <h3 id="specialty">
+                    <span class="label">Speciality :</span> {{ data.appointment.doctor.specialty.name }}
+                  </h3>
+              </div> 
+         
+        </div>
+    </div>
+</div>

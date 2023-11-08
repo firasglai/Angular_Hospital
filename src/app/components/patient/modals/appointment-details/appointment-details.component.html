@@ -1,12 +1,9 @@
 <h1 mat-dialog-title>Appointment Details :</h1>
-
 <div mat-dialog-content>
-  <div class="container">
-    <div class="row mb-4">
-      <div class="col-lg-4 col-md-6 mb-4">
+  <div class="body">
         <div class="card hover-lift hover-shadow-xl shadow-sm border-0">
           <!--card-body-->
-          <div class="card-body p-4">
+          <div class="card-body">
             <div class="d-flex mb-4 align-items-center">
               <!--Companies group-->
               <div class="flex-grow-1 d-flex align-items-center">
@@ -32,25 +29,24 @@
                 </div>
               </div>
             </div>
-            <h5 id="reason">
-              Appointment Reason : {{ data.appointment.reason }}
-            </h5>
-            <h5 id="doctor">
-              Doctor FullName : {{ data.appointment.doctor.fullName }}
-            </h5>
-            <h5 id="patient">
-              Patient FullName : {{ data.appointment.patient.fullName }}
-            </h5>
-            <h5 id="status">
-              Appointment Status : {{ data.appointment.statusAPT }}
-            </h5>
-            <p class="mb-0 text-muted">
-              Appointment Specialty:
-              {{ data.appointment.doctor.specialty.name }}
-            </p>
-          </div>
+            <div class="appointment-info">
+              <h3 id="reason">
+                <span class="label">Appointment Reason :</span> <span class="content">{{ data.appointment.reason }}</span>             
+              </h3>
+              <h3 id="doctor">
+                <span class="label">Doctor FullName :</span> {{ data.appointment.doctor.fullName }}
+              </h3>
+              <h3 id="patient">
+                <span class="label">Patient FullName :</span> {{ data.appointment.patient.fullName }}
+              </h3>
+              <h3 id="status">
+                <span class="label">Appointment Status :</span> {{ data.appointment.statusAPT }}
+              </h3>
+              <p class="mb-0 text-muted">
+                <span class="label">Appointment Specialty:</span> {{ data.appointment.doctor.specialty.name }}
+              </p>
+            </div>
+            
         </div>
-      </div>
-    </div>
   </div>
 </div>

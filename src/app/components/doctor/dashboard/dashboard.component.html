@@ -1,5 +1,5 @@
 <div class="body">
-  <div>
+  <div class="header">
     <h1>Welcome back, <span><i>{{userProfile.fullName}}</i></span></h1><!-- Displays a welcome message with the username of the logged-in user -->
   </div>
 
@@ -41,16 +41,15 @@
         
       </div>
 
-    </div>
+    </div>  
 
   </div>
-  <div *ngIf="!todaysAppointments"  class="payments" style="height: calc(100vh - 602px);">
-    <h5>Today's Appoitments</h5>
-    <div style="text-align: center;padding:  15px;">    You have no appoitments this day</div>
-
+  <div *ngIf="todaysAppointments" class="appointments" style="height: calc(100vh - 602px); display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <img src="assets/images/empty-box.png" alt="No appointments" style="display: block; margin: 0 auto;">
+    <span style="text-align: center; font-size: large; color:#192252 ; font-weight: 500;">You have no appointments for today</span>
   </div>
-  <div  *ngIf="todaysAppointments" class="payments">
-   
+
+  <div *ngIf="todaysAppointments.length > 0" class="appointments">
     <h5>Today's Appoitments</h5>
     <div class="table-container">
       <table class="table table-borderless">
@@ -63,11 +62,10 @@
             <th>MedicalHistory</th>
             <th>Status</th>
             <th>Action</th>
-          
           </tr>
         </thead>
-        <tbody  *ngFor="let appointment of todaysAppointments">
-          <tr *ngIf="isSameDay(appointment.date.toString())" >
+        <tbody *ngFor="let appointment of todaysAppointments">
+          <tr>
             <td class="patient-column">
 
               <img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="Patient-profile">
@@ -99,7 +97,7 @@
             <td class="action-column  custom-action-column">
               <div class="action-icons">
                 <i class="fas fa-eye"></i> <!--TO ADD APPOINTMENT DETAILS PAGE-->
-                <i class="fas fa-list-dots"></i> <!-- PRINT DETAILS OF APPOINTMENT -->
+                <i class="fas fa-list-dots"></i> <!-- APPOINTMENT actions -->
               </div>
             </td>
           </tr>

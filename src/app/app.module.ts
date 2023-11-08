@@ -105,6 +105,7 @@ import { ConsultationComponent } from './components/doctor/consultation/consulta
 import { PatientDetailsComponent } from './components/doctor/modals/patient-details/patient-details.component';
 import { DoctorCalendarComponent } from './components/doctor/doctor-calendar/doctor-calendar.component';
 import { FlatpickrModule } from 'angularx-flatpickr';
+import { AppointmentComponent } from './components/doctor/tables/appointment/appointment.component';
 //import { EffectsModule } from '@ngrx/effects';
 //import { UserEffects } from './store/effects/user-effects';
 export function playerFactory() {
@@ -161,6 +162,7 @@ export function playerFactory() {
     ConsultationComponent,
     PatientDetailsComponent,
     DoctorCalendarComponent,
+    AppointmentComponent,
 
   ],
   imports: [

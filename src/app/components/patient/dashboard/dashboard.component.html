@@ -9,10 +9,10 @@
         <canvas id="chart" #chart></canvas> <!-- Renders a chart with the chart id and reference #chart -->
       </div>
       <div class="chartLegend">
-        <div class="chartLegend-element" *ngFor="let det of patientDatas1">
-          <div class="legendCircle" [style.backgroundColor]="color(det)"> </div> <!-- Displays a colored circle legend for the chart -->
-          <div class="legendtext">{{det["name"]}}</div> <!-- Displays the name of the data in the legend -->
-          <div class="legendpercent">{{det["data"]}}</div> <!-- Displays the percentage of data in the legend -->
+        <div class="chartLegend-element">
+          <div class="legendCircle" > </div> <!-- Displays a colored circle legend for the chart -->
+          <div class="legendtext"></div> <!-- Displays the name of the data in the legend -->
+          <div class="legendpercent"></div> <!-- Displays the percentage of data in the legend -->
 
         </div>
       </div>
